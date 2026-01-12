@@ -71,27 +71,66 @@ export default function AcercaDe() {
   const artistasTemporales = [
     {
       id: 1,
-      nombre: "Ana Martínez",
-      especialidad: "Acuarela & Color",
-      imagen: "/female-tattoo-artist-portrait-colorful-artistic.jpg",
-      instagram: "@ana.ink",
-      periodo: "Enero - Marzo 2026",
+      nombre: "Ayelen Vera Echegaray",
+      especialidad: "Black & Grey, Color & Realismo",
+      imagen: "/ayelen-vera-echegaray-portrait.jpg",
+      instagram: "@ayeaguafuerte",
+      periodo: "Por confirmar",
+      descripcion: "Tatúo hace más de 10 años. Me podés encontrar en Buenos Aires y en Córdoba. En el tatuaje busco desarrollar la composición integral y mantener la premisa primigenia del tatuaje. Me especializo en piezas grandes, pensadas para dialogar con el cuerpo completo. Mi estilo está basado en el black and grey y el color, orientado hacia el realismo o ilustrativo tomando conceptos del neotradicional.",
     },
     {
       id: 2,
-      nombre: "Lucas Torres",
-      especialidad: "Geométrico & Dotwork",
-      imagen: "/male-tattoo-artist-portrait-professional.jpg",
-      instagram: "@lucas.dots",
-      periodo: "Febrero - Abril 2026",
+      nombre: "Lucas Ghilardi",
+      especialidad: "Universo Oscuro & Expresivo",
+      imagen: "/lucas-ghilardi-portrait.jpg",
+      instagram: "@luks.gh",
+      periodo: "Por confirmar",
+      descripcion: "10 años tatuando. Dentro de mi estilo, la búsqueda es formal y conceptual, teniendo en cuenta la relación de la pieza dentro de la lógica y movimiento del cuerpo humano. Así, integrar el dinamismo de las formas, la luz y sombra, aplicado a cada elemento, relato o ser dentro de un universo oscuro y expresivo.",
     },
     {
       id: 3,
-      nombre: "Sofia Vega",
-      especialidad: "Ilustración & Fine Line",
-      imagen: "/female-tattoo-artist-portrait-professional-minimal.jpg",
-      instagram: "@sofia.fineline",
-      periodo: "Marzo - Mayo 2026",
+      nombre: "Tomás Chiecchio",
+      especialidad: "Piezas Únicas & Simbolismo",
+      imagen: "/tomas-chiecchio-portrait.jpg",
+      instagram: "@a.t.0.0.m",
+      periodo: "Por confirmar",
+      descripcion: "Tatuó hace 11 años. En sentido profesional lo que busco y hago con el tatuaje es que la persona que elija mi arte se lleve una pieza única, original y sumamente simbólica, desde el momento de inicio con el boceto hasta el final con el tatuaje. El hecho de que alguien elija mis diseños es algo con lo que una vez pensé imposible. Que el hecho del tatuaje no sea un acto superficial solamente sino algo consciente.",
+    },
+    {
+      id: 4,
+      nombre: "Celina",
+      especialidad: "Estilo por definir",
+      imagen: "/celina-portrait.jpg",
+      instagram: "@celina.tattoo",
+      periodo: "Por confirmar",
+      descripcion: "Biografía por definir.",
+    },
+    {
+      id: 5,
+      nombre: "Clara Bajicoff",
+      especialidad: "Diseño & Joyas Permanentes",
+      imagen: "/clara-bajicoff-portrait.jpg",
+      instagram: "@claratatua",
+      periodo: "Por confirmar",
+      descripcion: "Tatuando hace 2 años. Como diseñadora que tatúa, Clara está enfocada en traducir elementos y formas de la vida cotidiana, donde la búsqueda está en resaltar lo bello de las cosas, creando algo así como una joya permanente en la piel.",
+    },
+    {
+      id: 6,
+      nombre: "Camila",
+      especialidad: "Estilo por definir",
+      imagen: "/camila-portrait.jpg",
+      instagram: "@camila.tattoo",
+      periodo: "Por confirmar",
+      descripcion: "Biografía por definir.",
+    },
+    {
+      id: 7,
+      nombre: "Michell",
+      especialidad: "Estilo por definir",
+      imagen: "/michell-portrait.jpg",
+      instagram: "@michell.tattoo",
+      periodo: "Por confirmar",
+      descripcion: "Biografía por definir.",
     },
   ]
 
@@ -228,38 +267,42 @@ export default function AcercaDe() {
             Conoce a los artistas temporales que colaboran con nosotros. Cada uno trae su estilo único y perspectiva al
             estudio.
           </p>
-          <div className="relative">
-            <div className="flex gap-6 animate-scroll-infinite hover:pause-animation">
-              {/* Duplicamos el array para crear el efecto infinito */}
-              {[...artistasTemporales, ...artistasTemporales].map((artista, index) => (
-                <div
-                  key={`${artista.id}-${index}`}
-                  className="flex-shrink-0 w-[300px] bg-zinc-900 rounded-sm overflow-hidden group"
-                >
-                  <div className="relative aspect-square">
-                    <Image
-                      src={artista.imagen || "/placeholder.svg"}
-                      alt={artista.nombre}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-1">{artista.nombre}</h3>
-                    <p className="text-sm text-gray-400 mb-2">{artista.especialidad}</p>
-                    <p className="text-xs text-gray-500 mb-3">{artista.periodo}</p>
-                    <a
-                      href={`https://instagram.com/${artista.instagram.replace("@", "")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-white hover:underline"
-                    >
-                      {artista.instagram}
-                    </a>
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <div className="flex gap-6 animate-scroll-infinite">
+            {/* Duplicamos el array para crear el efecto infinito */}
+            {[...artistasTemporales, ...artistasTemporales].map((artista, index) => (
+              <div
+                key={`${artista.id}-${index}`}
+                className="flex-shrink-0 w-[300px] bg-zinc-900 rounded-sm overflow-hidden group hover:[animation-play-state:paused]"
+              >
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={artista.imagen || "/placeholder.svg"}
+                    alt={artista.nombre}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {/* Overlay con descripción al hacer hover */}
+                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 z-10">
+                    <p className="text-white text-sm leading-relaxed text-center">{artista.descripcion}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-1">{artista.nombre}</h3>
+                  <p className="text-sm text-gray-400 mb-2">{artista.especialidad}</p>
+                  <p className="text-xs text-gray-500 mb-3">{artista.periodo}</p>
+                  <a
+                    href={`https://instagram.com/${artista.instagram.replace("@", "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white hover:underline"
+                  >
+                    {artista.instagram}
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
