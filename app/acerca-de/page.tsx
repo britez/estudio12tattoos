@@ -1,6 +1,5 @@
 import Image from "next/image"
 import type { Metadata } from "next"
-import GuestArtistsCarousel from "@/components/guest-artists-carousel"
 
 export const metadata: Metadata = {
   title: "Acerca de Nosotros - Nuestro Equipo de Artistas",
@@ -133,15 +132,6 @@ export default function AcercaDe() {
       periodo: "Por confirmar",
       descripcion: "Biografía por definir.",
     },
-    {
-      id: 8,
-      nombre: "Malena Chiesino",
-      especialidad: "Trazo & Simbolismo Conceptual",
-      imagen: "/malena-chiesino-portrait.jpg",
-      instagram: "@malena.tattoo",
-      periodo: "Por confirmar",
-      descripcion: "Tatuando hace 4 años. Mi búsqueda en el tattoo es conceptual, priorizo el trazo y el simbolismo. Integro lo anatómico con el diseño, buscando un limpio recorrido visual.",
-    },
   ]
 
   return (
@@ -270,15 +260,50 @@ export default function AcercaDe() {
       </section>
 
       {/* Artistas Temporales con carrusel */}
-      <section className="px-4 py-16 bg-black text-white">
+      <section className="px-4 py-16 bg-black text-white overflow-hidden">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">Artistas Invitados</h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
             Conoce a los artistas temporales que colaboran con nosotros. Cada uno trae su estilo único y perspectiva al
             estudio.
           </p>
-
-          <GuestArtistsCarousel artists={artistasTemporales} />
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <div className="flex gap-6 animate-scroll-infinite">
+            {/* Duplicamos el array para crear el efecto infinito */}
+            {[...artistasTemporales, ...artistasTemporales].map((artista, index) => (
+              <div
+                key={`${artista.id}-${index}`}
+                className="flex-shrink-0 w-[300px] bg-zinc-900 rounded-sm overflow-hidden group hover:[animation-play-state:paused]"
+              >
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={artista.imagen || "/placeholder.svg"}
+                    alt={artista.nombre}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {/* Overlay con descripción al hacer hover */}
+                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 z-10">
+                    <p className="text-white text-sm leading-relaxed text-center">{artista.descripcion}</p>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-1">{artista.nombre}</h3>
+                  <p className="text-sm text-gray-400 mb-2">{artista.especialidad}</p>
+                  <p className="text-xs text-gray-500 mb-3">{artista.periodo}</p>
+                  <a
+                    href={`https://instagram.com/${artista.instagram.replace("@", "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white hover:underline"
+                  >
+                    {artista.instagram}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -1,38 +1,19 @@
-"use client"
-
 import { Instagram, MessageCircle, Mail, MapPin, Phone } from "lucide-react"
 import type { Metadata } from "next"
-import { FormEvent } from "react"
+
+export const metadata: Metadata = {
+  title: "Contacto - Agenda tu Consulta Gratuita",
+  description:
+    "Contáctanos para agendar una consulta gratuita. Estamos en Buenos Aires. Respuesta rápida por WhatsApp e Instagram.",
+  openGraph: {
+    title: "Contacto - estudio12 Tatuajes",
+    description:
+      "Agenda tu consulta gratuita. Contáctanos por WhatsApp, Instagram o completa nuestro formulario. Respuesta rápida garantizada.",
+    images: ["/logo-estudio12.jpg"],
+  },
+}
 
 export default function ContactoPage() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    
-    const formData = new FormData(e.currentTarget)
-    const name = formData.get('name') as string
-    const email = formData.get('email') as string
-    const phone = formData.get('phone') as string
-    const message = formData.get('message') as string
-    
-    // Componer el mensaje para WhatsApp
-    const whatsappMessage = `*Nuevo contacto desde la web*
-
-*Nombre:* ${name}
-*Email:* ${email}
-${phone ? `*Teléfono:* ${phone}\n` : ''}
-*Mensaje:*
-${message}`
-    
-    // Número de WhatsApp (sin espacios ni guiones)
-    const whatsappNumber = '5491171601995'
-    
-    // Crear URL de WhatsApp con el mensaje
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
-    
-    // Abrir WhatsApp
-    window.open(whatsappURL, '_blank')
-  }
-
   return (
     <div className="min-h-screen">
       <section className="pt-32 pb-20 px-4">
@@ -48,7 +29,7 @@ ${message}`
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="bg-black border border-zinc-800 rounded-sm p-8">
               <h2 className="text-2xl font-bold mb-6 text-white">Envíanos un mensaje</h2>
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2 text-white">
                     Nombre completo
