@@ -116,7 +116,7 @@ export default async function RootLayout({
   
   return (
     <html lang={lang} className={ballet.variable}>
-      <body className="antialiased">
+      <body className={`font-sans antialiased ${ballet.variable}`}>
         <Header lang={lang} dict={dict} />
         {children}
         <Footer dict={dict} />

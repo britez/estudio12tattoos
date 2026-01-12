@@ -25,7 +25,7 @@ export function GuestArtistsCarousel({ artists }: GuestArtistsCarouselProps) {
     dragFree: true,
     align: 'start',
     containScroll: 'trimSnaps'
-  }, [Autoplay({ delay: 3000, stopOnInteraction: false })])
+  }, [Autoplay({ delay: 3000, stopOnInteraction: false, pauseOnMouseEnter: true, resetProgress: false })])
   
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
