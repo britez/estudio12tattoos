@@ -2,6 +2,7 @@ import Image from "next/image"
 import type { Metadata } from "next"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
+import { GuestArtistsCarousel, type GuestArtist } from '@/components/guest-artists-carousel'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/acerca-de'>): Promise<Metadata> {
   const { lang } = await params
@@ -89,7 +90,7 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
     fundacion: dict.about.artists.founder.founded,
   }
 
-  const artistasTemporales = [
+  const artistasTemporales: GuestArtist[] = [
     {
       id: 1,
       nombre: "Ayelen Vera Echegaray",
@@ -152,6 +153,15 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
       instagram: "@michell.tattoo",
       periodo: dict.about.artists.status_labels.pending,
       descripcion: dict.about.artists.status_labels.pending_bio,
+    },
+    {
+      id: 8,
+      nombre: dict.about.artists.malena_chiesino.name,
+      especialidad: dict.about.artists.malena_chiesino.specialty,
+      imagen: "/malena-chiesino-portrait.jpg",
+      instagram: "@maletatts",
+      periodo: dict.about.artists.malena_chiesino.period,
+      descripcion: dict.about.artists.malena_chiesino.description,
     },
   ]
 
@@ -275,50 +285,14 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
       </section>
 
       {/* Artistas Temporales con carrusel */}
-      <section className="px-4 py-16 bg-black text-white overflow-hidden">
+      <section className="py-16 bg-black text-white overflow-hidden">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">{dict.about.guests.title}</h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
             {dict.about.guests.description}
           </p>
         </div>
-        <div className="relative w-full overflow-hidden">
-          <div className="flex gap-6 animate-scroll-infinite">
-            {/* Duplicamos el array para crear el efecto infinito */}
-            {[...artistasTemporales, ...artistasTemporales].map((artista, index) => (
-              <div
-                key={`${artista.id}-${index}`}
-                className="flex-shrink-0 w-[300px] bg-zinc-900 rounded-sm overflow-hidden group hover:[animation-play-state:paused]"
-              >
-                <div className="relative aspect-square overflow-hidden">
-                  <Image
-                    src={artista.imagen || "/placeholder.svg"}
-                    alt={artista.nombre}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {/* Overlay con descripción al hacer hover */}
-                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 z-10">
-                    <p className="text-white text-sm leading-relaxed text-center">{artista.descripcion}</p>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">{artista.nombre}</h3>
-                  <p className="text-sm text-gray-400 mb-2">{artista.especialidad}</p>
-                  <p className="text-xs text-gray-500 mb-3">{artista.periodo}</p>
-                  <a
-                    href={`https://instagram.com/${artista.instagram.replace("@", "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white hover:underline"
-                  >
-                    {artista.instagram}
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <GuestArtistsCarousel artists={artistasTemporales} />
       </section>
     </div>
   )

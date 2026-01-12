@@ -176,6 +176,13 @@
         "pending": "Por confirmar",
         "pending_bio": "Biografía por definir.",
         "pending_style": "Estilo por definir"
+      },
+      "malena_chiesino": {
+        "name": "Malena Chiesino",
+        "specialty": "Conceptual & Simbolismo",
+        "experience": "4 años",
+        "period": "Por confirmar",
+        "description": "Mi búsqueda en el tattoo es conceptual, priorizo el trazo y el simbolismo. Integro lo anatómico con el diseño, buscando un limpio recorrido visual."
       }
     }
   },
@@ -225,6 +232,22 @@
       "description": "Contáctanos para agendar tu consulta de tatuaje. Formulario de contacto, WhatsApp, Instagram. Estudio 12 en San Telmo, Buenos Aires.",
       "og_title": "Contacto - estudio12",
       "og_description": "Agenda tu consulta de tatuaje. Múltiples formas de contacto disponibles. Estudio profesional en Buenos Aires."
+    }
+  },
+  "not_found": {
+    "title": "¡Oops! Esta página se fue a tatuar",
+    "subtitle": "404 - No encontrado",
+    "message": "Parece que esta página se escapó del estudio para hacerse un tatuaje y no volvió nunca más. Mientras tanto, podés explorar el resto de nuestro trabajo.",
+    "fun_fact": "Dato curioso: El 73.8% de las páginas 404 nunca regresa de su sesión de tatuaje. ¿Será que les gusta tanto la experiencia?",
+    "cta": {
+      "home": "Volver al inicio",
+      "contact": "Contactanos",
+      "work": "Ver trabajos"
+    },
+    "ascii_art": "( ͡° ͜ʖ ͡°)",
+    "metadata": {
+      "title": "Página no encontrada - 404",
+      "description": "La página que buscás no se encuentra disponible. Navegá por nuestro estudio de tatuajes."
     }
   }
 }

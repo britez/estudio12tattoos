@@ -176,6 +176,13 @@
         "pending": "To be confirmed",
         "pending_bio": "Biography to be defined.",
         "pending_style": "Style to be defined"
+      },
+      "malena_chiesino": {
+        "name": "Malena Chiesino",
+        "specialty": "Conceptual & Symbolism",
+        "experience": "4 years",
+        "period": "To be confirmed",
+        "description": "My search in tattooing is conceptual, I prioritize line work and symbolism. I integrate anatomy with design, seeking a clean visual journey."
       }
     }
   },
@@ -225,6 +232,20 @@
       "description": "Contact us to book your tattoo consultation. Contact form, WhatsApp, Instagram. Studio 12 in San Telmo, Buenos Aires.",
       "og_title": "Contact - estudio12",
       "og_description": "Book your tattoo consultation. Multiple contact methods available. Professional studio in Buenos Aires."
-    }
-  }
+    }  },
+  "not_found": {
+    "title": "Oops! This page went to get a tattoo",
+    "subtitle": "404 - Not found",
+    "message": "Looks like this page escaped from the studio to get a tattoo and never came back. Meanwhile, you can explore the rest of our work.",
+    "fun_fact": "Fun fact: 73.8% of 404 pages never return from their tattoo session. Maybe they just love the experience that much?",
+    "cta": {
+      "home": "Back to home",
+      "contact": "Contact us",
+      "work": "View work"
+    },
+    "ascii_art": "( ͡° ͜ʖ ͡°)",
+    "metadata": {
+      "title": "Page not found - 404",
+      "description": "The page you're looking for is not available. Browse our tattoo studio."
+    }  }
 }
