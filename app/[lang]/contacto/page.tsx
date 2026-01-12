@@ -1,131 +1,71 @@
-"use client"
-
 import { Instagram, MessageCircle, Mail, MapPin, Phone } from "lucide-react"
 import type { Metadata } from "next"
-import { FormEvent } from "react"
+import { getDictionary, hasLocale } from '../dictionaries'
+import type { PageProps } from '../types'
+import ContactForm from './ContactForm'
 
-export default function ContactoPage() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    
-    const formData = new FormData(e.currentTarget)
-    const name = formData.get('name') as string
-    const email = formData.get('email') as string
-    const phone = formData.get('phone') as string
-    const message = formData.get('message') as string
-    
-    // Componer el mensaje para WhatsApp
-    const whatsappMessage = `*Nuevo contacto desde la web*
-
-*Nombre:* ${name}
-*Email:* ${email}
-${phone ? `*Teléfono:* ${phone}\n` : ''}
-*Mensaje:*
-${message}`
-    
-    // Número de WhatsApp (sin espacios ni guiones)
-    const whatsappNumber = '5491171601995'
-    
-    // Crear URL de WhatsApp con el mensaje
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
-    
-    // Abrir WhatsApp
-    window.open(whatsappURL, '_blank')
+export async function generateMetadata({ params }: PageProps<'/[lang]/contacto'>): Promise<Metadata> {
+  const { lang } = await params
+  
+  // Validar que el locale sea válido
+  if (!hasLocale(lang)) {
+    throw new Error(`Invalid locale: ${lang}`)
   }
+  
+  const dict = await getDictionary(lang)
+  
+  return {
+    title: dict.contact.metadata.title,
+    description: dict.contact.metadata.description,
+    openGraph: {
+      title: dict.contact.metadata.og_title,
+      description: dict.contact.metadata.og_description,
+      type: 'website',
+      locale: lang === 'es' ? 'es_AR' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.contact.metadata.og_title,
+      description: dict.contact.metadata.og_description,
+    },
+  }
+}
+
+export default async function ContactoPage({ params }: PageProps<'/[lang]/contacto'>) {
+  const { lang } = await params
+  
+  // Validar que el locale sea válido
+  if (!hasLocale(lang)) {
+    throw new Error(`Invalid locale: ${lang}`)
+  }
+  
+  const dict = await getDictionary(lang)
 
   return (
     <div className="min-h-screen">
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Hablemos de tu idea</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.contact.hero.title}</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Completa el formulario o contáctanos directamente por WhatsApp o Instagram. Respondemos todas las
-              consultas.
+              {dict.contact.hero.description}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="bg-black border border-zinc-800 rounded-sm p-8">
-              <h2 className="text-2xl font-bold mb-6 text-white">Envíanos un mensaje</h2>
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-white">
-                    Nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-sm focus:outline-none focus:ring-2 focus:ring-white"
-                    placeholder="Tu nombre"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-white">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-sm focus:outline-none focus:ring-2 focus:ring-white"
-                    placeholder="tu@email.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium mb-2 text-white">
-                    Teléfono
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-sm focus:outline-none focus:ring-2 focus:ring-white"
-                    placeholder="+54 9 11 1234-5678"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-white">
-                    Cuéntanos tu idea
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded-sm focus:outline-none focus:ring-2 focus:ring-white resize-none"
-                    placeholder="Describe el tatuaje que tienes en mente, estilo preferido, tamaño aproximado..."
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-white text-black py-3 rounded-sm font-medium hover:bg-zinc-200 transition-colors"
-                >
-                  Enviar mensaje
-                </button>
-              </form>
-            </div>
+            <ContactForm dict={dict} />
 
             {/* Información de contacto */}
             <div className="space-y-8">
               <div className="bg-card border border-border rounded-sm p-8">
-                <h2 className="text-2xl font-bold mb-6">Información de contacto</h2>
+                <h2 className="text-2xl font-bold mb-6">{dict.contact.info.title}</h2>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 mt-1 text-muted-foreground shrink-0" />
                     <div>
-                      <p className="font-medium">Dirección</p>
-                      <p className="text-muted-foreground">
-                        Humberto 1° 985, piso 12
-                        <br />
-                        Buenos Aires, Argentina
+                      <p className="font-medium">{dict.contact.info.address_label}</p>
+                      <p className="text-muted-foreground whitespace-pre-line">
+                        {dict.contact.info.address}
                       </p>
                     </div>
                   </div>
@@ -133,7 +73,7 @@ ${message}`
                   <div className="flex items-start gap-4">
                     <Phone className="w-5 h-5 mt-1 text-muted-foreground shrink-0" />
                     <div>
-                      <p className="font-medium">Teléfono</p>
+                      <p className="font-medium">{dict.contact.info.phone_label}</p>
                       <p className="text-muted-foreground">+549 11 71601995</p>
                     </div>
                   </div>
@@ -141,7 +81,7 @@ ${message}`
                   <div className="flex items-start gap-4">
                     <Mail className="w-5 h-5 mt-1 text-muted-foreground shrink-0" />
                     <div>
-                      <p className="font-medium">Email</p>
+                      <p className="font-medium">{dict.contact.info.email_label}</p>
                       <p className="text-muted-foreground">estudio12.tattoos@gmail.com</p>
                     </div>
                   </div>
@@ -150,7 +90,7 @@ ${message}`
 
               {/* Redes sociales */}
               <div className="bg-black rounded-sm p-8">
-                <h3 className="text-xl font-bold mb-6 text-white">Síguenos en redes</h3>
+                <h3 className="text-xl font-bold mb-6 text-white">{dict.contact.social.title}</h3>
                 <div className="space-y-4">
                   <a
                     href="https://www.instagram.com/estudio.12_/?hl=es"
@@ -184,7 +124,7 @@ ${message}`
                 </div>
 
                 <p className="text-sm text-zinc-400 mt-6 leading-relaxed">
-                  Respuesta rápida por WhatsApp de Lun a Sab, 10:00 - 20:00 hs
+                  {dict.contact.social.schedule}
                 </p>
               </div>
             </div>
@@ -209,7 +149,7 @@ ${message}`
 
       <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">Nuestros trabajos</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">{dict.contact.gallery.title}</h2>
 
           <div className="relative overflow-hidden">
             <div className="flex gap-6 animate-scroll-infinite pause-animation">
@@ -217,37 +157,37 @@ ${message}`
               <div className="flex gap-6 shrink-0">
                 <img
                   src="/polynesian-hand-tattoo.webp"
-                  alt="Tatuaje polinesio"
+                  alt={dict.contact.images.polynesian_tattoo}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/tattoo-artist-working-panoramic-view.webp"
-                  alt="Artista trabajando"
+                  alt={dict.contact.images.artist_working}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/mandala-stencil-application.webp"
-                  alt="Aplicación de stencil"
+                  alt={dict.contact.images.stencil_application}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/japanese-geisha-tattoo-colorful.webp"
-                  alt="Tatuaje de geisha japonesa"
+                  alt={dict.contact.images.japanese_geisha}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/female-artist-working-natural-light.webp"
-                  alt="Artista concentrada"
+                  alt={dict.contact.images.focused_artist}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/japanese-snake-cherry-blossom-forearm.webp"
-                  alt="Serpiente japonesa"
+                  alt={dict.contact.images.japanese_snake}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/studio-window-cityview-silhouette.webp"
-                  alt="Vista del estudio"
+                  alt={dict.contact.images.studio_view}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
               </div>
@@ -255,37 +195,37 @@ ${message}`
               <div className="flex gap-6 shrink-0">
                 <img
                   src="/polynesian-hand-tattoo.webp"
-                  alt="Tatuaje polinesio"
+                  alt={dict.contact.images.polynesian_tattoo}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/tattoo-artist-working-panoramic-view.webp"
-                  alt="Artista trabajando"
+                  alt={dict.contact.images.artist_working}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/mandala-stencil-application.webp"
-                  alt="Aplicación de stencil"
+                  alt={dict.contact.images.stencil_application}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/japanese-geisha-tattoo-colorful.webp"
-                  alt="Tatuaje de geisha japonesa"
+                  alt={dict.contact.images.japanese_geisha}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/female-artist-working-natural-light.webp"
-                  alt="Artista concentrada"
+                  alt={dict.contact.images.focused_artist}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/japanese-snake-cherry-blossom-forearm.webp"
-                  alt="Serpiente japonesa"
+                  alt={dict.contact.images.japanese_snake}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
                 <img
                   src="/studio-window-cityview-silhouette.webp"
-                  alt="Vista del estudio"
+                  alt={dict.contact.images.studio_view}
                   className="h-96 w-auto object-cover rounded-sm"
                 />
               </div>

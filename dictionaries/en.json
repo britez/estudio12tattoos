@@ -1,0 +1,230 @@
+{
+  "layout": {
+    "metadata": {
+      "title": "estudio12 - Tattoo Studio with Panoramic View | Buenos Aires",
+      "title_template": "%s | estudio12",
+      "description": "We are a professional tattoo studio in Buenos Aires with panoramic view. Every stroke tells a story. Specialists in realism, traditional, minimalist and more. Book your consultation.",
+      "keywords": [
+        "tattoos",
+        "tattoo studio",
+        "buenos aires tattoos",
+        "estudio12",
+        "realistic tattoos",
+        "traditional tattoos",
+        "minimalist tattoos",
+        "professional tattoos",
+        "tattoo studio",
+        "argentina tattoos",
+        "professional tattoo artists"
+      ],
+      "og_title": "estudio12 - Tattoo Studio with Panoramic View",
+      "og_description": "Professional tattoo studio in Buenos Aires. Every stroke tells a story. Artists specialized in multiple styles.",
+      "twitter_title": "estudio12 - Tattoo Studio with Panoramic View",
+      "twitter_description": "Professional tattoo studio in Buenos Aires. Every stroke tells a story. Artists specialized in multiple styles.",
+      "locale": "en_US"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "HOME",
+      "work": "WORK",
+      "about": "ABOUT",
+      "contact": "CONTACT"
+    },
+    "toggle_menu": "Toggle menu",
+    "language_selector": {
+      "spanish": "Español",
+      "english": "English",
+      "switch_to_spanish": "Cambiar a español",
+      "switch_to_english": "Switch to English"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "THE EXPERIENCE OF",
+      "subtitle": "Tattooing"
+    },
+    "description": "We are a professional tattoo studio with a panoramic view of one of the most beautiful cities. We know that every stroke tells a story, we create art pieces that last a lifetime.",
+    "cta": {
+      "title": "What's your next tattoo?",
+      "description": "Tell us your idea, the style and size, do you already have tattoos? The studio takes care of advising you and presenting the perfect artist for you.",
+      "button": "Contact Us"
+    },
+    "categories": {
+      "studio": "Studio",
+      "realism": "Realism",
+      "experience": "Experience",
+      "polynesian": "Polynesian",
+      "process": "Process",
+      "japanese_traditional": "Traditional Japanese",
+      "japanese": "Japanese"
+    },
+    "works": {
+      "panoramic_view": "Panoramic View",
+      "our_studio": "Our Studio",
+      "realistic_cats": "Realistic Cats",
+      "studio12_experience": "studio12 Experience",
+      "realistic_horse": "Realistic Horse",
+      "polynesian": "Polynesian",
+      "artist_in_action": "Artist in Action",
+      "stencil_application": "Stencil Application",
+      "traditional_geisha": "Traditional Geisha",
+      "focused_artist": "Focused Artist",
+      "japanese_snake": "Japanese Snake",
+      "studio_view": "Studio View",
+      "sunset_consultation": "Sunset Consultation"
+    },
+    "metadata": {
+      "title": "Home - The Tattoo Experience",
+      "description": "We are a professional tattoo studio with panoramic view to one of the most beautiful cities. We know that every stroke tells a story, we create art pieces that last a lifetime.",
+      "og_title": "estudio12 - The Tattoo Experience",
+      "og_description": "We are a professional tattoo studio with panoramic view. Every stroke tells a story, we create art pieces that last a lifetime."
+    }
+  },
+  "work": {
+    "hero": {
+      "title": "Our Work",
+      "description": "Explore our tattoo portfolio. Each piece tells a unique story."
+    },
+    "cta": {
+      "title": "Got Inspired?",
+      "description": "Book a consultation to discuss your next tattoo with our team of artists.",
+      "button": "Book Consultation"
+    },
+    "metadata": {
+      "title": "Work - Tattoo Portfolio",
+      "description": "Explore our tattoo portfolio. Each piece tells a unique story. Realism, traditional Japanese, Polynesian and more styles.",
+      "og_title": "estudio12 - Our Work",
+      "og_description": "Professional tattoo portfolio. Each piece tells a unique story. Specialists in multiple styles."
+    }
+  },
+  "footer": {
+    "tagline": "The tattoo experience.",
+    "copyright": "© 2026 estudio12. All rights reserved.",
+    "social": {
+      "instagram_alt": "Instagram",
+      "whatsapp_alt": "WhatsApp",
+      "email_alt": "Contact"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About the Studio",
+      "description_1": "Founded in 2022, Studio 12 opened its doors in the San Telmo neighborhood, Autonomous City of Buenos Aires, with the mission of sharing the art of tattooing from a contemporary perspective, without losing the values that define it as a craft.",
+      "description_2": "The studio maintains constant updating and training, with the objective of offering a service according to the expectations and needs of each client.",
+      "description_3": "At Studio 12 we work under high standards of hygiene, safety and professionalism. We use state-of-the-art equipment and apply strict sanitary protocols to guarantee a safe, careful and comfortable experience in each session."
+    },
+    "founder": {
+      "title": "Founding Artist",
+      "founded_label": "Founded the studio in:"
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "Meet the artists who bring your ideas to life. Each with their unique style and passion for the art of tattooing.",
+      "experience_label": "of experience"
+    },
+    "guests": {
+      "title": "Guest Artists",
+      "description": "Meet the temporary artists who collaborate with us. Each brings their unique style and perspective to the studio."
+    },
+    "cta": {
+      "title": "Want to work with our team?",
+      "description": "Book a free consultation to discuss your idea with the artist who best fits your style.",
+      "button": "Book Consultation"
+    },
+    "metadata": {
+      "title": "About Us - Our Team of Artists",
+      "description": "Meet our team of professional artists specialized in realism, traditional, minimalist, oriental and more. Founded in 2015 with the highest standards of quality and safety.",
+      "og_title": "About estudio12 - Our Team of Artists",
+      "og_description": "Meet our team of professional artists specialized in multiple tattoo styles. Over 10 years of combined experience."
+    },
+    "artists": {
+      "founder": {
+        "name": "Macarena Troiani",
+        "specialty": "Founder & Artistic Director",
+        "experience": "11 years",
+        "description": "I like to encourage people to live from what they are passionate about and share what I have learned in these 11 years. I have taken seminars, workshops and training of all kinds to grow as a professional and enrich my artistic eye. I am still learning, it is a constant in my life.",
+        "founded": "2022"
+      },
+      "team": {
+        "martina": {
+          "name": "Martina Padula",
+          "specialty": "Fineline & Delicate Designs",
+          "experience": "3 years",
+          "description": "My search in tattooing is to achieve delicate and neat tattoos, with great value in details. I give them a dark aura, which is my personal brand."
+        },
+        "ivo": {
+          "name": "Ivo Bardon",
+          "specialty": "Dotwork & Symbolism",
+          "experience": "8 years",
+          "description": "I am from San Telmo and all my work is done with dots. I dedicate myself to making pieces with a lot of symbolic charge for each client and my challenge is to create pieces with the ornamental Buenos Aires aesthetic."
+        },
+        "sofia": {
+          "name": "Sofía Campanaro",
+          "specialty": "Abstract Art & Textures",
+          "experience": "5 years",
+          "description": "My artistic search comes from everyday inspirations, the textures and movements that the things we see and feel have in order to reach an abstraction of that."
+        },
+        "mateo": {
+          "name": "Mateo Díaz",
+          "specialty": "Realism & Argentine Culture",
+          "experience": "4 years",
+          "description": "I am 21 years old and my artistic search is focused on traditional Argentine culture, music and football. I am devoted to the search for meaning and purpose, and I try to immortalize symbols on the skin through realism in dialogue with minimalism and graphic design."
+        }
+      },
+      "status_labels": {
+        "pending": "To be confirmed",
+        "pending_bio": "Biography to be defined.",
+        "pending_style": "Style to be defined"
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Let's talk about your idea",
+      "description": "Fill out the form or contact us directly via WhatsApp or Instagram. We respond to all inquiries."
+    },
+    "form": {
+      "title": "Send us a message",
+      "name_label": "Full name",
+      "name_placeholder": "Your name",
+      "email_label": "Email",
+      "email_placeholder": "your@email.com",
+      "phone_label": "Phone",
+      "phone_placeholder": "+54 9 11 1234-5678",
+      "message_label": "Tell us your idea",
+      "message_placeholder": "Describe the tattoo you have in mind, preferred style, approximate size...",
+      "submit_button": "Send message",
+      "whatsapp_intro": "*New contact from website*"
+    },
+    "info": {
+      "title": "Contact Information",
+      "address_label": "Address",
+      "address": "Humberto 1° 985, floor 12\nBuenos Aires, Argentina",
+      "phone_label": "Phone",
+      "email_label": "Email"
+    },
+    "social": {
+      "title": "Follow us on social media",
+      "schedule": "Quick WhatsApp response Mon to Sat, 10:00 - 20:00"
+    },
+    "gallery": {
+      "title": "Our Work"
+    },
+    "images": {
+      "polynesian_tattoo": "Polynesian tattoo",
+      "artist_working": "Artist working",
+      "stencil_application": "Stencil application",
+      "japanese_geisha": "Japanese geisha tattoo",
+      "focused_artist": "Focused artist",
+      "japanese_snake": "Japanese snake",
+      "studio_view": "Studio view"
+    },
+    "metadata": {
+      "title": "Contact - Book Your Consultation",
+      "description": "Contact us to book your tattoo consultation. Contact form, WhatsApp, Instagram. Studio 12 in San Telmo, Buenos Aires.",
+      "og_title": "Contact - estudio12",
+      "og_description": "Book your tattoo consultation. Multiple contact methods available. Professional studio in Buenos Aires."
+    }
+  }
+}

@@ -1,109 +1,130 @@
 import { ImageWithSkeleton } from "@/components/image-with-skeleton"
 import type { Metadata } from "next"
+import { getDictionary, hasLocale } from './dictionaries'
+import type { PageProps } from './types'
 
-export const metadata: Metadata = {
-  title: "Inicio - La Experiencia de Tatuarte",
-  description:
-    "Somos un estudio de tatuajes profesional con vista panorámica a una de las ciudades más bellas. Sabemos que cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.",
-  openGraph: {
-    title: "estudio12 - La Experiencia de Tatuarte",
-    description:
-      "Somos un estudio de tatuajes profesional con vista panorámica. Cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.",
-    images: ["/artist-designing-tattoo-ipad.jpg"],
-  },
+
+export async function generateMetadata({ params }: PageProps<'/[lang]'>): Promise<Metadata> {
+  const { lang } = await params
+  
+  // Validar que el locale sea válido
+  if (!hasLocale(lang)) {
+    throw new Error(`Invalid locale: ${lang}`)
+  }
+  
+  const dict = await getDictionary(lang)
+  
+  return {
+    title: dict.home.metadata.title,
+    description: dict.home.metadata.description,
+    openGraph: {
+      title: dict.home.metadata.og_title,
+      description: dict.home.metadata.og_description,
+      images: ["/artist-designing-tattoo-ipad.jpg"],
+    },
+  }
 }
 
-export default function Home() {
+export default async function Home({ params }: PageProps<'/[lang]'>) {
+  const { lang } = await params
+ 
+  // Validar que el locale sea válido
+  if (!hasLocale(lang)) {
+    throw new Error(`Invalid locale: ${lang}`)
+  }
+ 
+  const dict = await getDictionary(lang)
+
   const featured = [
     {
       id: 1,
-      title: "Vista Panorámica",
+      title: dict.home.works.panoramic_view,
       image: "/images/84ef3090-eaae-44d6-815c-a81bae093663.webp",
-      category: "Estudio",
+      category: dict.home.categories.studio,
       type: "image",
     },
     {
       id: 2,
-      title: "Nuestro Estudio",
+      title: dict.home.works.our_studio,
       image: "/studio-tattoo-chair.webp",
-      category: "Estudio",
+      category: dict.home.categories.studio,
       type: "image",
     },
     {
       id: 3,
-      title: "Gatos Realistas",
+      title: dict.home.works.realistic_cats,
       image: "/cats-tattoo-realistic.webp",
-      category: "Realismo",
+      category: dict.home.categories.realism,
       type: "image",
     },
     {
       id: 4,
-      title: "Experiencia estudio12",
+      title: dict.home.works.studio12_experience,
       video: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%40natha_streetink%20en%20el%2012%21%20Ya%20nos%20conoces%20Tuviste%20la%20experiencia%20de%20tatuarte%20con%20vista%20panora%CC%81mic-JoeWWFQPOQo1Hjp8MzS2Uvh0Y7RIAH.mp4",
-      category: "Experiencia",
+      category: dict.home.categories.experience,
       type: "video",
     },
     {
       id: 5,
-      title: "Caballo Realista",
+      title: dict.home.works.realistic_horse,
       image: "/realistic-horse-tattoo.webp",
-      category: "Realismo",
+      category: dict.home.categories.realism,
       type: "image",
     },
     {
       id: 6,
-      title: "Polinesio",
+      title: dict.home.works.polynesian,
       image: "/polynesian-hand-tattoo.webp",
-      category: "Polinesio",
+      category: dict.home.categories.polynesian,
       type: "image",
     },
     {
       id: 7,
-      title: "Artista en Acción",
+      title: dict.home.works.artist_in_action,
       image: "/tattoo-artist-working-panoramic-view.webp",
-      category: "Proceso",
+      category: dict.home.categories.process,
       type: "image",
     },
     {
       id: 8,
-      title: "Aplicación de Stencil",
+      title: dict.home.works.stencil_application,
       image: "/mandala-stencil-application.webp",
-      category: "Proceso",
+      category: dict.home.categories.process,
       type: "image",
     },
     {
       id: 9,
-      title: "Geisha Tradicional",
+      title: dict.home.works.traditional_geisha,
       image: "/japanese-geisha-tattoo-colorful.webp",
-      category: "Japonés Tradicional",
+      category: dict.home.categories.japanese_traditional,
       type: "image",
     },
     {
       id: 10,
-      title: "Artista Concentrada",
+      title: dict.home.works.focused_artist,
       image: "/female-artist-working-natural-light.webp",
-      category: "Proceso",
+      category: dict.home.categories.process,
       type: "image",
     },
     {
       id: 11,
-      title: "Serpiente Japonesa",
+      title: dict.home.works.japanese_snake,
       image: "/japanese-snake-cherry-blossom-forearm.webp",
-      category: "Japonés",
+      category: dict.home.categories.japanese,
       type: "image",
     },
     {
       id: 12,
-      title: "Vista del Estudio",
+      title: dict.home.works.studio_view,
       image: "/studio-window-cityview-silhouette.webp",
-      category: "Estudio",
+      category: dict.home.categories.studio,
       type: "image",
     },
     {
       id: 13,
-      title: "Consulta al Atardecer",
+      title: dict.home.works.sunset_consultation,
       image: "/artists-consultation-sunset-studio.webp",
-      category: "Estudio",
+      category: dict.home.categories.studio,
       type: "image",
     },
   ]
@@ -114,13 +135,12 @@ export default function Home() {
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance uppercase leading-none">
-            LA EXPERIENCIA DE
+            {dict.home.hero.title}
             <br />
-            <span className="font-marker normal-case text-6xl md:text-9xl block mt-2">Tatuarte</span>
+            <span className="font-marker normal-case text-6xl md:text-9xl block mt-2">{dict.home.hero.subtitle}</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Somos un estudio de tatuajes profesional, con vista panorámica a una de las ciudades más bellas. Sabemos que
-            cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.
+            {dict.home.description}
           </p>
         </div>
       </section>
@@ -187,16 +207,15 @@ export default function Home() {
       <section className="px-4 pb-20">
         <div className="container mx-auto max-w-3xl">
           <div className="bg-secondary rounded-sm p-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance uppercase">¿Cúal es tu próximo tatuaje?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance uppercase">{dict.home.cta.title}</h2>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Contanos tu idea, el estilo y tamaño, ¿ya tenés tatuajes?. El estudio se encarga de asesorarte y
-              presentarte el artista perfecto para ti.
+              {dict.home.cta.description}
             </p>
             <a
-              href="/contacto"
+              href={`/${lang}/contacto`}
               className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-sm font-medium hover:bg-primary/90 transition-colors"
             >
-              Contáctanos
+              {dict.home.cta.button}
             </a>
           </div>
         </div>

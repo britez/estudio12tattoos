@@ -1,0 +1,230 @@
+{
+  "layout": {
+    "metadata": {
+      "title": "estudio12 - Estudio de Tatuajes con Vista Panorámica | Buenos Aires",
+      "title_template": "%s | estudio12",
+      "description": "Somos un estudio de tatuajes profesional en Buenos Aires con vista panorámica. Cada trazo cuenta una historia. Especialistas en realismo, tradicional, minimalista y más. Agenda tu consulta.",
+      "keywords": [
+        "tatuajes",
+        "estudio de tatuajes",
+        "tatuajes buenos aires",
+        "estudio12",
+        "tatuajes realistas",
+        "tatuajes tradicionales",
+        "tatuajes minimalistas",
+        "tatuajes profesionales",
+        "tattoo studio",
+        "tatuajes argentina",
+        "tatuadores profesionales"
+      ],
+      "og_title": "estudio12 - Estudio de Tatuajes con Vista Panorámica",
+      "og_description": "Estudio de tatuajes profesional en Buenos Aires. Cada trazo cuenta una historia. Artistas especializados en múltiples estilos.",
+      "twitter_title": "estudio12 - Estudio de Tatuajes con Vista Panorámica",
+      "twitter_description": "Estudio de tatuajes profesional en Buenos Aires. Cada trazo cuenta una historia. Artistas especializados en múltiples estilos.",
+      "locale": "es_AR"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "INICIO",
+      "work": "TRABAJOS",
+      "about": "ACERCA DE",
+      "contact": "CONTACTO"
+    },
+    "toggle_menu": "Alternar menú",
+    "language_selector": {
+      "spanish": "Español",
+      "english": "English",
+      "switch_to_spanish": "Cambiar a español",
+      "switch_to_english": "Switch to English"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "LA EXPERIENCIA DE",
+      "subtitle": "Tatuarte"
+    },
+    "description": "Somos un estudio de tatuajes profesional, con vista panorámica a una de las ciudades más bellas. Sabemos que cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.",
+    "cta": {
+      "title": "¿Cuál es tu próximo tatuaje?",
+      "description": "Contanos tu idea, el estilo y tamaño, ¿ya tenés tatuajes?. El estudio se encarga de asesorarte y presentarte el artista perfecto para ti.",
+      "button": "Contáctanos"
+    },
+    "categories": {
+      "studio": "Estudio",
+      "realism": "Realismo",
+      "experience": "Experiencia",
+      "polynesian": "Polinesio",
+      "process": "Proceso",
+      "japanese_traditional": "Japonés Tradicional",
+      "japanese": "Japonés"
+    },
+    "works": {
+      "panoramic_view": "Vista Panorámica",
+      "our_studio": "Nuestro Estudio",
+      "realistic_cats": "Gatos Realistas",
+      "studio12_experience": "Experiencia estudio12",
+      "realistic_horse": "Caballo Realista",
+      "polynesian": "Polinesio",
+      "artist_in_action": "Artista en Acción",
+      "stencil_application": "Aplicación de Stencil",
+      "traditional_geisha": "Geisha Tradicional",
+      "focused_artist": "Artista Concentrada",
+      "japanese_snake": "Serpiente Japonesa",
+      "studio_view": "Vista del Estudio",
+      "sunset_consultation": "Consulta al Atardecer"
+    },
+    "metadata": {
+      "title": "Inicio - La Experiencia de Tatuarte",
+      "description": "Somos un estudio de tatuajes profesional con vista panorámica a una de las ciudades más bellas. Sabemos que cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.",
+      "og_title": "estudio12 - La Experiencia de Tatuarte",
+      "og_description": "Somos un estudio de tatuajes profesional con vista panorámica. Cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida."
+    }
+  },
+  "work": {
+    "hero": {
+      "title": "Nuestros Trabajos",
+      "description": "Explora nuestro portafolio de tatuajes. Cada pieza cuenta una historia única."
+    },
+    "cta": {
+      "title": "¿Te inspiraste?",
+      "description": "Agenda una consulta para discutir tu próximo tatuaje con nuestro equipo de artistas.",
+      "button": "Agendar Consulta"
+    },
+    "metadata": {
+      "title": "Trabajos - Portafolio de Tatuajes",
+      "description": "Explora nuestro portafolio de tatuajes. Cada pieza cuenta una historia única. Realismo, japonés tradicional, polinesio y más estilos.",
+      "og_title": "estudio12 - Nuestros Trabajos",
+      "og_description": "Portafolio de tatuajes profesionales. Cada pieza cuenta una historia única. Especialistas en múltiples estilos."
+    }
+  },
+  "footer": {
+    "tagline": "La experiencia de tatuarte.",
+    "copyright": "© 2026 estudio12. Todos los derechos reservados.",
+    "social": {
+      "instagram_alt": "Instagram",
+      "whatsapp_alt": "WhatsApp",
+      "email_alt": "Contacto"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Acerca del estudio",
+      "description_1": "Fundado en 2022, Estudio 12 abrió sus puertas en el barrio de San Telmo, Ciudad Autónoma de Buenos Aires, con la misión de compartir el arte del tatuaje desde una mirada contemporánea, sin perder los valores que lo definen como un oficio.",
+      "description_2": "El estudio se mantiene en constante actualización y capacitación, con el objetivo de ofrecer un servicio acorde a las expectativas y necesidades de cada cliente.",
+      "description_3": "En Estudio 12 trabajamos bajo altos estándares de higiene, seguridad y profesionalismo. Utilizamos equipamiento de última generación y aplicamos protocolos sanitarios estrictos para garantizar una experiencia segura, cuidada y cómoda en cada sesión."
+    },
+    "founder": {
+      "title": "Artista Fundadora",
+      "founded_label": "Fundó el estudio en:"
+    },
+    "team": {
+      "title": "Nuestro Equipo",
+      "description": "Conoce a los artistas que dan vida a tus ideas. Cada uno con su estilo único y pasión por el arte del tatuaje.",
+      "experience_label": "de experiencia"
+    },
+    "guests": {
+      "title": "Artistas Invitados",
+      "description": "Conoce a los artistas temporales que colaboran con nosotros. Cada uno trae su estilo único y perspectiva al estudio."
+    },
+    "cta": {
+      "title": "¿Quieres trabajar con nuestro equipo?",
+      "description": "Agenda una consulta gratuita para discutir tu idea con el artista que mejor se ajuste a tu estilo.",
+      "button": "Agendar Consulta"
+    },
+    "metadata": {
+      "title": "Acerca de Nosotros - Nuestro Equipo de Artistas",
+      "description": "Conoce a nuestro equipo de artistas profesionales especializados en realismo, tradicional, minimalista, oriental y más. Fundado en 2015 con los más altos estándares de calidad y seguridad.",
+      "og_title": "Acerca de estudio12 - Nuestro Equipo de Artistas",
+      "og_description": "Conoce a nuestro equipo de artistas profesionales especializados en múltiples estilos de tatuaje. Más de 10 años de experiencia combinada."
+    },
+    "artists": {
+      "founder": {
+        "name": "Macarena Troiani",
+        "specialty": "Fundadora & Directora Artística",
+        "experience": "11 años",
+        "description": "Me gusta incentivar a las personas a vivir de lo que les apasiona y compartir lo que he aprendido en estos 11 años. He tomado seminarios, talleres y capacitaciones de todo tipo para crecer como profesional y enriquecer mi ojo artístico. Aún sigo aprendiendo, es una constante en mi vida.",
+        "founded": "2022"
+      },
+      "team": {
+        "martina": {
+          "name": "Martina Padula",
+          "specialty": "Fineline & Diseños Delicados",
+          "experience": "3 años",
+          "description": "Mi búsqueda en el tattoo es lograr tatuajes delicados y prolijos, con gran valor en los detalles. Les doy un aura oscura, que es mi marca personal."
+        },
+        "ivo": {
+          "name": "Ivo Bardon",
+          "specialty": "Dotwork & Simbolismo",
+          "experience": "8 años",
+          "description": "Soy de San Telmo y todo mi trabajo está realizado con puntos. Me dedico a hacer piezas con mucha carga simbólica para cada cliente y mi desafío es crear piezas con la estética ornamental porteña."
+        },
+        "sofia": {
+          "name": "Sofía Campanaro",
+          "specialty": "Arte Abstracto & Texturas",
+          "experience": "5 años",
+          "description": "Mi búsqueda artística va mucho de inspiraciones cotidianas, las texturas y movimientos que tienen las cosas que vemos y sentimos para poder llegar a una abstracción de eso."
+        },
+        "mateo": {
+          "name": "Mateo Díaz",
+          "specialty": "Realismo & Cultura Argentina",
+          "experience": "4 años",
+          "description": "Tengo 21 años y mi búsqueda artística está enfocada en la cultura tradicional argentina, la música y el fútbol. Me desvela la búsqueda del sentido y del propósito, e intento inmortalizar símbolos en la piel a partir del realismo en diálogo con el minimalismo y el diseño gráfico."
+        }
+      },
+      "status_labels": {
+        "pending": "Por confirmar",
+        "pending_bio": "Biografía por definir.",
+        "pending_style": "Estilo por definir"
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Hablemos de tu idea",
+      "description": "Completa el formulario o contáctanos directamente por WhatsApp o Instagram. Respondemos todas las consultas."
+    },
+    "form": {
+      "title": "Envíanos un mensaje",
+      "name_label": "Nombre completo",
+      "name_placeholder": "Tu nombre",
+      "email_label": "Email",
+      "email_placeholder": "tu@email.com",
+      "phone_label": "Teléfono",
+      "phone_placeholder": "+54 9 11 1234-5678",
+      "message_label": "Cuéntanos tu idea",
+      "message_placeholder": "Describe el tatuaje que tienes en mente, estilo preferido, tamaño aproximado...",
+      "submit_button": "Enviar mensaje",
+      "whatsapp_intro": "*Nuevo contacto desde la web*"
+    },
+    "info": {
+      "title": "Información de contacto",
+      "address_label": "Dirección",
+      "address": "Humberto 1° 985, piso 12\nBuenos Aires, Argentina",
+      "phone_label": "Teléfono",
+      "email_label": "Email"
+    },
+    "social": {
+      "title": "Síguenos en redes",
+      "schedule": "Respuesta rápida por WhatsApp de Lun a Sab, 10:00 - 20:00 hs"
+    },
+    "gallery": {
+      "title": "Nuestros trabajos"
+    },
+    "images": {
+      "polynesian_tattoo": "Tatuaje polinesio",
+      "artist_working": "Artista trabajando",
+      "stencil_application": "Aplicación de stencil",
+      "japanese_geisha": "Tatuaje de geisha japonesa",
+      "focused_artist": "Artista concentrada",
+      "japanese_snake": "Serpiente japonesa",
+      "studio_view": "Vista del estudio"
+    },
+    "metadata": {
+      "title": "Contacto - Agenda tu Consulta",
+      "description": "Contáctanos para agendar tu consulta de tatuaje. Formulario de contacto, WhatsApp, Instagram. Estudio 12 en San Telmo, Buenos Aires.",
+      "og_title": "Contacto - estudio12",
+      "og_description": "Agenda tu consulta de tatuaje. Múltiples formas de contacto disponibles. Estudio profesional en Buenos Aires."
+    }
+  }
+}
