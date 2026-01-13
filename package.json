@@ -6,8 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start",
-    "slicemachine": "start-slicemachine"
+    "slicemachine": "start-slicemachine",
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
