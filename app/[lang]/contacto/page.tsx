@@ -90,13 +90,13 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
       console.error('Fallback also failed for carousel:', fallbackError)
       // Fallback con imágenes hardcodeadas si todo falla
       carouselImages = [
-        { src: "/polynesian-hand-tattoo.webp", alt: dict.contact.images.polynesian_tattoo },
-        { src: "/tattoo-artist-working-panoramic-view.webp", alt: dict.contact.images.artist_working },
-        { src: "/mandala-stencil-application.webp", alt: dict.contact.images.stencil_application },
-        { src: "/japanese-geisha-tattoo-colorful.webp", alt: dict.contact.images.japanese_geisha },
-        { src: "/female-artist-working-natural-light.webp", alt: dict.contact.images.focused_artist },
-        { src: "/japanese-snake-cherry-blossom-forearm.webp", alt: dict.contact.images.japanese_snake },
-        { src: "/studio-window-cityview-silhouette.webp", alt: dict.contact.images.studio_view }
+        { src: "/polynesian-hand-tattoo.webp", alt: "Tatuaje polinesio" },
+        { src: "/tattoo-artist-working-panoramic-view.webp", alt: "Artista trabajando" },
+        { src: "/mandala-stencil-application.webp", alt: "Aplicación de stencil" },
+        { src: "/japanese-geisha-tattoo-colorful.webp", alt: "Tatuaje de geisha japonesa" },
+        { src: "/female-artist-working-natural-light.webp", alt: "Artista concentrada" },
+        { src: "/japanese-snake-cherry-blossom-forearm.webp", alt: "Serpiente japonesa" },
+        { src: "/studio-window-cityview-silhouette.webp", alt: "Vista del estudio" }
       ]
     }
   }
