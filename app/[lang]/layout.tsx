@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { Ballet } from "next/font/google"
 import { Header } from "@/components/header"
@@ -117,6 +118,20 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={ballet.variable}>
       <body className={`font-sans antialiased ${ballet.variable}`}>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-3PHC2TMNZN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3PHC2TMNZN');
+          `}
+        </Script>
+        
         <Header lang={lang} dict={dict} />
         {children}
         <Footer dict={dict} />
