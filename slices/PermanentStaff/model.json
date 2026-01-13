@@ -1,0 +1,71 @@
+{
+  "id": "permanent_staff",
+  "type": "SharedSlice",
+  "name": "PermanentStaff",
+  "description": "PermanentStaff",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "artists": {
+          "type": "Group",
+          "config": {
+            "label": "artists",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "name",
+                  "placeholder": ""
+                }
+              },
+              "category": {
+                "type": "Text",
+                "config": {
+                  "label": "category",
+                  "placeholder": ""
+                }
+              },
+              "experience": {
+                "type": "Text",
+                "config": {
+                  "label": "experience",
+                  "placeholder": ""
+                }
+              },
+              "bio": {
+                "type": "Text",
+                "config": {
+                  "label": "bio",
+                  "placeholder": ""
+                }
+              },
+              "instagram": {
+                "type": "Text",
+                "config": {
+                  "label": "instagram",
+                  "placeholder": ""
+                }
+              },
+              "picture": {
+                "type": "Image",
+                "config": {
+                  "label": "picture",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

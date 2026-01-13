@@ -69,6 +69,71 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type AboutusDocumentDataSlicesSlice = GuestArtistsSlice | PermanentStaffSlice;
+
+/**
+ * Content for AboutUs documents
+ */
+interface AboutusDocumentData {
+  /**
+   * Slice Zone field in *AboutUs*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: aboutus.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<AboutusDocumentDataSlicesSlice>; /**
+   * Meta Title field in *AboutUs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: aboutus.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *AboutUs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: aboutus.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *AboutUs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: aboutus.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * AboutUs document from Prismic
+ *
+ * - **API ID**: `aboutus`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutusDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AboutusDocumentData>,
+    "aboutus",
+    Lang
+  >;
+
 type HomeDocumentDataSlicesSlice = PortfolioSlice;
 
 /**
@@ -191,7 +256,261 @@ interface WorkDocumentData {
 export type WorkDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<WorkDocumentData>, "work", Lang>;
 
-export type AllDocumentTypes = HomeDocument | WorkDocument;
+export type AllDocumentTypes = AboutusDocument | HomeDocument | WorkDocument;
+
+/**
+ * Default variation for AboutUs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AboutUsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *AboutUs*
+ */
+type AboutUsSliceVariation = AboutUsSliceDefault;
+
+/**
+ * AboutUs Shared Slice
+ *
+ * - **API ID**: `about_us`
+ * - **Description**: AboutUs
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AboutUsSlice = prismic.SharedSlice<
+  "about_us",
+  AboutUsSliceVariation
+>;
+
+/**
+ * Item in *GuestArtists → Default → Primary → artists*
+ */
+export interface GuestArtistsSliceDefaultPrimaryArtistsItem {
+  /**
+   * name field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * category field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].category
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  category: prismic.KeyTextField;
+
+  /**
+   * schedule field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].schedule
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  schedule: prismic.KeyTextField;
+
+  /**
+   * instagram field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].instagram
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  instagram: prismic.KeyTextField;
+
+  /**
+   * picture field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  picture: prismic.ImageField<never>;
+
+  /**
+   * bio field in *GuestArtists → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[].bio
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  bio: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *GuestArtists → Default → Primary*
+ */
+export interface GuestArtistsSliceDefaultPrimary {
+  /**
+   * artists field in *GuestArtists → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guest_artists.default.primary.artists[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  artists: prismic.GroupField<
+    Simplify<GuestArtistsSliceDefaultPrimaryArtistsItem>
+  >;
+}
+
+/**
+ * Default variation for GuestArtists Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type GuestArtistsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<GuestArtistsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *GuestArtists*
+ */
+type GuestArtistsSliceVariation = GuestArtistsSliceDefault;
+
+/**
+ * GuestArtists Shared Slice
+ *
+ * - **API ID**: `guest_artists`
+ * - **Description**: GuestArtists
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type GuestArtistsSlice = prismic.SharedSlice<
+  "guest_artists",
+  GuestArtistsSliceVariation
+>;
+
+/**
+ * Item in *PermanentStaff → Default → Primary → artists*
+ */
+export interface PermanentStaffSliceDefaultPrimaryArtistsItem {
+  /**
+   * name field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * category field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].category
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  category: prismic.KeyTextField;
+
+  /**
+   * experience field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].experience
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  experience: prismic.KeyTextField;
+
+  /**
+   * bio field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].bio
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  bio: prismic.KeyTextField;
+
+  /**
+   * instagram field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].instagram
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  instagram: prismic.KeyTextField;
+
+  /**
+   * picture field in *PermanentStaff → Default → Primary → artists*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[].picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  picture: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *PermanentStaff → Default → Primary*
+ */
+export interface PermanentStaffSliceDefaultPrimary {
+  /**
+   * artists field in *PermanentStaff → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: permanent_staff.default.primary.artists[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  artists: prismic.GroupField<
+    Simplify<PermanentStaffSliceDefaultPrimaryArtistsItem>
+  >;
+}
+
+/**
+ * Default variation for PermanentStaff Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PermanentStaffSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<PermanentStaffSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *PermanentStaff*
+ */
+type PermanentStaffSliceVariation = PermanentStaffSliceDefault;
+
+/**
+ * PermanentStaff Shared Slice
+ *
+ * - **API ID**: `permanent_staff`
+ * - **Description**: PermanentStaff
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PermanentStaffSlice = prismic.SharedSlice<
+  "permanent_staff",
+  PermanentStaffSliceVariation
+>;
 
 /**
  * Item in *Portfolio → Default → Primary → imagenes*
@@ -383,6 +702,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutusDocument,
+      AboutusDocumentData,
+      AboutusDocumentDataSlicesSlice,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
@@ -390,6 +712,19 @@ declare module "@prismicio/client" {
       WorkDocumentData,
       WorkDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AboutUsSlice,
+      AboutUsSliceVariation,
+      AboutUsSliceDefault,
+      GuestArtistsSlice,
+      GuestArtistsSliceDefaultPrimaryArtistsItem,
+      GuestArtistsSliceDefaultPrimary,
+      GuestArtistsSliceVariation,
+      GuestArtistsSliceDefault,
+      PermanentStaffSlice,
+      PermanentStaffSliceDefaultPrimaryArtistsItem,
+      PermanentStaffSliceDefaultPrimary,
+      PermanentStaffSliceVariation,
+      PermanentStaffSliceDefault,
       PortfolioSlice,
       PortfolioSliceDefaultPrimaryImagenesItem,
       PortfolioSliceDefaultPrimary,

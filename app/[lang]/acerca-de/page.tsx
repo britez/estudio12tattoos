@@ -1,8 +1,10 @@
 import Image from "next/image"
 import type { Metadata } from "next"
+import { createClient } from "@/prismicio"
+import type { AboutusDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
-import { GuestArtistsCarousel, type GuestArtist } from '@/components/guest-artists-carousel'
+import { GenericCarousel, type CarouselImage, type GuestArtist } from '@/components/guest-artists-carousel'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/acerca-de'>): Promise<Metadata> {
   const { lang } = await params
@@ -41,45 +43,126 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
   }
   
   const dict = await getDictionary(lang)
-  const artistasFijos = [
-    {
-      id: 1,
-      nombre: dict.about.artists.team.martina.name,
-      especialidad: dict.about.artists.team.martina.specialty,
-      imagen: "/martina-padula-portrait.jpg",
-      experiencia: dict.about.artists.team.martina.experience,
-      descripcion: dict.about.artists.team.martina.description,
-      instagram: "@mar.fineline",
-    },
-    {
-      id: 2,
-      nombre: dict.about.artists.team.ivo.name,
-      especialidad: dict.about.artists.team.ivo.specialty,
-      imagen: "/ivo-bardon-portrait.jpg",
-      experiencia: dict.about.artists.team.ivo.experience,
-      descripcion: dict.about.artists.team.ivo.description,
-      instagram: "Pendiente",
-    },
-    {
-      id: 3,
-      nombre: dict.about.artists.team.sofia.name,
-      especialidad: dict.about.artists.team.sofia.specialty,
-      imagen: "/sofia-campanaro-portrait.jpg",
-      experiencia: dict.about.artists.team.sofia.experience,
-      descripcion: dict.about.artists.team.sofia.description,
-      instagram: "@kcit0",
-    },
-    {
-      id: 4,
-      nombre: dict.about.artists.team.mateo.name,
-      especialidad: dict.about.artists.team.mateo.specialty,
-      imagen: "/mateo-diaz-portrait.jpg",
-      experiencia: dict.about.artists.team.mateo.experience,
-      descripcion: dict.about.artists.team.mateo.description,
-      instagram: "@mateodiaz.ar",
-    },
-  ]
+  const client = createClient()
+  
+  // Mapear idiomas de Next.js a los códigos de Prismic
+  const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
+  
+  // Obtener datos desde Prismic
+  let permanentStaff: Array<{
+    id: number
+    nombre: string
+    especialidad: string
+    imagen: string
+    experiencia: string
+    descripcion: string
+    instagram: string
+  }> = []
+  
+  let guestArtists: GuestArtist[] = []
+  
+  try {
+    const aboutDocument: AboutusDocument = await client.getSingle("aboutus", { 
+      lang: prismicLang
+    })
+    
+    console.log('Loading about us data from Prismic')
+    
+    // Buscar el slice de permanent staff 
+    const permanentStaffSlice = aboutDocument.data.slices.find(slice => slice.slice_type === 'permanent_staff')
+    if (permanentStaffSlice && 'primary' in permanentStaffSlice && permanentStaffSlice.primary.artists) {
+      console.log('Permanent staff slice found with', permanentStaffSlice.primary.artists.length, 'artists')
+      permanentStaff = permanentStaffSlice.primary.artists.map((artista, index) => ({
+        id: index + 1,
+        nombre: artista.name || '',
+        especialidad: artista.category || '',
+        imagen: artista.picture.url || '',
+        experiencia: artista.experience || '',
+        descripcion: artista.bio || '',
+        instagram: artista.instagram || '',
+      }))
+    }
+    
+    // Buscar el slice de guest artists
+    const guestArtistsSlice = aboutDocument.data.slices.find(slice => slice.slice_type === 'guest_artists')
+    if (guestArtistsSlice && 'primary' in guestArtistsSlice && guestArtistsSlice.primary.artists) {
+      console.log('Guest artists slice found with', guestArtistsSlice.primary.artists.length, 'artists')
+      guestArtists = guestArtistsSlice.primary.artists.map((artista, index) => ({
+        id: index + 1,
+        nombre: artista.name || '',
+        especialidad: artista.category || '',
+        imagen: artista.picture.url || '',
+        instagram: artista.instagram || '',
+        periodo: artista.schedule || 'Por confirmar',
+        descripcion: artista.bio || '',
+      }))
+    }
+  } catch (error) {
+    console.error('Error loading about us data from Prismic:', error)
+    
+    // Fallback con datos hardcodeados
+    permanentStaff = [
+      {
+        id: 1,
+        nombre: dict.about.artists.team.martina.name,
+        especialidad: dict.about.artists.team.martina.specialty,
+        imagen: "/martina-padula-portrait.jpg",
+        experiencia: dict.about.artists.team.martina.experience,
+        descripcion: dict.about.artists.team.martina.description,
+        instagram: "@mar.fineline",
+      },
+      {
+        id: 2,
+        nombre: dict.about.artists.team.ivo.name,
+        especialidad: dict.about.artists.team.ivo.specialty,
+        imagen: "/ivo-bardon-portrait.jpg",
+        experiencia: dict.about.artists.team.ivo.experience,
+        descripcion: dict.about.artists.team.ivo.description,
+        instagram: "Pendiente",
+      },
+      {
+        id: 3,
+        nombre: dict.about.artists.team.sofia.name,
+        especialidad: dict.about.artists.team.sofia.specialty,
+        imagen: "/sofia-campanaro-portrait.jpg",
+        experiencia: dict.about.artists.team.sofia.experience,
+        descripcion: dict.about.artists.team.sofia.description,
+        instagram: "@kcit0",
+      },
+      {
+        id: 4,
+        nombre: dict.about.artists.team.mateo.name,
+        especialidad: dict.about.artists.team.mateo.specialty,
+        imagen: "/mateo-diaz-portrait.jpg",
+        experiencia: dict.about.artists.team.mateo.experience,
+        descripcion: dict.about.artists.team.mateo.description,
+        instagram: "@mateodiaz.ar",
+      },
+    ]
 
+    guestArtists = [
+      {
+        id: 1,
+        nombre: "Ayelen Vera Echegaray",
+        especialidad: "Black & Grey, Color & Realismo",
+        imagen: "/ayelen-vera-echegaray-portrait.jpg",
+        instagram: "@ayeaguafuerte",
+        periodo: "Por confirmar",
+        descripcion: "Tatúo hace más de 10 años. Me podés encontrar en Buenos Aires y en Córdoba. En el tatuaje busco desarrollar la composición integral y mantener la premisa primigenia del tatuaje. Me especializo en piezas grandes, pensadas para dialogar con el cuerpo completo. Mi estilo está basado en el black and grey y el color, orientado hacia el realismo o ilustrativo tomando conceptos del neotradicional.",
+      },
+      {
+        id: 2,
+        nombre: "Lucas Ghilardi",
+        especialidad: "Universo Oscuro & Expresivo",
+        imagen: "/lucas-ghilardi-portrait.jpg",
+        instagram: "@luks.gh",
+        periodo: "Por confirmar",
+        descripcion: "10 años tatuando. Dentro de mi estilo, la búsqueda es formal y conceptual, teniendo en cuenta la relación de la pieza dentro de la lógica y movimiento del cuerpo humano. Así, integrar el dinamismo de las formas, la luz y sombra, aplicado a cada elemento, relato o ser dentro de un universo oscuro y expresivo.",
+      },
+    ]
+  }
+  
+  // Mantener artista fundadora como datos del diccionario
   const artistaInvitado = {
     nombre: dict.about.artists.founder.name,
     especialidad: dict.about.artists.founder.specialty,
@@ -89,81 +172,6 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
     instagram: "@maca.tatua",
     fundacion: dict.about.artists.founder.founded,
   }
-
-  const artistasTemporales: GuestArtist[] = [
-    {
-      id: 1,
-      nombre: "Ayelen Vera Echegaray",
-      especialidad: "Black & Grey, Color & Realismo",
-      imagen: "/ayelen-vera-echegaray-portrait.jpg",
-      instagram: "@ayeaguafuerte",
-      periodo: "Por confirmar",
-      descripcion: "Tatúo hace más de 10 años. Me podés encontrar en Buenos Aires y en Córdoba. En el tatuaje busco desarrollar la composición integral y mantener la premisa primigenia del tatuaje. Me especializo en piezas grandes, pensadas para dialogar con el cuerpo completo. Mi estilo está basado en el black and grey y el color, orientado hacia el realismo o ilustrativo tomando conceptos del neotradicional.",
-    },
-    {
-      id: 2,
-      nombre: "Lucas Ghilardi",
-      especialidad: "Universo Oscuro & Expresivo",
-      imagen: "/lucas-ghilardi-portrait.jpg",
-      instagram: "@luks.gh",
-      periodo: "Por confirmar",
-      descripcion: "10 años tatuando. Dentro de mi estilo, la búsqueda es formal y conceptual, teniendo en cuenta la relación de la pieza dentro de la lógica y movimiento del cuerpo humano. Así, integrar el dinamismo de las formas, la luz y sombra, aplicado a cada elemento, relato o ser dentro de un universo oscuro y expresivo.",
-    },
-    {
-      id: 3,
-      nombre: "Tomás Chiecchio",
-      especialidad: "Piezas Únicas & Simbolismo",
-      imagen: "/tomas-chiecchio-portrait.jpg",
-      instagram: "@a.t.0.0.m",
-      periodo: "Por confirmar",
-      descripcion: "Tatuó hace 11 años. En sentido profesional lo que busco y hago con el tatuaje es que la persona que elija mi arte se lleve una pieza única, original y sumamente simbólica, desde el momento de inicio con el boceto hasta el final con el tatuaje. El hecho de que alguien elija mis diseños es algo con lo que una vez pensé imposible. Que el hecho del tatuaje no sea un acto superficial solamente sino algo consciente.",
-    },
-    // {
-    //   id: 4,
-    //   nombre: "Celina",
-    //   especialidad: dict.about.artists.status_labels.pending_style,
-    //   imagen: "/celina-portrait.jpg",
-    //   instagram: "@celina.tattoo",
-    //   periodo: dict.about.artists.status_labels.pending,
-    //   descripcion: dict.about.artists.status_labels.pending_bio,
-    // },
-    {
-      id: 5,
-      nombre: "Clara Bajicoff",
-      especialidad: "Diseño & Joyas Permanentes",
-      imagen: "/clara-bajicoff-portrait.jpg",
-      instagram: "@claratatua",
-      periodo: "Por confirmar",
-      descripcion: "Tatuando hace 2 años. Como diseñadora que tatúa, Clara está enfocada en traducir elementos y formas de la vida cotidiana, donde la búsqueda está en resaltar lo bello de las cosas, creando algo así como una joya permanente en la piel.",
-    },
-    // {
-    //   id: 6,
-    //   nombre: "Camila",
-    //   especialidad: dict.about.artists.status_labels.pending_style,
-    //   imagen: "/camila-portrait.jpg",
-    //   instagram: "@camila.tattoo",
-    //   periodo: dict.about.artists.status_labels.pending,
-    //   descripcion: dict.about.artists.status_labels.pending_bio,
-    // },
-    // {
-    //   id: 7,
-    //   nombre: "Michell",
-    //   especialidad: dict.about.artists.status_labels.pending_style,
-    //   imagen: "/michell-portrait.jpg",
-    //   instagram: "@michell.tattoo",
-    //   periodo: dict.about.artists.status_labels.pending,
-    //   descripcion: dict.about.artists.status_labels.pending_bio,
-    // },
-    {
-      id: 8,
-      nombre: dict.about.artists.malena_chiesino.name,
-      especialidad: dict.about.artists.malena_chiesino.specialty,
-      imagen: "/malena-chiesino-portrait.jpg",
-      instagram: "@maletatts",
-      periodo: dict.about.artists.malena_chiesino.period,
-      descripcion: dict.about.artists.malena_chiesino.description,
-    },
-  ]
 
   return (
     <div className="min-h-screen">
@@ -238,7 +246,7 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
             {dict.about.team.description}
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artistasFijos.map((artista) => (
+            {permanentStaff.map((artista) => (
               <div key={artista.id} className="group">
                 <div className="relative aspect-square rounded-sm overflow-hidden mb-4 bg-muted">
                   <Image
@@ -292,7 +300,12 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
             {dict.about.guests.description}
           </p>
         </div>
-        <GuestArtistsCarousel artists={artistasTemporales} />
+        <GenericCarousel 
+          items={guestArtists} 
+          type="artists" 
+          autoplayDelay={5000}
+          itemWidth={300}
+        />
       </section>
     </div>
   )
