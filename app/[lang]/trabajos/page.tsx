@@ -46,10 +46,6 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
   // Mapear idiomas de Next.js a los códigos de Prismic
   const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
   
-  // Debug: verificar qué idioma estamos pidiendo
-  console.log('🔍 Next.js language:', lang)
-  console.log('🔍 Prismic language:', prismicLang)
-  
   // Obtener el documento de trabajos desde Prismic
   let portfolioWorks: Array<{
     id: number
@@ -65,10 +61,6 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
       lang: prismicLang
     })
     
-    // Debug: verificar qué documento obtuvimos
-    console.log('📄 Document language:', workDocument.lang)
-    console.log('📄 Document data:', !!workDocument.data)
-    
     // Extraer los trabajos del slice Works2
     const worksSlice = workDocument.data.slices.find(slice => slice.slice_type === 'works2')
     if (worksSlice && 'primary' in worksSlice && worksSlice.primary.works) {
@@ -79,17 +71,13 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
         artist: work.subtitle || 'Estudio 12',
         category: work.heading || 'Tatuaje',
       }))
-      console.log('✅ Found works:', portfolioWorks.length)
     }
   } catch (error) {
-    console.error('❌ Error loading works from Prismic:', error)
+    console.error('Error loading works from Prismic:', error)
     
     // Intentar sin especificar idioma como fallback
     try {
-      console.log('🔄 Trying fallback without language...')
       const workDocument: WorkDocument = await client.getSingle("work")
-      console.log('📄 Fallback document language:', workDocument.lang)
-      
       const worksSlice = workDocument.data.slices.find(slice => slice.slice_type === 'works2')
       if (worksSlice && 'primary' in worksSlice && worksSlice.primary.works) {
         portfolioWorks = worksSlice.primary.works.map((work, index) => ({
@@ -99,10 +87,9 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
           artist: work.subtitle || 'Estudio 12',
           category: work.heading || 'Tatuaje',
         }))
-        console.log('✅ Fallback found works:', portfolioWorks.length)
       }
     } catch (fallbackError) {
-      console.error('❌ Fallback also failed:', fallbackError)
+      console.error('Fallback also failed:', fallbackError)
       portfolioWorks = []
     }
   }
