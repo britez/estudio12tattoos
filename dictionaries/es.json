@@ -125,53 +125,6 @@
       "description": "Conoce a nuestro equipo de artistas profesionales especializados en realismo, tradicional, minimalista, oriental y más. Fundado en 2015 con los más altos estándares de calidad y seguridad.",
       "og_title": "Acerca de estudio12 - Nuestro Equipo de Artistas",
       "og_description": "Conoce a nuestro equipo de artistas profesionales especializados en múltiples estilos de tatuaje. Más de 10 años de experiencia combinada."
-    },
-    "artists": {
-      "founder": {
-        "name": "Macarena Troiani",
-        "specialty": "Fundadora & Directora Artística",
-        "experience": "11 años",
-        "description": "Me gusta incentivar a las personas a vivir de lo que les apasiona y compartir lo que he aprendido en estos 11 años. He tomado seminarios, talleres y capacitaciones de todo tipo para crecer como profesional y enriquecer mi ojo artístico. Aún sigo aprendiendo, es una constante en mi vida.",
-        "founded": "2022"
-      },
-      "team": {
-        "martina": {
-          "name": "Martina Padula",
-          "specialty": "Fineline & Diseños Delicados",
-          "experience": "3 años",
-          "description": "Mi búsqueda en el tattoo es lograr tatuajes delicados y prolijos, con gran valor en los detalles. Les doy un aura oscura, que es mi marca personal."
-        },
-        "ivo": {
-          "name": "Ivo Bardon",
-          "specialty": "Dotwork & Simbolismo",
-          "experience": "8 años",
-          "description": "Soy de San Telmo y todo mi trabajo está realizado con puntos. Me dedico a hacer piezas con mucha carga simbólica para cada cliente y mi desafío es crear piezas con la estética ornamental porteña."
-        },
-        "sofia": {
-          "name": "Sofía Campanaro",
-          "specialty": "Arte Abstracto & Texturas",
-          "experience": "5 años",
-          "description": "Mi búsqueda artística va mucho de inspiraciones cotidianas, las texturas y movimientos que tienen las cosas que vemos y sentimos para poder llegar a una abstracción de eso."
-        },
-        "mateo": {
-          "name": "Mateo Díaz",
-          "specialty": "Realismo & Cultura Argentina",
-          "experience": "4 años",
-          "description": "Tengo 21 años y mi búsqueda artística está enfocada en la cultura tradicional argentina, la música y el fútbol. Me desvela la búsqueda del sentido y del propósito, e intento inmortalizar símbolos en la piel a partir del realismo en diálogo con el minimalismo y el diseño gráfico."
-        }
-      },
-      "status_labels": {
-        "pending": "Por confirmar",
-        "pending_bio": "Biografía por definir.",
-        "pending_style": "Estilo por definir"
-      },
-      "malena_chiesino": {
-        "name": "Malena Chiesino",
-        "specialty": "Conceptual & Simbolismo",
-        "experience": "4 años",
-        "period": "Por confirmar",
-        "description": "Mi búsqueda en el tattoo es conceptual, priorizo el trazo y el simbolismo. Integro lo anatómico con el diseño, buscando un limpio recorrido visual."
-      }
     }
   },
   "contact": {

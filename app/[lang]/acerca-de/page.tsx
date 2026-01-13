@@ -99,78 +99,22 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
     }
   } catch (error) {
     console.error('Error loading about us data from Prismic:', error)
-    
-    // Fallback con datos hardcodeados
-    permanentStaff = [
-      {
-        id: 1,
-        nombre: dict.about.artists.team.martina.name,
-        especialidad: dict.about.artists.team.martina.specialty,
-        imagen: "/martina-padula-portrait.jpg",
-        experiencia: dict.about.artists.team.martina.experience,
-        descripcion: dict.about.artists.team.martina.description,
-        instagram: "@mar.fineline",
-      },
-      {
-        id: 2,
-        nombre: dict.about.artists.team.ivo.name,
-        especialidad: dict.about.artists.team.ivo.specialty,
-        imagen: "/ivo-bardon-portrait.jpg",
-        experiencia: dict.about.artists.team.ivo.experience,
-        descripcion: dict.about.artists.team.ivo.description,
-        instagram: "Pendiente",
-      },
-      {
-        id: 3,
-        nombre: dict.about.artists.team.sofia.name,
-        especialidad: dict.about.artists.team.sofia.specialty,
-        imagen: "/sofia-campanaro-portrait.jpg",
-        experiencia: dict.about.artists.team.sofia.experience,
-        descripcion: dict.about.artists.team.sofia.description,
-        instagram: "@kcit0",
-      },
-      {
-        id: 4,
-        nombre: dict.about.artists.team.mateo.name,
-        especialidad: dict.about.artists.team.mateo.specialty,
-        imagen: "/mateo-diaz-portrait.jpg",
-        experiencia: dict.about.artists.team.mateo.experience,
-        descripcion: dict.about.artists.team.mateo.description,
-        instagram: "@mateodiaz.ar",
-      },
-    ]
-
-    guestArtists = [
-      {
-        id: 1,
-        nombre: "Ayelen Vera Echegaray",
-        especialidad: "Black & Grey, Color & Realismo",
-        imagen: "/ayelen-vera-echegaray-portrait.jpg",
-        instagram: "@ayeaguafuerte",
-        periodo: "Por confirmar",
-        descripcion: "Tatúo hace más de 10 años. Me podés encontrar en Buenos Aires y en Córdoba. En el tatuaje busco desarrollar la composición integral y mantener la premisa primigenia del tatuaje. Me especializo en piezas grandes, pensadas para dialogar con el cuerpo completo. Mi estilo está basado en el black and grey y el color, orientado hacia el realismo o ilustrativo tomando conceptos del neotradicional.",
-      },
-      {
-        id: 2,
-        nombre: "Lucas Ghilardi",
-        especialidad: "Universo Oscuro & Expresivo",
-        imagen: "/lucas-ghilardi-portrait.jpg",
-        instagram: "@luks.gh",
-        periodo: "Por confirmar",
-        descripcion: "10 años tatuando. Dentro de mi estilo, la búsqueda es formal y conceptual, teniendo en cuenta la relación de la pieza dentro de la lógica y movimiento del cuerpo humano. Así, integrar el dinamismo de las formas, la luz y sombra, aplicado a cada elemento, relato o ser dentro de un universo oscuro y expresivo.",
-      },
-    ]
+    // Si no hay datos desde Prismic, mostrar mensaje de error o datos vacíos
+    permanentStaff = []
+    guestArtists = []
   }
   
-  // Mantener artista fundadora como datos del diccionario
-  const artistaInvitado = {
-    nombre: dict.about.artists.founder.name,
-    especialidad: dict.about.artists.founder.specialty,
+  // Datos de la artista fundadora (información fija)
+  const artistaFundadora = {
+    nombre: lang === 'es' ? 'Macarena Troiani' : 'Macarena Troiani',
+    especialidad: lang === 'es' ? 'Fundadora & Directora Artística' : 'Founder & Artistic Director',
     imagen: "/macarena-founder-portrait.webp",
-    experiencia: dict.about.artists.founder.experience,
-    descripcion: dict.about.artists.founder.description,
+    experiencia: lang === 'es' ? '11 años' : '11 years',
+    descripcion: lang === 'es' 
+      ? 'Me gusta incentivar a las personas a vivir de lo que les apasiona y compartir lo que he aprendido en estos 11 años. He tomado seminarios, talleres y capacitaciones de todo tipo para crecer como profesional y enriquecer mi ojo artístico. Aún sigo aprendiendo, es una constante en mi vida.'
+      : 'I like to encourage people to live from what they are passionate about and share what I have learned in these 11 years. I have taken seminars, workshops and training of all kinds to grow as a professional and enrich my artistic eye. I am still learning, it is a constant in my life.',
     instagram: "@maca.tatua",
-    fundacion: dict.about.artists.founder.founded,
+    fundacion: "2022",
   }
 
   return (
@@ -206,30 +150,30 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
             <div className="grid md:grid-cols-5 gap-8">
               <div className="md:col-span-2 relative aspect-square md:aspect-auto">
                 <Image
-                  src={artistaInvitado.imagen || "/placeholder.svg"}
-                  alt={artistaInvitado.nombre}
+                  src={artistaFundadora.imagen || "/placeholder.svg"}
+                  alt={artistaFundadora.nombre}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
-                <h3 className="text-3xl md:text-4xl font-bold mb-2">{artistaInvitado.nombre}</h3>
-                <p className="text-white font-semibold mb-2">{artistaInvitado.especialidad}</p>
-                <p className="text-sm text-gray-400 mb-6">{artistaInvitado.experiencia} {dict.about.team.experience_label}</p>
-                <p className="text-lg leading-relaxed mb-6 text-gray-300">{artistaInvitado.descripcion}</p>
+                <h3 className="text-3xl md:text-4xl font-bold mb-2">{artistaFundadora.nombre}</h3>
+                <p className="text-white font-semibold mb-2">{artistaFundadora.especialidad}</p>
+                <p className="text-sm text-gray-400 mb-6">{artistaFundadora.experiencia} {dict.about.team.experience_label}</p>
+                <p className="text-lg leading-relaxed mb-6 text-gray-300">{artistaFundadora.descripcion}</p>
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                   <div className="bg-white/10 px-4 py-2 rounded-sm">
                     <p className="text-sm font-medium">
-                      {dict.about.founder.founded_label} <span className="font-bold">{artistaInvitado.fundacion}</span>
+                      {dict.about.founder.founded_label} <span className="font-bold">{artistaFundadora.fundacion}</span>
                     </p>
                   </div>
                   <a
-                    href={`https://instagram.com/${artistaInvitado.instagram.replace("@", "")}`}
+                    href={`https://instagram.com/${artistaFundadora.instagram.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:underline font-medium"
                   >
-                    {artistaInvitado.instagram}
+                    {artistaFundadora.instagram}
                   </a>
                 </div>
               </div>

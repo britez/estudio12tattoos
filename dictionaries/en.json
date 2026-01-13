@@ -125,54 +125,8 @@
       "description": "Meet our team of professional artists specialized in realism, traditional, minimalist, oriental and more. Founded in 2015 with the highest standards of quality and safety.",
       "og_title": "About estudio12 - Our Team of Artists",
       "og_description": "Meet our team of professional artists specialized in multiple tattoo styles. Over 10 years of combined experience."
-    },
-    "artists": {
-      "founder": {
-        "name": "Macarena Troiani",
-        "specialty": "Founder & Artistic Director",
-        "experience": "11 years",
-        "description": "I like to encourage people to live from what they are passionate about and share what I have learned in these 11 years. I have taken seminars, workshops and training of all kinds to grow as a professional and enrich my artistic eye. I am still learning, it is a constant in my life.",
-        "founded": "2022"
-      },
-      "team": {
-        "martina": {
-          "name": "Martina Padula",
-          "specialty": "Fineline & Delicate Designs",
-          "experience": "3 years",
-          "description": "My search in tattooing is to achieve delicate and neat tattoos, with great value in details. I give them a dark aura, which is my personal brand."
-        },
-        "ivo": {
-          "name": "Ivo Bardon",
-          "specialty": "Dotwork & Symbolism",
-          "experience": "8 years",
-          "description": "I am from San Telmo and all my work is done with dots. I dedicate myself to making pieces with a lot of symbolic charge for each client and my challenge is to create pieces with the ornamental Buenos Aires aesthetic."
-        },
-        "sofia": {
-          "name": "Sofía Campanaro",
-          "specialty": "Abstract Art & Textures",
-          "experience": "5 years",
-          "description": "My artistic search comes from everyday inspirations, the textures and movements that the things we see and feel have in order to reach an abstraction of that."
-        },
-        "mateo": {
-          "name": "Mateo Díaz",
-          "specialty": "Realism & Argentine Culture",
-          "experience": "4 years",
-          "description": "I am 21 years old and my artistic search is focused on traditional Argentine culture, music and football. I am devoted to the search for meaning and purpose, and I try to immortalize symbols on the skin through realism in dialogue with minimalism and graphic design."
-        }
-      },
-      "status_labels": {
-        "pending": "To be confirmed",
-        "pending_bio": "Biography to be defined.",
-        "pending_style": "Style to be defined"
-      },
-      "malena_chiesino": {
-        "name": "Malena Chiesino",
-        "specialty": "Conceptual & Symbolism",
-        "experience": "4 years",
-        "period": "To be confirmed",
-        "description": "My search in tattooing is conceptual, I prioritize line work and symbolism. I integrate anatomy with design, seeking a clean visual journey."
-      }
     }
+
   },
   "contact": {
     "hero": {
