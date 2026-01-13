@@ -101,25 +101,9 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
       }
     } catch (fallbackError) {
       console.error('Fallback also failed:', fallbackError)
+      // Si todo falla, usar array vacío - el video se agregará de todas formas
+      prismicImages = []
     }
-    
-    // Fallback con algunas imágenes por defecto si Prismic falla
-    prismicImages = [
-      {
-        id: 1,
-        title: dict.home.works.panoramic_view,
-        image: "/images/84ef3090-eaae-44d6-815c-a81bae093663.webp",
-        category: dict.home.categories.studio,
-        type: "image",
-      },
-      {
-        id: 2,
-        title: dict.home.works.realistic_cats,
-        image: "/cats-tattoo-realistic.webp",
-        category: dict.home.categories.realism,
-        type: "image",
-      }
-    ]
   }
   
   // Intercalar el video en la posición 4 (como estaba antes)
