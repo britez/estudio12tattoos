@@ -1,5 +1,7 @@
 import { Instagram, MessageCircle, Mail, MapPin, Phone } from "lucide-react"
 import type { Metadata } from "next"
+import { createClient } from "@/prismicio"
+import type { HomeDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
 import ContactForm from './ContactForm'
@@ -40,6 +42,64 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
   }
   
   const dict = await getDictionary(lang)
+  const client = createClient()
+  
+  // Mapear idiomas de Next.js a los códigos de Prismic
+  const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
+  
+  // Obtener imágenes desde Prismic (mismas que el home)
+  let carouselImages: Array<{
+    src: string
+    alt: string
+  }> = []
+  
+  try {
+    const homeDocument: HomeDocument = await client.getSingle("home", { 
+      lang: prismicLang
+    })
+    
+    console.log('Loading carousel images from Prismic for contact page')
+    
+    // Buscar el slice de portfolio 
+    const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
+    if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
+      console.log('Portfolio slice found for carousel with', portfolioSlice.primary.imagenes.length, 'images')
+      carouselImages = portfolioSlice.primary.imagenes.map((imagen) => ({
+        src: imagen.media.url || '',
+        alt: imagen.title || imagen.subtitle || 'Imagen del estudio',
+      }))
+    } else {
+      console.log('Portfolio slice not found for carousel, using fallback')
+    }
+  } catch (error) {
+    console.error('Error loading carousel images from Prismic:', error)
+    
+    // Intentar sin especificar idioma como fallback
+    try {
+      console.log('Trying fallback without language specification for carousel')
+      const homeDocument: HomeDocument = await client.getSingle("home")
+      const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
+      if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
+        console.log('Fallback successful for carousel with', portfolioSlice.primary.imagenes.length, 'images')
+        carouselImages = portfolioSlice.primary.imagenes.map((imagen) => ({
+          src: imagen.media.url || '',
+          alt: imagen.title || imagen.subtitle || 'Imagen del estudio',
+        }))
+      }
+    } catch (fallbackError) {
+      console.error('Fallback also failed for carousel:', fallbackError)
+      // Fallback con imágenes hardcodeadas si todo falla
+      carouselImages = [
+        { src: "/polynesian-hand-tattoo.webp", alt: dict.contact.images.polynesian_tattoo },
+        { src: "/tattoo-artist-working-panoramic-view.webp", alt: dict.contact.images.artist_working },
+        { src: "/mandala-stencil-application.webp", alt: dict.contact.images.stencil_application },
+        { src: "/japanese-geisha-tattoo-colorful.webp", alt: dict.contact.images.japanese_geisha },
+        { src: "/female-artist-working-natural-light.webp", alt: dict.contact.images.focused_artist },
+        { src: "/japanese-snake-cherry-blossom-forearm.webp", alt: dict.contact.images.japanese_snake },
+        { src: "/studio-window-cityview-silhouette.webp", alt: dict.contact.images.studio_view }
+      ]
+    }
+  }
 
   return (
     <div className="min-h-screen">
@@ -155,79 +215,25 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
             <div className="flex gap-6 animate-scroll-infinite pause-animation">
               {/* Primera serie de imágenes */}
               <div className="flex gap-6 shrink-0">
-                <img
-                  src="/polynesian-hand-tattoo.webp"
-                  alt={dict.contact.images.polynesian_tattoo}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/tattoo-artist-working-panoramic-view.webp"
-                  alt={dict.contact.images.artist_working}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/mandala-stencil-application.webp"
-                  alt={dict.contact.images.stencil_application}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/japanese-geisha-tattoo-colorful.webp"
-                  alt={dict.contact.images.japanese_geisha}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/female-artist-working-natural-light.webp"
-                  alt={dict.contact.images.focused_artist}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/japanese-snake-cherry-blossom-forearm.webp"
-                  alt={dict.contact.images.japanese_snake}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/studio-window-cityview-silhouette.webp"
-                  alt={dict.contact.images.studio_view}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
+                {carouselImages.map((image, index) => (
+                  <img
+                    key={`first-${index}`}
+                    src={image.src}
+                    alt={image.alt}
+                    className="h-96 w-auto object-cover rounded-sm"
+                  />
+                ))}
               </div>
               {/* Duplicado para scroll infinito */}
               <div className="flex gap-6 shrink-0">
-                <img
-                  src="/polynesian-hand-tattoo.webp"
-                  alt={dict.contact.images.polynesian_tattoo}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/tattoo-artist-working-panoramic-view.webp"
-                  alt={dict.contact.images.artist_working}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/mandala-stencil-application.webp"
-                  alt={dict.contact.images.stencil_application}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/japanese-geisha-tattoo-colorful.webp"
-                  alt={dict.contact.images.japanese_geisha}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/female-artist-working-natural-light.webp"
-                  alt={dict.contact.images.focused_artist}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/japanese-snake-cherry-blossom-forearm.webp"
-                  alt={dict.contact.images.japanese_snake}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
-                <img
-                  src="/studio-window-cityview-silhouette.webp"
-                  alt={dict.contact.images.studio_view}
-                  className="h-96 w-auto object-cover rounded-sm"
-                />
+                {carouselImages.map((image, index) => (
+                  <img
+                    key={`second-${index}`}
+                    src={image.src}
+                    alt={image.alt}
+                    className="h-96 w-auto object-cover rounded-sm"
+                  />
+                ))}
               </div>
             </div>
           </div>
