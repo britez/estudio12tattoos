@@ -5,6 +5,7 @@ import type { HomeDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
 import ContactForm from './ContactForm'
+import { GenericCarousel, type CarouselImage } from '@/components/guest-artists-carousel'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/contacto'>): Promise<Metadata> {
   const { lang } = await params
@@ -48,10 +49,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
   const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
   
   // Obtener imágenes desde Prismic (mismas que el home)
-  let carouselImages: Array<{
-    src: string
-    alt: string
-  }> = []
+  let carouselImages: CarouselImage[] = []
   
   try {
     const homeDocument: HomeDocument = await client.getSingle("home", { 
@@ -64,9 +62,12 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
     const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
     if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
       console.log('Portfolio slice found for carousel with', portfolioSlice.primary.imagenes.length, 'images')
-      carouselImages = portfolioSlice.primary.imagenes.map((imagen) => ({
+      carouselImages = portfolioSlice.primary.imagenes.map((imagen, index) => ({
+        id: `contact-image-${index}`,
         src: imagen.media.url || '',
-        alt: imagen.title || imagen.subtitle || 'Imagen del estudio',
+        alt: imagen.title || imagen.subtitle || `Trabajo ${index + 1}`,
+        title: imagen.title || undefined,
+        description: imagen.subtitle || undefined
       }))
     } else {
       console.log('Portfolio slice not found for carousel, using fallback')
@@ -81,22 +82,25 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
       const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
       if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
         console.log('Fallback successful for carousel with', portfolioSlice.primary.imagenes.length, 'images')
-        carouselImages = portfolioSlice.primary.imagenes.map((imagen) => ({
+        carouselImages = portfolioSlice.primary.imagenes.map((imagen, index) => ({
+          id: `contact-fallback-${index}`,
           src: imagen.media.url || '',
-          alt: imagen.title || imagen.subtitle || 'Imagen del estudio',
+          alt: imagen.title || imagen.subtitle || `Trabajo ${index + 1}`,
+          title: imagen.title || undefined,
+          description: imagen.subtitle || undefined
         }))
       }
     } catch (fallbackError) {
       console.error('Fallback also failed for carousel:', fallbackError)
       // Fallback con imágenes hardcodeadas si todo falla
       carouselImages = [
-        { src: "/polynesian-hand-tattoo.webp", alt: "Tatuaje polinesio" },
-        { src: "/tattoo-artist-working-panoramic-view.webp", alt: "Artista trabajando" },
-        { src: "/mandala-stencil-application.webp", alt: "Aplicación de stencil" },
-        { src: "/japanese-geisha-tattoo-colorful.webp", alt: "Tatuaje de geisha japonesa" },
-        { src: "/female-artist-working-natural-light.webp", alt: "Artista concentrada" },
-        { src: "/japanese-snake-cherry-blossom-forearm.webp", alt: "Serpiente japonesa" },
-        { src: "/studio-window-cityview-silhouette.webp", alt: "Vista del estudio" }
+        { id: "fallback-1", src: "/polynesian-hand-tattoo.webp", alt: "Tatuaje polinesio" },
+        { id: "fallback-2", src: "/tattoo-artist-working-panoramic-view.webp", alt: "Artista trabajando" },
+        { id: "fallback-3", src: "/mandala-stencil-application.webp", alt: "Aplicación de stencil" },
+        { id: "fallback-4", src: "/japanese-geisha-tattoo-colorful.webp", alt: "Tatuaje de geisha japonesa" },
+        { id: "fallback-5", src: "/female-artist-working-natural-light.webp", alt: "Artista concentrada" },
+        { id: "fallback-6", src: "/japanese-snake-cherry-blossom-forearm.webp", alt: "Serpiente japonesa" },
+        { id: "fallback-7", src: "/studio-window-cityview-silhouette.webp", alt: "Vista del estudio" }
       ]
     }
   }
@@ -208,36 +212,14 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
       </section>
 
       <section className="py-20 bg-black">
-        <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-white">{dict.contact.gallery.title}</h2>
 
-          <div className="relative overflow-hidden">
-            <div className="flex gap-6 animate-scroll-infinite pause-animation">
-              {/* Primera serie de imágenes */}
-              <div className="flex gap-6 shrink-0">
-                {carouselImages.map((image, index) => (
-                  <img
-                    key={`first-${index}`}
-                    src={image.src}
-                    alt={image.alt}
-                    className="h-96 w-auto object-cover rounded-sm"
-                  />
-                ))}
-              </div>
-              {/* Duplicado para scroll infinito */}
-              <div className="flex gap-6 shrink-0">
-                {carouselImages.map((image, index) => (
-                  <img
-                    key={`second-${index}`}
-                    src={image.src}
-                    alt={image.alt}
-                    className="h-96 w-auto object-cover rounded-sm"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+          <GenericCarousel 
+            items={carouselImages} 
+            type="images" 
+            autoplayDelay={4000}
+            itemWidth={350}
+          />
       </section>
     </div>
   )
