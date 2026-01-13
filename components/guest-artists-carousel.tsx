@@ -24,8 +24,14 @@ export function GuestArtistsCarousel({ artists }: GuestArtistsCarouselProps) {
     loop: true, 
     dragFree: true,
     align: 'start',
-    containScroll: 'trimSnaps'
-  }, [Autoplay({ delay: 3000, stopOnInteraction: false, pauseOnMouseEnter: true, resetProgress: false })])
+    containScroll: false
+  }, [Autoplay({ 
+    delay: 3000, 
+    stopOnInteraction: false, 
+    pauseOnMouseEnter: true,
+    stopOnFocusIn: false,
+    stopOnLastSnap: false
+  })])
   
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
@@ -53,10 +59,13 @@ export function GuestArtistsCarousel({ artists }: GuestArtistsCarouselProps) {
     }
   }, [emblaApi])
 
+  // Duplicamos los artistas para crear un efecto infinito más fluido
+  const duplicatedArtists = [...artists, ...artists, ...artists];
+
   return (
     <div className="embla relative" ref={emblaRef}>
-      <div className="embla__container flex">
-        {artists.map((artist, index) => (
+      <div className="embla__container flex transition-transform duration-1000 ease-linear">
+        {duplicatedArtists.map((artist, index) => (
           <div
             key={`${artist.id}-${index}`}
             className="embla__slide flex-shrink-0 w-[300px] mx-3"

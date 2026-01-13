@@ -1,5 +1,7 @@
 import Image from "next/image"
 import type { Metadata } from "next"
+import { createClient } from "@/prismicio"
+import type { WorkDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
 
@@ -39,79 +41,58 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
   }
   
   const dict = await getDictionary(lang)
-  // Portafolio de trabajos
-  const portfolioWorks = [
-    {
-      id: 1,
-      image: "/works/DSC04068.webp",
-      title: dict.home.works.custom_design_1,
-      artist: "Estudio 12",
-      category: dict.home.categories.custom,
-    },
-    {
-      id: 2,
-      image: "/works/flor-violeta.webp",
-      title: dict.home.works.violet_flower,
-      artist: "Estudio 12",
-      category: dict.home.categories.floral,
-    },
-    {
-      id: 3,
-      image: "/works/DSC04309.webp",
-      title: dict.home.works.traditional_geisha,
-      artist: "Artista",
-      category: dict.home.categories.japanese_traditional,
-    },
-    {
-      id: 4,
-      image: "/works/DSC08113.webp",
-      title: dict.home.works.japanese_snake,
-      artist: "Artista",
-      category: dict.home.categories.japanese,
-    },
-    {
-      id: 5,
-      image: "/works/DSC08200.webp",
-      title: dict.home.works.polynesian,
-      artist: "Artista",
-      category: dict.home.categories.polynesian,
-    },
-    {
-      id: 6,
-      image: "/works/DSC08254.webp",
-      title: dict.home.works.stencil_application,
-      artist: "Artista",
-      category: dict.home.categories.process,
-    },
-    {
-      id: 7,
-      image: "/works/IMG_2031.webp",
-      title: dict.home.works.artist_in_action,
-      artist: "Artista",
-      category: dict.home.categories.process,
-    },
-    {
-      id: 8,
-      image: "/works/IMG_2033.webp",
-      title: dict.home.works.focused_artist,
-      artist: "Artista",
-      category: dict.home.categories.process,
-    },
-    {
-      id: 9,
-      image: "/works/IMG_3317.webp",
-      title: dict.home.works.our_studio,
-      artist: dict.home.categories.studio,
-      category: dict.home.categories.studio,
-    },
-    {
-      id: 10,
-      image: "/works/IMG_0041.webp",
-      title: dict.home.works.panoramic_view,
-      artist: dict.home.categories.studio,
-      category: dict.home.categories.studio,
-    },
-  ]
+  const client = createClient()
+  
+  // Mapear idiomas de Next.js a los códigos de Prismic
+  const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
+  
+  // Obtener el documento de trabajos desde Prismic
+  let portfolioWorks: Array<{
+    id: number
+    image: string
+    title: string
+    artist: string
+    category: string
+  }> = []
+  
+  try {
+    // Intentar obtener el documento con el idioma específico
+    const workDocument: WorkDocument = await client.getSingle("work", { 
+      lang: prismicLang
+    })
+    
+    // Extraer los trabajos del slice Works2
+    const worksSlice = workDocument.data.slices.find(slice => slice.slice_type === 'works2')
+    if (worksSlice && 'primary' in worksSlice && worksSlice.primary.works) {
+      portfolioWorks = worksSlice.primary.works.map((work, index) => ({
+        id: index + 1,
+        image: work.picture.url || '',
+        title: work.title || '',
+        artist: work.subtitle || 'Estudio 12',
+        category: work.heading || 'Tatuaje',
+      }))
+    }
+  } catch (error) {
+    console.error('Error loading works from Prismic:', error)
+    
+    // Intentar sin especificar idioma como fallback
+    try {
+      const workDocument: WorkDocument = await client.getSingle("work")
+      const worksSlice = workDocument.data.slices.find(slice => slice.slice_type === 'works2')
+      if (worksSlice && 'primary' in worksSlice && worksSlice.primary.works) {
+        portfolioWorks = worksSlice.primary.works.map((work, index) => ({
+          id: index + 1,
+          image: work.picture.url || '',
+          title: work.title || '',
+          artist: work.subtitle || 'Estudio 12',
+          category: work.heading || 'Tatuaje',
+        }))
+      }
+    } catch (fallbackError) {
+      console.error('Fallback also failed:', fallbackError)
+      portfolioWorks = []
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -128,32 +109,45 @@ export default async function Trabajos({ params }: PageProps<'/[lang]/trabajos'>
       {/* Gallery Section */}
       <section className="px-4 pb-20">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {portfolioWorks.map((work) => (
-              <div
-                key={work.id}
-                className="group relative overflow-hidden bg-card rounded-sm"
-              >
-                <div className="relative aspect-[3/4]">
-                  <Image
-                    src={work.image}
-                    alt={work.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <p className="text-xs uppercase tracking-wider mb-1 text-gray-300">
-                        {work.category}
-                      </p>
-                      <h3 className="text-xl font-bold text-white mb-1">{work.title}</h3>
-                      <p className="text-sm text-gray-400">{work.artist}</p>
+          {portfolioWorks.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {portfolioWorks.map((work) => (
+                <div
+                  key={work.id}
+                  className="group relative overflow-hidden bg-card rounded-sm"
+                >
+                  <div className="relative aspect-[3/4]">
+                    <Image
+                      src={work.image}
+                      alt={`${work.title} - ${work.category} por ${work.artist}`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <p className="text-xs uppercase tracking-wider mb-1 text-gray-300">
+                          {work.category}
+                        </p>
+                        <h3 className="text-xl font-bold text-white mb-1">{work.title}</h3>
+                        <p className="text-sm text-gray-400">{work.artist}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <h3 className="text-2xl font-bold mb-4 text-muted-foreground">
+                {lang === 'es' ? 'Próximamente...' : 'Coming Soon...'}
+              </h3>
+              <p className="text-muted-foreground">
+                {lang === 'es' 
+                  ? 'Estamos preparando nuestro portafolio. ¡Vuelve pronto!' 
+                  : 'We are preparing our portfolio. Come back soon!'}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
