@@ -60,19 +60,7 @@
       "japanese": "Japonés"
     },
     "works": {
-      "panoramic_view": "Vista Panorámica",
-      "our_studio": "Nuestro Estudio",
-      "realistic_cats": "Gatos Realistas",
-      "studio12_experience": "Experiencia estudio12",
-      "realistic_horse": "Caballo Realista",
-      "polynesian": "Polinesio",
-      "artist_in_action": "Artista en Acción",
-      "stencil_application": "Aplicación de Stencil",
-      "traditional_geisha": "Geisha Tradicional",
-      "focused_artist": "Artista Concentrada",
-      "japanese_snake": "Serpiente Japonesa",
-      "studio_view": "Vista del Estudio",
-      "sunset_consultation": "Consulta al Atardecer"
+      "studio12_experience": "Experiencia estudio12"
     },
     "metadata": {
       "title": "Inicio - La Experiencia de Tatuarte",
@@ -217,15 +205,6 @@
     },
     "gallery": {
       "title": "Nuestros trabajos"
-    },
-    "images": {
-      "polynesian_tattoo": "Tatuaje polinesio",
-      "artist_working": "Artista trabajando",
-      "stencil_application": "Aplicación de stencil",
-      "japanese_geisha": "Tatuaje de geisha japonesa",
-      "focused_artist": "Artista concentrada",
-      "japanese_snake": "Serpiente japonesa",
-      "studio_view": "Vista del estudio"
     },
     "metadata": {
       "title": "Contacto - Agenda tu Consulta",

@@ -1,5 +1,7 @@
 import { ImageWithSkeleton } from "@/components/image-with-skeleton"
 import type { Metadata } from "next"
+import { createClient } from "@/prismicio"
+import type { HomeDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from './dictionaries'
 import type { PageProps } from './types'
 
@@ -34,99 +36,81 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   }
  
   const dict = await getDictionary(lang)
-
+  const client = createClient()
+  
+  // Mapear idiomas de Next.js a los códigos de Prismic
+  const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
+  
+  // Video que se intercala (mantener hardcodeado ya que Prismic no acepta videos)
+  const videoItem = {
+    id: 999, // ID especial para el video
+    title: dict.home.works.studio12_experience,
+    video: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%40natha_streetink%20en%20el%2012%21%20Ya%20nos%20conoces%20Tuviste%20la%20experiencia%20de%20tatuarte%20con%20vista%20panora%CC%81mic-JoeWWFQPOQo1Hjp8MzS2Uvh0Y7RIAH.mp4",
+    category: dict.home.categories.experience,
+    type: "video",
+  }
+  
+  // Obtener imágenes desde Prismic
+  let prismicImages: Array<{
+    id: number
+    title: string
+    image: string
+    category: string
+    type: string
+  }> = []
+  
+  try {
+    const homeDocument: HomeDocument = await client.getSingle("home", { 
+      lang: prismicLang
+    })
+    
+    console.log('Home document loaded:', homeDocument.data.slices.length, 'slices found')
+    console.log('Available slice types:', homeDocument.data.slices.map(s => s.slice_type))
+    
+    // Buscar el slice de portfolio 
+    const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
+    if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
+      console.log('Portfolio slice found with', portfolioSlice.primary.imagenes.length, 'images')
+      prismicImages = portfolioSlice.primary.imagenes.map((imagen, index) => ({
+        id: index + 1,
+        title: imagen.title || `Imagen ${index + 1}`,
+        image: imagen.media.url || '',
+        category: imagen.subtitle || dict.home.categories.studio,
+        type: "image",
+      }))
+    } else {
+      console.log('Portfolio slice not found or has no imagenes')
+    }
+  } catch (error) {
+    console.error('Error loading home images from Prismic:', error)
+    
+    // Intentar sin especificar idioma como fallback
+    try {
+      console.log('Trying fallback without language specification')
+      const homeDocument: HomeDocument = await client.getSingle("home")
+      const portfolioSlice = homeDocument.data.slices.find(slice => slice.slice_type === 'portfolio')
+      if (portfolioSlice && 'primary' in portfolioSlice && portfolioSlice.primary.imagenes) {
+        console.log('Fallback successful with', portfolioSlice.primary.imagenes.length, 'images')
+        prismicImages = portfolioSlice.primary.imagenes.map((imagen, index) => ({
+          id: index + 1,
+          title: imagen.title || `Imagen ${index + 1}`,
+          image: imagen.media.url || '',
+          category: imagen.subtitle || dict.home.categories.studio,
+          type: "image",
+        }))
+      }
+    } catch (fallbackError) {
+      console.error('Fallback also failed:', fallbackError)
+      // Si todo falla, usar array vacío - el video se agregará de todas formas
+      prismicImages = []
+    }
+  }
+  
+  // Intercalar el video en la posición 4 (como estaba antes)
   const featured = [
-    {
-      id: 1,
-      title: dict.home.works.panoramic_view,
-      image: "/images/84ef3090-eaae-44d6-815c-a81bae093663.webp",
-      category: dict.home.categories.studio,
-      type: "image",
-    },
-    {
-      id: 2,
-      title: dict.home.works.our_studio,
-      image: "/studio-tattoo-chair.webp",
-      category: dict.home.categories.studio,
-      type: "image",
-    },
-    {
-      id: 3,
-      title: dict.home.works.realistic_cats,
-      image: "/cats-tattoo-realistic.webp",
-      category: dict.home.categories.realism,
-      type: "image",
-    },
-    {
-      id: 4,
-      title: dict.home.works.studio12_experience,
-      video: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%40natha_streetink%20en%20el%2012%21%20Ya%20nos%20conoces%20Tuviste%20la%20experiencia%20de%20tatuarte%20con%20vista%20panora%CC%81mic-JoeWWFQPOQo1Hjp8MzS2Uvh0Y7RIAH.mp4",
-      category: dict.home.categories.experience,
-      type: "video",
-    },
-    {
-      id: 5,
-      title: dict.home.works.realistic_horse,
-      image: "/realistic-horse-tattoo.webp",
-      category: dict.home.categories.realism,
-      type: "image",
-    },
-    {
-      id: 6,
-      title: dict.home.works.polynesian,
-      image: "/polynesian-hand-tattoo.webp",
-      category: dict.home.categories.polynesian,
-      type: "image",
-    },
-    {
-      id: 7,
-      title: dict.home.works.artist_in_action,
-      image: "/tattoo-artist-working-panoramic-view.webp",
-      category: dict.home.categories.process,
-      type: "image",
-    },
-    {
-      id: 8,
-      title: dict.home.works.stencil_application,
-      image: "/mandala-stencil-application.webp",
-      category: dict.home.categories.process,
-      type: "image",
-    },
-    {
-      id: 9,
-      title: dict.home.works.traditional_geisha,
-      image: "/japanese-geisha-tattoo-colorful.webp",
-      category: dict.home.categories.japanese_traditional,
-      type: "image",
-    },
-    {
-      id: 10,
-      title: dict.home.works.focused_artist,
-      image: "/female-artist-working-natural-light.webp",
-      category: dict.home.categories.process,
-      type: "image",
-    },
-    {
-      id: 11,
-      title: dict.home.works.japanese_snake,
-      image: "/japanese-snake-cherry-blossom-forearm.webp",
-      category: dict.home.categories.japanese,
-      type: "image",
-    },
-    {
-      id: 12,
-      title: dict.home.works.studio_view,
-      image: "/studio-window-cityview-silhouette.webp",
-      category: dict.home.categories.studio,
-      type: "image",
-    },
-    {
-      id: 13,
-      title: dict.home.works.sunset_consultation,
-      image: "/artists-consultation-sunset-studio.webp",
-      category: dict.home.categories.studio,
-      type: "image",
-    },
+    ...prismicImages.slice(0, 3), // Primeras 3 imágenes
+    videoItem, // Video en posición 4
+    ...prismicImages.slice(3) // Resto de las imágenes
   ]
 
   return (
