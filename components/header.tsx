@@ -14,6 +14,7 @@ interface HeaderProps {
         home: string
         work: string
         about: string
+        book: string
         contact: string
       }
       toggle_menu: string
@@ -132,6 +133,13 @@ export function Header({ lang, dict }: HeaderProps) {
               onClick={() => setIsMenuOpen(false)}
             >
               {dict.header.nav.about}
+            </Link>
+            <Link
+              href={`/${lang}/reservar`}
+              className="block text-sm font-medium hover:text-muted-foreground transition-colors py-2 uppercase"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {dict.header.nav.book}
             </Link>
             <Link
               href={`/${lang}/contacto`}

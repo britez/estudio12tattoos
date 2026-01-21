@@ -29,6 +29,7 @@
       "home": "HOME",
       "work": "WORK",
       "about": "ABOUT",
+      "book": "BOOK",
       "contact": "CONTACT"
     },
     "toggle_menu": "Toggle menu",
@@ -166,6 +167,82 @@
       "og_title": "Contact - estudio12",
       "og_description": "Book your tattoo consultation. Multiple contact methods available. Professional studio in Buenos Aires."
     }  },
+  "book": {
+    "title": "Book Your Tattoo",
+    "subtitle": "Choose your artist and start your story",
+    "steps": {
+      "artist": {
+        "title": "Choose Your Artist",
+        "description": "Select the tattoo artist that best fits your style"
+      },
+      "style": {
+        "title": "Tattoo Style",
+        "description": "What type of tattoo do you have in mind?"
+      },
+      "details": {
+        "title": "Project Details",
+        "description": "Tell us more about your idea"
+      },
+      "contact": {
+        "title": "Contact Information",
+        "description": "To schedule your appointment"
+      }
+    },
+    "artists": {
+      "select_prompt": "Select an artist",
+      "view_portfolio": "View portfolio",
+      "specialties": "Specialties"
+    },
+    "styles": {
+      "realistic": "Realistic",
+      "traditional": "Traditional",
+      "minimalist": "Minimalist",
+      "geometric": "Geometric",
+      "watercolor": "Watercolor",
+      "blackwork": "Blackwork",
+      "other": "Other"
+    },
+    "form": {
+      "tattoo_description": "Tattoo description",
+      "tattoo_description_placeholder": "Describe your idea, include details like size, placement, references...",
+      "budget": "Estimated budget",
+      "budget_placeholder": "What's your budget range?",
+      "name": "Full name",
+      "name_placeholder": "Your name",
+      "email": "Email",
+      "email_placeholder": "your@email.com",
+      "phone": "Phone",
+      "phone_placeholder": "Your WhatsApp number",
+      "preferred_date": "Preferred date",
+      "preferred_date_placeholder": "When would you like to do it?",
+      "additional_notes": "Additional notes",
+      "additional_notes_placeholder": "Any additional information..."
+    },
+    "navigation": {
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit Request",
+      "send_whatsapp": "Send via WhatsApp",
+      "sending": "Sending...",
+      "step_counter": "Step {{current}} of {{total}}"
+    },
+    "whatsapp": {
+      "phone_number": "+5491171601995",
+      "message_template": "*🎨 New Tattoo Reservation - Studio 12*\n\n*Selected artist:* {artist}\n*Instagram:* {instagram}\n\n*Tattoo style:* {style}\n\n*Project description:*\n{description}\n\n*Contact information:*\n• Name: {name}\n• Email: {email}\n• Phone: {phone}\n• Preferred date: {date}\n\nThank you for choosing Studio 12 for your next tattoo. We'll contact you soon to coordinate the details. 🖤"
+    },
+    "success": {
+      "title": "Message Sent!",
+      "message": "Your request has been sent via WhatsApp. We'll respond shortly to coordinate your appointment.",
+      "whatsapp_message": "If you need to contact us directly:",
+      "back_home": "Back to home"
+    },
+    "metadata": {
+      "title": "Book Tattoo - Choose Your Artist",
+      "description": "Wizard to book your tattoo. Choose your favorite artist, describe your project and schedule your appointment at estudio12.",
+      "og_title": "Book Your Tattoo - estudio12",
+      "og_description": "Simple process to book your tattoo. Choose artist, describe your project and schedule your appointment."
+    }
+  },
   "not_found": {
     "title": "Oops! This page went to get a tattoo",
     "subtitle": "404 - Not found",

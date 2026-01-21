@@ -29,6 +29,7 @@
       "home": "INICIO",
       "work": "TRABAJOS",
       "about": "ACERCA DE",
+      "book": "RESERVAR",
       "contact": "CONTACTO"
     },
     "toggle_menu": "Alternar menú",
@@ -164,6 +165,82 @@
       "description": "Contáctanos para agendar tu consulta de tatuaje. Formulario de contacto, WhatsApp, Instagram. Estudio 12 en San Telmo, Buenos Aires.",
       "og_title": "Contacto - estudio12",
       "og_description": "Agenda tu consulta de tatuaje. Múltiples formas de contacto disponibles. Estudio profesional en Buenos Aires."
+    }
+  },
+  "book": {
+    "title": "Reservá tu Tatuaje",
+    "subtitle": "Elegí tu artista y comenzá tu historia",
+    "steps": {
+      "artist": {
+        "title": "Elegí tu Artista",
+        "description": "Seleccioná el tatuador que mejor se adapte a tu estilo"
+      },
+      "style": {
+        "title": "Estilo de Tatuaje",
+        "description": "¿Qué tipo de tatuaje tenés en mente?"
+      },
+      "details": {
+        "title": "Detalles del Proyecto",
+        "description": "Contanos más sobre tu idea"
+      },
+      "contact": {
+        "title": "Información de Contacto",
+        "description": "Para coordinar tu cita"
+      }
+    },
+    "artists": {
+      "select_prompt": "Seleccioná un artista",
+      "view_portfolio": "Ver portfolio",
+      "specialties": "Especialidades"
+    },
+    "styles": {
+      "realistic": "Realista",
+      "traditional": "Tradicional",
+      "minimalist": "Minimalista",
+      "geometric": "Geométrico",
+      "watercolor": "Acuarela",
+      "blackwork": "Blackwork",
+      "other": "Otro"
+    },
+    "form": {
+      "tattoo_description": "Descripción del tatuaje",
+      "tattoo_description_placeholder": "Describí tu idea, incluye detalles como tamaño, ubicación, referencias...",
+      "budget": "Presupuesto estimado",
+      "budget_placeholder": "¿Cuál es tu rango de presupuesto?",
+      "name": "Nombre completo",
+      "name_placeholder": "Tu nombre",
+      "email": "Email",
+      "email_placeholder": "tu@email.com",
+      "phone": "Teléfono",
+      "phone_placeholder": "Tu número de WhatsApp",
+      "preferred_date": "Fecha preferida",
+      "preferred_date_placeholder": "¿Cuándo te gustaría hacerlo?",
+      "additional_notes": "Notas adicionales",
+      "additional_notes_placeholder": "Cualquier información adicional..."
+    },
+    "navigation": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "submit": "Enviar Solicitud",
+      "send_whatsapp": "Enviar por WhatsApp",
+      "sending": "Enviando...",
+      "step_counter": "Paso {{current}} de {{total}}"
+    },
+    "whatsapp": {
+      "phone_number": "+5491171601995",
+      "message_template": "*🎨 Nueva Reserva de Tatuaje - Estudio 12*\n\n*Artista seleccionado:* {artist}\n*Instagram:* {instagram}\n\n*Estilo de tatuaje:* {style}\n\n*Descripción del proyecto:*\n{description}\n\n*Información de contacto:*\n• Nombre: {name}\n• Email: {email}\n• Teléfono: {phone}\n• Fecha preferida: {date}\n\nGracias por elegir Estudio 12 para tu próximo tatuaje. Te contactaremos pronto para coordinar los detalles. 🖤"
+    },
+    "success": {
+      "title": "¡Mensaje Enviado!",
+      "message": "Tu solicitud se ha enviado por WhatsApp. Te responderemos a la brevedad para coordinar tu cita.",
+      "whatsapp_message": "Si necesitás contactarnos directamente:",
+      "back_home": "Volver al inicio"
+    },
+    "metadata": {
+      "title": "Reservar Tatuaje - Elegí tu Artista",
+      "description": "Wizard para reservar tu tatuaje. Elegí tu artista favorito, describí tu proyecto y coordiná tu cita en estudio12.",
+      "og_title": "Reservá tu Tatuaje - estudio12",
+      "og_description": "Proceso simple para reservar tu tatuaje. Elegí artista, describí tu proyecto y coordiná tu cita."
     }
   },
   "not_found": {
