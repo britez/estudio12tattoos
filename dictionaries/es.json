@@ -49,7 +49,7 @@
     "cta": {
       "title": "¿Cuál es tu próximo tatuaje?",
       "description": "Contanos tu idea, el estilo y tamaño, ¿ya tenés tatuajes?. El estudio se encarga de asesorarte y presentarte el artista perfecto para ti.",
-      "button": "Contáctanos"
+      "button": "Reservar"
     },
     "categories": {
       "studio": "Estudio",
@@ -120,6 +120,9 @@
       "title": "¿Quieres trabajar con nuestro equipo?",
       "description": "Agenda una consulta gratuita para discutir tu idea con el artista que mejor se ajuste a tu estilo.",
       "button": "Agendar Consulta"
+    },
+    "promotional_banner": {
+      "title": "¿Te gustaría que tu espacio se vea como el nuestro?"
     },
     "metadata": {
       "title": "Acerca de Nosotros - Nuestro Equipo de Artistas",

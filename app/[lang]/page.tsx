@@ -196,7 +196,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
               {dict.home.cta.description}
             </p>
             <a
-              href={`/${lang}/contacto`}
+              href={`/${lang}/reservar`}
               className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-sm font-medium hover:bg-primary/90 transition-colors"
             >
               {dict.home.cta.button}

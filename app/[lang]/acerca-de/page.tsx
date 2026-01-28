@@ -220,7 +220,34 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Banner Promocional */}
+      <section className="px-4 py-20 bg-gray-200">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+            {dict.about.promotional_banner.title}
+          </h2>
+          <div className="flex justify-center items-center">
+            <div className="bg-white p-8 rounded-sm">
+              <a
+                href="https://mueblestattoo.com.ar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:opacity-80 transition-opacity"
+              >
+                <Image
+                  src="/muebles-capelli.jpeg"
+                  alt="Muebles Capelli"
+                  width={300}
+                  height={150}
+                  className="object-contain"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section 
       <section className="px-4 py-20 bg-secondary/50">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{dict.about.cta.title}</h2>
@@ -235,7 +262,7 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
           </a>
         </div>
       </section>
-
+    */}
       {/* Artistas Temporales con carrusel */}
       <section className="py-16 bg-black text-white overflow-hidden">
         <div className="container mx-auto max-w-6xl">

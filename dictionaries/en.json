@@ -49,7 +49,7 @@
     "cta": {
       "title": "What's your next tattoo?",
       "description": "Tell us your idea, the style and size, do you already have tattoos? The studio takes care of advising you and presenting the perfect artist for you.",
-      "button": "Contact Us"
+      "button": "Schedule"
     },
     "categories": {
       "studio": "Studio",
@@ -120,6 +120,9 @@
       "title": "Want to work with our team?",
       "description": "Book a free consultation to discuss your idea with the artist who best fits your style.",
       "button": "Book Consultation"
+    },
+    "promotional_banner": {
+      "title": "Would you like your space to look like ours?"
     },
     "metadata": {
       "title": "About Us - Our Team of Artists",

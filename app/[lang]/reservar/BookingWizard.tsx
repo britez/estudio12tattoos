@@ -91,14 +91,36 @@ export default function BookingWizard({ dict, lang, artists }: BookingWizardProp
       .replace('{phone}', bookingData.phone || '')
       .replace('{date}', bookingData.preferredDate || 'No especificada')
     
-    // Crear URL de WhatsApp
-    const whatsappUrl = `https://wa.me/${dict.whatsapp.phone_number.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`
+    // Crear URL de WhatsApp con detección de dispositivo
+    const phoneNumber = dict.whatsapp.phone_number.replace(/[^0-9]/g, '')
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    
+    let whatsappUrl
+    if (isMobile) {
+      // En móvil, usar el protocolo whatsapp:// que abre la app directamente
+      whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`
+    } else {
+      // En escritorio, usar wa.me que abre WhatsApp Web
+      whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    }
     
     // Simular un pequeño delay para mostrar el estado de carga
     await new Promise(resolve => setTimeout(resolve, 1000))
     
-    // Abrir WhatsApp
-    window.open(whatsappUrl, '_blank')
+    // Intentar abrir WhatsApp
+    try {
+      if (isMobile) {
+        // En móvil, cambiar la URL directamente
+        window.location.href = whatsappUrl
+      } else {
+        // En escritorio, usar window.open
+        window.open(whatsappUrl, '_blank')
+      }
+    } catch (error) {
+      console.error('Error opening WhatsApp:', error)
+      // Fallback a WhatsApp Web si falla
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank')
+    }
     
     setIsSubmitting(false)
     setIsSubmitted(true)
