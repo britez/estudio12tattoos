@@ -14,6 +14,7 @@ interface HeaderProps {
         home: string
         work: string
         about: string
+        partnerships: string
         book: string
         contact: string
       }
@@ -58,6 +59,12 @@ export function Header({ lang, dict }: HeaderProps) {
             >
               {dict.header.nav.work}
             </Link>
+            <Link
+              href={`/${lang}/reservar`}
+              className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase"
+            >
+              {dict.header.nav.book}
+            </Link>
 
             <Link href={`/${lang}`}>
               <div className="relative w-[140px] h-[40px]">
@@ -70,6 +77,12 @@ export function Header({ lang, dict }: HeaderProps) {
               className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase"
             >
               {dict.header.nav.about}
+            </Link>
+            <Link
+              href={`/${lang}/alianzas`}
+              className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase"
+            >
+              {dict.header.nav.partnerships}
             </Link>
             <Link
               href={`/${lang}/contacto`}
@@ -133,6 +146,13 @@ export function Header({ lang, dict }: HeaderProps) {
               onClick={() => setIsMenuOpen(false)}
             >
               {dict.header.nav.about}
+            </Link>
+            <Link
+              href={`/${lang}/alianzas`}
+              className="block text-sm font-medium hover:text-muted-foreground transition-colors py-2 uppercase"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {dict.header.nav.partnerships}
             </Link>
             <Link
               href={`/${lang}/reservar`}

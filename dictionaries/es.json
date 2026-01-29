@@ -29,6 +29,7 @@
       "home": "INICIO",
       "work": "TRABAJOS",
       "about": "ACERCA DE",
+      "partnerships": "ALIANZAS",
       "book": "RESERVAR",
       "contact": "CONTACTO"
     },
@@ -68,6 +69,35 @@
       "description": "Somos un estudio de tatuajes profesional con vista panorámica a una de las ciudades más bellas. Sabemos que cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida.",
       "og_title": "estudio12 - La Experiencia de Tatuarte",
       "og_description": "Somos un estudio de tatuajes profesional con vista panorámica. Cada trazo cuenta una historia, creamos piezas de arte que duran para toda la vida."
+    }
+  },
+  "partnerships": {
+    "hero": {
+      "title": "Nuestras Alianzas",
+      "description": "Trabajamos junto a marcas que comparten nuestra pasión por la excelencia y la calidad. Estas alianzas nos permiten ofrecer los mejores productos y servicios a nuestros clientes."
+    },
+    "featured": {
+      "title": "Aliados Destacados",
+      "description": "Conoce a las marcas que confían en nosotros y nos acompañan en nuestro crecimiento."
+    },
+    "cta": {
+      "title": "¿Quieres formar parte de nuestras alianzas?",
+      "description": "Si tu marca comparte nuestros valores de calidad y profesionalismo, nos gustaría conocerte.",
+      "button": "Contactanos"
+    },
+    "metadata": {
+      "title": "Alianzas - Marcas que nos Acompañan",
+      "description": "Descubre las marcas y empresas que confían en estudio12 y nos acompañan en nuestro crecimiento como estudio de tatuajes profesional.",
+      "og_title": "Alianzas estudio12 - Marcas que nos Acompañan",
+      "og_description": "Conoce a nuestros aliados comerciales que comparten nuestra pasión por la excelencia en el arte del tatuaje."
+    },
+    "special_offers": {
+      "title": "Promociones Especiales",
+      "tattoo_discount": {
+        "question": "¿Te tatuaste con nosotros este año?",
+        "description": "Tenés un 15% off en tu alojamiento de BARILOCHE en Alaska Patagonia Hostel o Periko's Youth Hostel.",
+        "disclaimer": "(No acumulable con otras promociones)"
+      }
     }
   },
   "work": {

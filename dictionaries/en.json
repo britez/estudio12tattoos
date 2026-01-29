@@ -29,6 +29,7 @@
       "home": "HOME",
       "work": "WORK",
       "about": "ABOUT",
+      "partnerships": "PARTNERSHIPS",
       "book": "BOOK",
       "contact": "CONTACT"
     },
@@ -68,6 +69,35 @@
       "description": "We are a professional tattoo studio with panoramic view to one of the most beautiful cities. We know that every stroke tells a story, we create art pieces that last a lifetime.",
       "og_title": "estudio12 - The Tattoo Experience",
       "og_description": "We are a professional tattoo studio with panoramic view. Every stroke tells a story, we create art pieces that last a lifetime."
+    }
+  },
+  "partnerships": {
+    "hero": {
+      "title": "Our Partnerships",
+      "description": "We work alongside brands that share our passion for excellence and quality. These partnerships allow us to offer the best products and services to our clients."
+    },
+    "featured": {
+      "title": "Featured Partners",
+      "description": "Meet the brands that trust us and accompany us in our growth."
+    },
+    "cta": {
+      "title": "Want to be part of our partnerships?",
+      "description": "If your brand shares our values of quality and professionalism, we would like to meet you.",
+      "button": "Contact Us"
+    },
+    "metadata": {
+      "title": "Partnerships - Brands That Support Us",
+      "description": "Discover the brands and companies that trust estudio12 and accompany us in our growth as a professional tattoo studio.",
+      "og_title": "estudio12 Partnerships - Brands That Support Us",
+      "og_description": "Meet our commercial partners who share our passion for excellence in the art of tattooing."
+    },
+    "special_offers": {
+      "title": "Special Offers",
+      "tattoo_discount": {
+        "question": "Did you get tattooed with us this year?",
+        "description": "You get 15% off on your accommodation in BARILOCHE at Alaska Patagonia Hostel or Periko's Youth Hostel.",
+        "disclaimer": "(Not combinable with other promotions)"
+      }
     }
   },
   "work": {
