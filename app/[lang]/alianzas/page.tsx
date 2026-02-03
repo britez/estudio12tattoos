@@ -53,6 +53,19 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
       website: "https://mueblestattoo.com.ar/",
       featured: true
     },
+    {
+      id: 2,
+      name: "Dermaglós",
+      description: lang === 'es' 
+        ? "Somos una marca que trasciende las generaciones, con más de 50 años de trayectoria cuidando la piel de los argentinos. Dermaglós te acompaña en todas las etapas de la vida."
+        : "We are a brand that transcends generations, with more than 50 years of experience caring for the skin of Argentines. Dermaglós accompanies you through all stages of life.",
+      subtitle: lang === 'es'
+        ? "Si te tatuaste con nosotros no te olvides de pedir tu código de descuento."
+        : "If you got tattooed with us, don't forget to ask for your discount code.",
+      logo: "/dermaglos.png",
+      website: "#", // Se puede agregar el website cuando esté disponible
+      featured: true
+    },
     // Aquí se pueden agregar más aliados en el futuro
   ]
 
@@ -114,14 +127,21 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
                       <p className="text-lg leading-relaxed text-muted-foreground mb-6">
                         {partner.description}
                       </p>
-                      <a
-                        href={partner.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-sm font-medium hover:bg-primary/90 transition-colors"
-                      >
-                        {lang === 'es' ? 'Visitar sitio web' : 'Visit website'}
-                      </a>
+                      {partner.subtitle && (
+                        <p className="text-sm font-medium text-accent mb-6 bg-accent/10 p-3 rounded-sm">
+                          {partner.subtitle}
+                        </p>
+                      )}
+                      {partner.website !== "#" && (
+                        <a
+                          href={partner.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-sm font-medium hover:bg-primary/90 transition-colors"
+                        >
+                          {lang === 'es' ? 'Visitar sitio web' : 'Visit website'}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
