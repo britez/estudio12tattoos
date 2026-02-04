@@ -63,7 +63,7 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
         ? "Si te tatuaste con nosotros no te olvides de pedir tu código de descuento."
         : "If you got tattooed with us, don't forget to ask for your discount code.",
       logo: "/dermaglos.png",
-      website: "#", // Se puede agregar el website cuando esté disponible
+      website: "https://www.dermaglos.com/terapeutica/tatuajes",
       featured: true
     },
     // Aquí se pueden agregar más aliados en el futuro
