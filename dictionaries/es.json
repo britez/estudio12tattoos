@@ -96,8 +96,11 @@
       "tattoo_discount": {
         "question": "¿Te tatuaste con nosotros este año?",
         "description": "Tenés un 15% off en tu alojamiento de BARILOCHE en Alaska Patagonia Hostel o Periko's Youth Hostel.",
-        "disclaimer": "(No acumulable con otras promociones)"
-      }
+        "disclaimer": "(No acumulable con otras promociones)"      },
+      "sport_club": {
+        "title": "Sport Club",
+        "description": "Si sos socio Sport Club contás con un 25% abonando en efectivo, debés presentar tu app sport club en el estudio.",
+        "disclaimer": "No acumulable con otras promociones."      }
     }
   },
   "work": {

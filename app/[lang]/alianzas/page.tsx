@@ -66,10 +66,63 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
       website: "https://www.dermaglos.com/terapeutica/tatuajes",
       featured: true
     },
+    {
+      id: 3,
+      name: "Ephemeral",
+      description: lang === 'es' 
+        ? "Tu tatuaje puede ser para toda la vida o podés elegir Ephemeral, es una tinta hecha para desvanecerse."
+        : "Your tattoo can be for life or you can choose Ephemeral, it's an ink made to fade away.",
+      subtitle: lang === 'es'
+        ? "Debés solicitar cita previa con Maca."
+        : "You must request a prior appointment with Maca.",
+      logo: "/ephemeral.jpeg",
+      website: "https://www.instagram.com/ephemeraltattoo.arg?igsh=dmdvcDkxcnFlYndv",
+      featured: true
+    },
+    {
+      id: 4,
+      name: "Sport Club",
+      description: lang === 'es' 
+        ? "Si sos socio Sport Club contás con un 25% abonando en efectivo, debés presentar tu app sport club en el estudio."
+        : "If you are a Sport Club member, you get 25% off paying in cash, you must present your Sport Club app at the studio.",
+      subtitle: lang === 'es'
+        ? "No acumulable con otras promociones."
+        : "Not combinable with other promotions.",
+      logo: "/sportclub.png",
+      website: "https://beneficios.sportclub.com.ar/beneficios/estu12io?id=4107",
+      featured: true
+    },
+    {
+      id: 5,
+      name: "Alaska Patagonia Hostel",
+      description: lang === 'es' 
+        ? "15% off en tu alojamiento en Bariloche. Disfrutá de la Patagonia con descuento exclusivo para clientes de estudio12."
+        : "15% off on your accommodation in Bariloche. Enjoy Patagonia with exclusive discount for estudio12 clients.",
+      subtitle: lang === 'es'
+        ? "Válido solo para clientes que se tatuaron con nosotros este año."
+        : "Valid only for clients who got tattooed with us this year.",
+      logo: "/alaska.jpeg",
+      website: "https://www.alaskapatagoniahostel.com/",
+      featured: true
+    },
+    {
+      id: 6,
+      name: "Periko's Youth Hostel",
+      description: lang === 'es' 
+        ? "15% off en tu alojamiento en Bariloche. La mejor experiencia de juventud en la Patagonia con descuento exclusivo."
+        : "15% off on your accommodation in Bariloche. The best youth experience in Patagonia with exclusive discount.",
+      subtitle: lang === 'es'
+        ? "Válido solo para clientes que se tatuaron con nosotros este año."
+        : "Valid only for clients who got tattooed with us this year.",
+      logo: "/periko.jpeg",
+      website: "https://www.perikos.com/",
+      featured: true
+    },
     // Aquí se pueden agregar más aliados en el futuro
   ]
 
-  const featuredPartners = partners.filter(partner => partner.featured)
+  const featuredPartners = partners.filter(partner => partner.featured && !partner.name.includes('Hostel'))
+  const hostels = partners.filter(partner => partner.featured && partner.name.includes('Hostel'))
   const regularPartners = partners.filter(partner => !partner.featured)
 
   return (
@@ -104,12 +157,12 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
                 <div key={partner.id} className="bg-background rounded-sm overflow-hidden shadow-lg">
                   <div className="grid md:grid-cols-2 gap-8 items-center">
                     {/* Logo Section */}
-                    <div className="p-12 flex justify-center items-center bg-gray-100">
+                    <div className="p-12 flex justify-center items-center bg-white">
                       <a
                         href={partner.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block hover:opacity-80 transition-opacity"
+                        className={`block hover:opacity-80 transition-opacity ${partner.name === 'Sport Club' ? 'bg-black p-4 rounded-sm' : ''}`}
                       >
                         <Image
                           src={partner.logo}
@@ -151,66 +204,69 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
         </section>
       )}
 
-      {/* Special Offers Section */}
-      <section className="px-4 py-20 bg-gray-900 text-white">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
-            {dict.partnerships.special_offers.title}
-          </h2>
-          <div className="bg-white/10 rounded-sm p-8 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6">
-              {dict.partnerships.special_offers.tattoo_discount.question}
-            </h3>
-            <p className="text-lg md:text-xl leading-relaxed mb-4">
-              {dict.partnerships.special_offers.tattoo_discount.description}
-            </p>
-            <p className="text-sm text-gray-300 italic">
-              {dict.partnerships.special_offers.tattoo_discount.disclaimer}
+      {/* Hostels Section */}
+      {hostels.length > 0 && (
+        <section className="px-4 py-20">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">
+              {lang === 'es' ? 'Beneficios de Alojamiento' : 'Accommodation Benefits'}
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+              {lang === 'es' 
+                ? 'Descuentos exclusivos en alojamiento en Bariloche para nuestros clientes.' 
+                : 'Exclusive accommodation discounts in Bariloche for our clients.'}
             </p>
             
-            {/* Hostels Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mt-12">
-              <a
-                href="https://www.alaskapatagoniahostel.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 p-6 rounded-sm hover:bg-white/20 transition-colors block"
-              >
-                <div className="aspect-[4/5] bg-white/20 rounded-sm mb-4 overflow-hidden">
-                  <Image
-                    src="/alaska.jpeg"
-                    alt="Alaska Patagonia Hostel"
-                    width={300}
-                    height={375}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h4 className="font-bold mb-2">Alaska Patagonia Hostel</h4>
-                <p className="text-sm text-gray-300">15% off - Bariloche</p>
-              </a>
-              
-              <a
-                href="https://www.perikos.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/10 p-6 rounded-sm hover:bg-white/20 transition-colors block"
-              >
-                <div className="aspect-[4/5] bg-white/20 rounded-sm mb-4 overflow-hidden">
-                  <Image
-                    src="/periko.jpeg"
-                    alt="Periko's Youth Hostel"
-                    width={300}
-                    height={375}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h4 className="font-bold mb-2">Periko's Youth Hostel</h4>
-                <p className="text-sm text-gray-300">15% off - Bariloche</p>
-              </a>
+            {/* Hostels in one row */}
+            <div className="bg-background rounded-sm overflow-hidden shadow-lg">
+              <div className="grid md:grid-cols-2 gap-8">
+                {hostels.map((hostel) => (
+                  <div key={hostel.id} className="grid grid-cols-2 gap-4 items-center">
+                    {/* Hostel Image */}
+                    <div className="p-4 flex justify-center items-center bg-gray-100 rounded-sm">
+                      <a
+                        href={hostel.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:opacity-80 transition-opacity"
+                      >
+                        <Image
+                          src={hostel.logo}
+                          alt={hostel.name}
+                          width={150}
+                          height={120}
+                          className="object-cover rounded-sm"
+                        />
+                      </a>
+                    </div>
+                    
+                    {/* Hostel Description */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold mb-2">{hostel.name}</h3>
+                      <p className="text-xs leading-relaxed text-muted-foreground mb-3">
+                        {hostel.description}
+                      </p>
+                      {hostel.subtitle && (
+                        <p className="text-xs font-medium text-accent mb-3 bg-accent/10 p-2 rounded-sm">
+                          {hostel.subtitle}
+                        </p>
+                      )}
+                      <a
+                        href={hostel.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-sm text-xs font-medium hover:bg-primary/90 transition-colors"
+                      >
+                        {lang === 'es' ? 'Ver hostel' : 'View hostel'}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Regular Partners Grid */}
       {regularPartners.length > 0 && (
