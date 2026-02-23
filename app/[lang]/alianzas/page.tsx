@@ -59,9 +59,6 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
       description: lang === 'es' 
         ? "Somos una marca que trasciende las generaciones, con más de 50 años de trayectoria cuidando la piel de los argentinos. Dermaglós te acompaña en todas las etapas de la vida."
         : "We are a brand that transcends generations, with more than 50 years of experience caring for the skin of Argentines. Dermaglós accompanies you through all stages of life.",
-      subtitle: lang === 'es'
-        ? "Si te tatuaste con nosotros no te olvides de pedir tu código de descuento."
-        : "If you got tattooed with us, don't forget to ask for your discount code.",
       logo: "/dermaglos.png",
       website: "https://www.dermaglos.com/terapeutica/tatuajes",
       featured: true
