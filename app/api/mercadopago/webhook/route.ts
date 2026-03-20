@@ -6,7 +6,6 @@ import type * as prismic from "@prismicio/client"
 import { BuyerConfirmationEmail } from "@/lib/emails/seminar-confirmation-buyer"
 import { StudioNotificationEmail } from "@/lib/emails/seminar-notification-studio"
 import { createElement } from "react"
-import { renderToStaticMarkup } from "react-dom/server"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -163,53 +162,43 @@ export async function POST(request: NextRequest) {
   const studioEmail = process.env.STUDIO_EMAIL ?? ""
   const fromAddress = process.env.EMAIL_FROM ?? "noreply@estudio12tattoos.com"
 
-  const buyerHtml = renderToStaticMarkup(
-    createElement(BuyerConfirmationEmail, {
-      buyerName,
-      buyerEmail,
-      seminarTitle,
-      seminarDate,
-      seminarTime,
-      seminarInstructor,
-      amount,
-      paymentId: paymentIdStr,
-    })
-  )
-
-  const studioHtml = studioEmail
-    ? renderToStaticMarkup(
-        createElement(StudioNotificationEmail, {
-          buyerName,
-          buyerEmail,
-          buyerPhone,
-          buyerDni,
-          seminarTitle,
-          seminarDate,
-          seminarTime,
-          amount,
-          paymentId: paymentIdStr,
-          seminarSlug: slug,
-        })
-      )
-    : null
-
   try {
     const emailPromises: Promise<unknown>[] = [
       resend.emails.send({
         from: fromAddress,
         to: buyerEmail,
         subject: `Inscripción confirmada — ${seminarTitle}`,
-        html: buyerHtml,
+        react: createElement(BuyerConfirmationEmail, {
+          buyerName,
+          buyerEmail,
+          seminarTitle,
+          seminarDate,
+          seminarTime,
+          seminarInstructor,
+          amount,
+          paymentId: paymentIdStr,
+        }),
       }),
     ]
 
-    if (studioHtml && studioEmail) {
+    if (studioEmail) {
       emailPromises.push(
         resend.emails.send({
           from: fromAddress,
           to: studioEmail,
           subject: `Nuevo inscripto: ${buyerName} — ${seminarTitle}`,
-          html: studioHtml,
+          react: createElement(StudioNotificationEmail, {
+            buyerName,
+            buyerEmail,
+            buyerPhone,
+            buyerDni,
+            seminarTitle,
+            seminarDate,
+            seminarTime,
+            amount,
+            paymentId: paymentIdStr,
+            seminarSlug: slug,
+          }),
         })
       )
     }
