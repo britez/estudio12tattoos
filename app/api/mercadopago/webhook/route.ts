@@ -9,28 +9,30 @@ import { createElement } from "react"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-function verifySignature(request: NextRequest, rawBody: string): boolean {
+function verifySignature(request: NextRequest, dataId: string): boolean {
   const secret = process.env.MP_WEBHOOK_SECRET
   if (!secret) return true // Skip in dev if not configured
 
   const xSignature = request.headers.get("x-signature")
-  const xRequestId = request.headers.get("x-request-id")
+  const xRequestId = request.headers.get("x-request-id") ?? ""
   if (!xSignature) return false
 
-  const parts: Record<string, string> = {}
+  // Parse "ts=...,v1=..." — use indexOf to avoid splitting on "=" inside the value
+  let ts = ""
+  let v1 = ""
   for (const part of xSignature.split(",")) {
-    const [key, val] = part.trim().split("=")
-    if (key && val) parts[key] = val
+    const idx = part.indexOf("=")
+    if (idx === -1) continue
+    const key = part.slice(0, idx).trim()
+    const val = part.slice(idx + 1).trim()
+    if (key === "ts") ts = val
+    if (key === "v1") v1 = val
   }
-
-  const ts = parts["ts"]
-  const v1 = parts["v1"]
   if (!ts || !v1) return false
 
   // MP signature: HMAC-SHA256 of "id:{data.id};request-id:{x-request-id};ts:{ts}"
-  // We need the data.id from the body here, but for simplicity we verify ts + rawBody
   const crypto = require("crypto")
-  const message = `id:${new URL(request.url).searchParams.get("data.id") ?? ""};request-id:${xRequestId ?? ""};ts:${ts}`
+  const message = `id:${dataId};request-id:${xRequestId};ts:${ts}`
   const expected = crypto.createHmac("sha256", secret).update(message).digest("hex")
   return expected === v1
 }
@@ -73,11 +75,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid body" }, { status: 400 })
   }
 
-  // Verify signature
-  if (!verifySignature(request, rawBody)) {
-    return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
-  }
-
   let notification: unknown
   try {
     notification = JSON.parse(rawBody)
@@ -85,15 +82,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
   }
 
-  if (
-    typeof notification !== "object" ||
-    notification === null ||
-    !("type" in notification)
-  ) {
+  // Extract data.id before signature verification (needed to build the HMAC message)
+  const notifObj = typeof notification === "object" && notification !== null
+    ? notification as Record<string, unknown>
+    : {}
+  const dataId = String((notifObj["data"] as Record<string, unknown> | undefined)?.["id"] ?? "")
+
+  // Verify signature using data.id from body
+  if (!verifySignature(request, dataId)) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
+  }
+
+  if (!("type" in notifObj)) {
     return NextResponse.json({ ok: true }, { status: 200 })
   }
 
-  const data = notification as Record<string, unknown>
+  const data = notifObj
 
   // Only process payment events
   if (data["type"] !== "payment") {
