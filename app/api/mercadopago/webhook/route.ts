@@ -9,7 +9,7 @@ import { createElement } from "react"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-function verifySignature(request: NextRequest, dataId: string): boolean {
+function verifySignature(request: NextRequest): boolean {
   const secret = process.env.MP_WEBHOOK_SECRET
   if (!secret) return true // Skip in dev if not configured
 
@@ -30,9 +30,12 @@ function verifySignature(request: NextRequest, dataId: string): boolean {
   }
   if (!ts || !v1) return false
 
-  // MP signature: HMAC-SHA256 of "id:{data.id};request-id:{x-request-id};ts:{ts}"
+  // data.id comes from URL query params, NOT from the body
+  const dataId = request.nextUrl.searchParams.get("data.id") ?? ""
+
+  // Template with trailing semicolon: id:{data.id};request-id:{x-request-id};ts:{ts};
   const crypto = require("crypto")
-  const message = `id:${dataId};request-id:${xRequestId};ts:${ts}`
+  const message = `id:${dataId};request-id:${xRequestId};ts:${ts};`
   const expected = crypto.createHmac("sha256", secret).update(message).digest("hex")
   return expected === v1
 }
@@ -88,8 +91,8 @@ export async function POST(request: NextRequest) {
     : {}
   const dataId = String((notifObj["data"] as Record<string, unknown> | undefined)?.["id"] ?? "")
 
-  // Verify signature using data.id from body
-  if (!verifySignature(request, dataId)) {
+  // Verify signature using data.id from URL query params
+  if (!verifySignature(request)) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
   }
 
