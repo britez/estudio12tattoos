@@ -7,5 +7,6 @@ export const components = {
   guest_artists: dynamic(() => import("./GuestArtists")),
   permanent_staff: dynamic(() => import("./PermanentStaff")),
   portfolio: dynamic(() => import("./Portfolio")),
+  seminar_list: dynamic(() => import("./SeminarList")),
   works2: dynamic(() => import("./Works2")),
 };

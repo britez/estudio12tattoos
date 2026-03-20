@@ -279,6 +279,53 @@
       "og_description": "Simple process to book your tattoo. Choose artist, describe your project and schedule your appointment."
     }
   },
+  "seminarios": {
+    "hero": {
+      "title": "Seminars",
+      "description": "Learn from our artists. Intensive tattoo workshops for all levels, with limited spots and unique dates."
+    },
+    "card": {
+      "register_button": "Reserve a spot",
+      "sold_out": "Sold out",
+      "cancelled": "Cancelled",
+      "date_label": "Date",
+      "time_label": "Schedule",
+      "duration_label": "Duration",
+      "price_label": "Price",
+      "instructor_label": "Instructor",
+      "spots_label": "Spots",
+      "level_label": "Level",
+      "levels": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced"
+      }
+    },
+    "empty": {
+      "title": "Coming Soon",
+      "description": "We are preparing new seminars. Follow us on Instagram to be the first to know."
+    },
+    "cta": {
+      "title": "Want us to notify you when there's news?",
+      "description": "Send us a message and we'll add you to the interested list.",
+      "button": "Contact us"
+    },
+    "detail": {
+      "back_button": "View all seminars",
+      "buy_button": "I want to join",
+      "buy_error": "There was an error processing the payment. Please try again.",
+      "payment_success": "Payment successful! We'll see you at the seminar.",
+      "payment_pending": "Payment pending. We'll notify you once it's confirmed.",
+      "payment_failure": "The payment could not be processed. Please try again.",
+      "not_found": "Seminar not found."
+    },
+    "metadata": {
+      "title": "Seminars",
+      "description": "Intensive tattoo workshops with Estudio 12 artists. Limited spots.",
+      "og_title": "Tattoo Seminars | Estudio 12",
+      "og_description": "Learn with the artists of Estudio 12. Tattoo technique workshops with limited spots."
+    }
+  },
   "not_found": {
     "title": "Oops! This page went to get a tattoo",
     "subtitle": "404 - Not found",

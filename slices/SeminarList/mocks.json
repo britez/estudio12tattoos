@@ -1,0 +1,156 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "seminarios": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "imagen",
+                {
+                  "origin": {
+                    "id": "main",
+                    "url": "https://images.unsplash.com/photo-1590246814883-57c511e74ee9",
+                    "width": 800,
+                    "height": 600
+                  },
+                  "url": "https://images.unsplash.com/photo-1590246814883-57c511e74ee9",
+                  "width": 800,
+                  "height": 600,
+                  "edit": {
+                    "zoom": 1,
+                    "crop": { "x": 0, "y": 0 },
+                    "background": "transparent"
+                  },
+                  "alt": "Taller de Realismo",
+                  "credits": null,
+                  "__TYPE__": "ImageContent",
+                  "thumbnails": {}
+                }
+              ],
+              [
+                "titulo",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "Taller de Realismo — Nivel Básico",
+                  "type": "Text"
+                }
+              ],
+              [
+                "descripcion",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "Aprendé las bases del realismo en tatuaje con técnicas de sombreado y contraste.",
+                  "type": "Text"
+                }
+              ],
+              [
+                "fecha",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "15 de Julio, 2026",
+                  "type": "Text"
+                }
+              ],
+              [
+                "hora",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "14:00 - 18:00",
+                  "type": "Text"
+                }
+              ],
+              [
+                "duracion",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "4 horas",
+                  "type": "Text"
+                }
+              ],
+              [
+                "precio",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "$30.000",
+                  "type": "Text"
+                }
+              ],
+              [
+                "instructor",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "Juan Britez",
+                  "type": "Text"
+                }
+              ],
+              [
+                "cupos",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "6 lugares",
+                  "type": "Text"
+                }
+              ],
+              [
+                "nivel",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "beginner",
+                  "type": "Select"
+                }
+              ],
+              [
+                "tecnica",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "Realismo",
+                  "type": "Text"
+                }
+              ],
+              [
+                "link_registro",
+                {
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "link_type": "Web",
+                    "url": "https://wa.me/5491171601995"
+                  }
+                }
+              ],
+              [
+                "estado",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "upcoming",
+                  "type": "Select"
+                }
+              ],
+              [
+                "slug",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "taller-realismo-basico",
+                  "type": "Text"
+                }
+              ],
+              [
+                "precio_numerico",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": 30000,
+                  "type": "Number"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "items": []
+  }
+]

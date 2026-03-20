@@ -1,0 +1,136 @@
+{
+  "id": "seminar_list",
+  "type": "SharedSlice",
+  "name": "SeminarList",
+  "description": "Lista de seminarios y talleres",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "seminarios": {
+          "type": "Group",
+          "config": {
+            "label": "seminarios",
+            "repeat": true,
+            "fields": {
+              "imagen": {
+                "type": "Image",
+                "config": {
+                  "label": "imagen",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "titulo": {
+                "type": "Text",
+                "config": {
+                  "label": "titulo",
+                  "placeholder": ""
+                }
+              },
+              "descripcion": {
+                "type": "Text",
+                "config": {
+                  "label": "descripcion",
+                  "placeholder": ""
+                }
+              },
+              "fecha": {
+                "type": "Text",
+                "config": {
+                  "label": "fecha",
+                  "placeholder": "ej: 15 de Julio, 2026"
+                }
+              },
+              "hora": {
+                "type": "Text",
+                "config": {
+                  "label": "hora",
+                  "placeholder": "ej: 14:00 - 18:00"
+                }
+              },
+              "duracion": {
+                "type": "Text",
+                "config": {
+                  "label": "duracion",
+                  "placeholder": "ej: 4 horas"
+                }
+              },
+              "precio": {
+                "type": "Text",
+                "config": {
+                  "label": "precio",
+                  "placeholder": "ej: $30.000"
+                }
+              },
+              "instructor": {
+                "type": "Text",
+                "config": {
+                  "label": "instructor",
+                  "placeholder": ""
+                }
+              },
+              "cupos": {
+                "type": "Text",
+                "config": {
+                  "label": "cupos",
+                  "placeholder": "ej: 6 lugares"
+                }
+              },
+              "nivel": {
+                "type": "Select",
+                "config": {
+                  "label": "nivel",
+                  "options": ["beginner", "intermediate", "advanced"],
+                  "default_value": "beginner"
+                }
+              },
+              "tecnica": {
+                "type": "Text",
+                "config": {
+                  "label": "tecnica",
+                  "placeholder": "ej: Realismo"
+                }
+              },
+              "link_registro": {
+                "type": "Link",
+                "config": {
+                  "label": "link_registro",
+                  "allowTargetBlank": true
+                }
+              },
+              "estado": {
+                "type": "Select",
+                "config": {
+                  "label": "estado",
+                  "options": ["upcoming", "past", "cancelled"],
+                  "default_value": "upcoming"
+                }
+              },
+              "slug": {
+                "type": "Text",
+                "config": {
+                  "label": "slug",
+                  "placeholder": "ej: taller-realismo-basico"
+                }
+              },
+              "precio_numerico": {
+                "type": "Number",
+                "config": {
+                  "label": "precio_numerico",
+                  "placeholder": "30000"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

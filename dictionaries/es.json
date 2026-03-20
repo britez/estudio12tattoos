@@ -279,6 +279,51 @@
       "og_description": "Proceso simple para reservar tu tatuaje. Elegí artista, describí tu proyecto y coordiná tu cita."
     }
   },
+  "seminarios": {
+    "hero": {
+      "title": "Seminarios",
+      "description": "Aprendé de nuestros artistas. Talleres intensivos de tatuaje para todos los niveles, con cupos limitados y fechas únicas."
+    },
+    "card": {
+      "register_button": "Reservar lugar",
+      "sold_out": "Sin cupos",
+      "cancelled": "Cancelado",
+      "date_label": "Fecha",
+      "time_label": "Horario",
+      "duration_label": "Duración",
+      "price_label": "Precio",
+      "instructor_label": "Instructor",
+      "spots_label": "Cupos",
+      "level_label": "Nivel",
+      "levels": {
+        "beginner": "Principiante",
+        "intermediate": "Intermedio",
+        "advanced": "Avanzado"
+      }
+    },
+    "empty": {
+      "title": "Próximamente",
+      "description": "Estamos preparando nuevos seminarios. Seguinos en Instagram para enterarte primero."
+    },
+    "cta": {
+      "title": "¿Querés que avisemos cuando haya novedades?",
+      "description": "Mandanos un mensaje y te sumamos a la lista de interesados.",
+      "button": "Contactanos"
+    },    "detail": {
+      "back_button": "Ver todos los seminarios",
+      "buy_button": "Quiero anotarme",
+      "buy_error": "Hubo un error al procesar el pago. Intentá de nuevo.",
+      "payment_success": "¡Pago exitoso! Te esperamos en el seminario.",
+      "payment_pending": "Pago pendiente. Te notificaremos cuando se confirme.",
+      "payment_failure": "El pago no se pudo procesar. Intentá de nuevo.",
+      "not_found": "Seminario no encontrado."
+    },    "metadata": {
+      "title": "Seminarios",
+      "description": "Talleres intensivos de tatuaje con artistas del Estudio 12. Cupos limitados.",
+      "og_title": "Seminarios de Tatuaje | Estudio 12",
+      "og_description": "Aprendé con los artistas del Estudio 12. Talleres de técnicas de tatuaje con cupos limitados."
+    }
+  },
   "not_found": {
     "title": "¡Oops! Esta página se fue a tatuar",
     "subtitle": "404 - No encontrado",
