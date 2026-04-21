@@ -20,6 +20,9 @@ import { getDictionary, hasLocale } from "../../dictionaries"
 import type { Seminar } from "../components/SeminarCard"
 import { BuyButton } from "./components/BuyButton"
 
+// Revalidar cada 60 segundos para que cambios en Prismic se reflejen rápido
+export const revalidate = 60
+
 interface SlugPageProps {
   params: Promise<{ lang: string; slug: string }>
   searchParams: Promise<{ payment?: string }>

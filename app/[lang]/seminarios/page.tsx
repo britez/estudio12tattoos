@@ -6,6 +6,9 @@ import type { PageProps } from '../types'
 import { generateSeminariosMetadata } from './metadata'
 import { SeminarCard, type Seminar } from './components/SeminarCard'
 
+// Revalidar cada 60 segundos para que cambios en Prismic se reflejen rápido
+export const revalidate = 60
+
 export async function generateMetadata({ params }: PageProps<'/[lang]/seminarios'>): Promise<Metadata> {
   return generateSeminariosMetadata({ params })
 }
