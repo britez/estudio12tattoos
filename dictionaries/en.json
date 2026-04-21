@@ -314,6 +314,8 @@
       "back_button": "View all seminars",
       "buy_button": "I want to join",
       "buy_error": "There was an error processing the payment. Please try again.",
+      "email_label": "Your email",
+      "email_placeholder": "hello@example.com",
       "payment_success": "Payment successful! We'll see you at the seminar.",
       "payment_pending": "Payment pending. We'll notify you once it's confirmed.",
       "payment_failure": "The payment could not be processed. Please try again.",

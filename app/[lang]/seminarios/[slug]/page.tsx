@@ -327,9 +327,10 @@ export default async function SeminarDetailPage({
                 {canBuy && (
                   <BuyButton
                     slug={seminar.slug}
-                    lang={lang}
                     label={detailDict.buy_button}
                     errorLabel={detailDict.buy_error}
+                    emailLabel={detailDict.email_label}
+                    emailPlaceholder={detailDict.email_placeholder}
                   />
                 )}
 
