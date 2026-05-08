@@ -13,6 +13,7 @@ interface HeaderProps {
       nav: {
         home: string
         work: string
+        seminars: string
         about: string
         partnerships: string
         book: string
@@ -50,14 +51,17 @@ export function Header({ lang, dict }: HeaderProps) {
           </button>
 
           <nav className="hidden md:flex items-center gap-8">
-            <Link href={`/${lang}`} className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase">
-              {dict.header.nav.home}
-            </Link>
             <Link
               href={`/${lang}/trabajos`}
               className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase"
             >
               {dict.header.nav.work}
+            </Link>
+            <Link
+              href={`/${lang}/seminarios`}
+              className="text-sm font-medium hover:text-muted-foreground transition-colors uppercase"
+            >
+              {dict.header.nav.seminars}
             </Link>
             <Link
               href={`/${lang}/reservar`}
@@ -127,18 +131,18 @@ export function Header({ lang, dict }: HeaderProps) {
         {isMenuOpen && (
           <nav className="md:hidden pb-4 space-y-3">
             <Link
-              href={`/${lang}`}
-              className="block text-sm font-medium hover:text-muted-foreground transition-colors py-2 uppercase"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {dict.header.nav.home}
-            </Link>
-            <Link
               href={`/${lang}/trabajos`}
               className="block text-sm font-medium hover:text-muted-foreground transition-colors py-2 uppercase"
               onClick={() => setIsMenuOpen(false)}
             >
               {dict.header.nav.work}
+            </Link>
+            <Link
+              href={`/${lang}/seminarios`}
+              className="block text-sm font-medium hover:text-muted-foreground transition-colors py-2 uppercase"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {dict.header.nav.seminars}
             </Link>
             <Link
               href={`/${lang}/acerca-de`}
