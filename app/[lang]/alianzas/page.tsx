@@ -91,6 +91,16 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
     },
     {
       id: 5,
+      name: "Orange Grip",
+      description: lang === 'es' 
+        ? "Precisión en cada línea"
+        : "Precision in every line",
+      logo: "/orange-grip.jpeg",
+      website: "https://www.instagram.com/orange.grip/",
+      featured: true
+    },
+    {
+      id: 6,
       name: "Alaska Patagonia Hostel",
       description: lang === 'es' 
         ? "15% off en tu alojamiento en Bariloche. Disfrutá de la Patagonia con descuento exclusivo para clientes de estudio12."
@@ -103,7 +113,7 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
       featured: true
     },
     {
-      id: 6,
+      id: 7,
       name: "Periko's Youth Hostel",
       description: lang === 'es' 
         ? "15% off en tu alojamiento en Bariloche. La mejor experiencia de juventud en la Patagonia con descuento exclusivo."
@@ -166,7 +176,7 @@ export default async function AlianzasPage({ params }: PageProps<'/[lang]/alianz
                           alt={partner.name}
                           width={400}
                           height={200}
-                          className="object-contain"
+                          className={partner.name === 'Orange Grip' ? 'object-cover' : 'object-contain'}
                         />
                       </a>
                     </div>
