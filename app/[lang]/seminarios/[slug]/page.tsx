@@ -18,7 +18,7 @@ import {
 import { createClient } from "@/prismicio"
 import { getDictionary, hasLocale } from "../../dictionaries"
 import type { Seminar } from "../components/SeminarCard"
-import { BuyButton } from "./components/BuyButton"
+import { PaymentButtons } from "./components/PaymentButtons"
 
 // Revalidar cada 60 segundos para que cambios en Prismic se reflejen rápido
 export const revalidate = 60
@@ -46,6 +46,11 @@ function mapItem(item: any, index: number): Seminar {
       typeof item.precio_numerico === "number"
         ? item.precio_numerico
         : parseFloat(String(item.precio ?? "").replace(/[^0-9.]/g, "")) || 0,
+    precioUsd: item.precio_usd || undefined,
+    precioNumericoUsd:
+      typeof item.precio_numerico_usd === "number"
+        ? item.precio_numerico_usd
+        : undefined,
     instructor: item.instructor || "",
     cupos: item.cupos || "",
     nivel: (["beginner", "intermediate", "advanced"].includes(item.nivel)
@@ -150,7 +155,7 @@ export default async function SeminarDetailPage({
   const detailDict = dict.seminarios.detail
   const isUpcoming = seminar.estado === "upcoming"
   const isCancelled = seminar.estado === "cancelled"
-  const canBuy = isUpcoming && seminar.precioNumerico > 0
+  const canBuy = isUpcoming && (seminar.precioNumerico > 0 || (seminar.precioNumericoUsd && seminar.precioNumericoUsd > 0))
 
   return (
     <div className="min-h-screen bg-background">
@@ -320,20 +325,39 @@ export default async function SeminarDetailPage({
 
               {/* Precio + CTA */}
               <div className="flex flex-col gap-4 pt-2 border-t border-border">
-                {seminar.precio && (
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-2xl font-bold">{seminar.precio}</span>
+                {(seminar.precio || seminar.precioUsd) && (
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                      <DollarSign className="w-4 h-4" />
+                      <span className="uppercase tracking-wider">
+                        {lang === "es" ? "Opciones de pago" : "Payment options"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {seminar.precio && (
+                        <span className="text-xl font-bold">{seminar.precio}</span>
+                      )}
+                      {seminar.precio && seminar.precioUsd && (
+                        <span className="text-xl text-muted-foreground">/</span>
+                      )}
+                      {seminar.precioUsd && (
+                        <span className="text-xl font-bold text-muted-foreground">{seminar.precioUsd}</span>
+                      )}
+                    </div>
                   </div>
                 )}
 
                 {canBuy && (
-                  <BuyButton
+                  <PaymentButtons
                     slug={seminar.slug}
-                    label={detailDict.buy_button}
-                    errorLabel={detailDict.buy_error}
+                    precioArs={seminar.precio || undefined}
+                    precioNumericoArs={seminar.precioNumerico}
+                    precioUsd={seminar.precioUsd}
+                    precioNumericoUsd={seminar.precioNumericoUsd}
                     emailLabel={detailDict.email_label}
                     emailPlaceholder={detailDict.email_placeholder}
+                    errorLabel={detailDict.buy_error}
+                    lang={lang}
                   />
                 )}
 

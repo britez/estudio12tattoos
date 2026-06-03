@@ -47,6 +47,8 @@ export default async function SeminariosPage({ params }: PageProps<'/[lang]/semi
           duracion: item.duracion || '',
           precio: item.precio || '',
           precioNumerico: typeof item.precio_numerico === 'number' ? item.precio_numerico : parseFloat(String(item.precio ?? '').replace(/[^0-9.]/g, '')) || 0,
+          precioUsd: item.precio_usd || undefined,
+          precioNumericoUsd: typeof item.precio_numerico_usd === 'number' ? item.precio_numerico_usd : undefined,
           instructor: item.instructor || '',
           cupos: item.cupos || '',
           nivel: (['beginner', 'intermediate', 'advanced'].includes(item.nivel)
@@ -83,6 +85,8 @@ export default async function SeminariosPage({ params }: PageProps<'/[lang]/semi
             duracion: item.duracion || '',
             precio: item.precio || '',
             precioNumerico: typeof item.precio_numerico === 'number' ? item.precio_numerico : parseFloat(String(item.precio ?? '').replace(/[^0-9.]/g, '')) || 0,
+            precioUsd: item.precio_usd || undefined,
+            precioNumericoUsd: typeof item.precio_numerico_usd === 'number' ? item.precio_numerico_usd : undefined,
             instructor: item.instructor || '',
             cupos: item.cupos || '',
             nivel: (['beginner', 'intermediate', 'advanced'].includes(item.nivel)

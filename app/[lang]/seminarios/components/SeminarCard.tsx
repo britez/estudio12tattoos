@@ -13,6 +13,8 @@ export type Seminar = {
   duracion: string
   precio: string
   precioNumerico: number
+  precioUsd?: string
+  precioNumericoUsd?: number
   instructor: string
   cupos: string
   nivel: "beginner" | "intermediate" | "advanced"
@@ -136,10 +138,18 @@ export function SeminarCard({ seminar, dict, lang }: SeminarCardProps) {
         </dl>
 
         <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
-          {seminar.precio && (
+          {(seminar.precio || seminar.precioUsd) && (
             <div className="flex items-center gap-1.5 font-semibold">
               <DollarSign className="w-4 h-4 text-muted-foreground" />
-              <span>{seminar.precio}</span>
+              <span>
+                {seminar.precio}
+                {seminar.precio && seminar.precioUsd && (
+                  <span className="text-muted-foreground"> / </span>
+                )}
+                {seminar.precioUsd && (
+                  <span className="text-muted-foreground">{seminar.precioUsd}</span>
+                )}
+              </span>
             </div>
           )}
           {hasDetail && isUpcoming ? (

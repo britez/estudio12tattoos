@@ -125,6 +125,20 @@
                   "label": "precio_numerico",
                   "placeholder": "30000"
                 }
+              },
+              "precio_usd": {
+                "type": "Text",
+                "config": {
+                  "label": "precio_usd",
+                  "placeholder": "ej: USD $30"
+                }
+              },
+              "precio_numerico_usd": {
+                "type": "Number",
+                "config": {
+                  "label": "precio_numerico_usd",
+                  "placeholder": "30"
+                }
               }
             }
           }
