@@ -1,0 +1,69 @@
+{
+  "id": "founder",
+  "type": "SharedSlice",
+  "name": "Founder",
+  "description": "Founder",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "name": {
+          "type": "Text",
+          "config": {
+            "label": "Name",
+            "placeholder": ""
+          }
+        },
+        "role": {
+          "type": "Text",
+          "config": {
+            "label": "Role",
+            "placeholder": ""
+          }
+        },
+        "picture": {
+          "type": "Image",
+          "config": {
+            "label": "Picture",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "experience": {
+          "type": "Text",
+          "config": {
+            "label": "Experience",
+            "placeholder": ""
+          }
+        },
+        "bio": {
+          "type": "Text",
+          "config": {
+            "label": "Bio",
+            "placeholder": ""
+          }
+        },
+        "instagram": {
+          "type": "Text",
+          "config": {
+            "label": "Instagram",
+            "placeholder": ""
+          }
+        },
+        "founded_year": {
+          "type": "Number",
+          "config": {
+            "label": "Founded Year",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -16,6 +16,9 @@
             },
             "permanent_staff": {
               "type": "SharedSlice"
+            },
+            "founder": {
+              "type": "SharedSlice"
             }
           }
         }

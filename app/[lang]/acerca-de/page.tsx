@@ -60,9 +60,10 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
   }> = []
   
   let guestArtists: GuestArtist[] = []
+  let aboutDocument: AboutusDocument | null = null
   
   try {
-    const aboutDocument: AboutusDocument = await client.getSingle("aboutus", { 
+    aboutDocument = await client.getSingle("aboutus", { 
       lang: prismicLang
     })
     
@@ -104,18 +105,19 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
     guestArtists = []
   }
   
-  // Datos de la artista fundadora (información fija)
-  const artistaFundadora = {
-    nombre: lang === 'es' ? 'Macarena Troiani' : 'Macarena Troiani',
-    especialidad: lang === 'es' ? 'Fundadora & Directora Artística' : 'Founder & Artistic Director',
-    imagen: "/macarena-founder-portrait.webp",
-    experiencia: lang === 'es' ? '11 años' : '11 years',
-    descripcion: lang === 'es' 
-      ? 'Me gusta incentivar a las personas a vivir de lo que les apasiona y compartir lo que he aprendido en estos 11 años. He tomado seminarios, talleres y capacitaciones de todo tipo para crecer como profesional y enriquecer mi ojo artístico. Aún sigo aprendiendo, es una constante en mi vida.'
-      : 'I like to encourage people to live from what they are passionate about and share what I have learned in these 11 years. I have taken seminars, workshops and training of all kinds to grow as a professional and enrich my artistic eye. I am still learning, it is a constant in my life.',
-    instagram: "@maca.tatua",
-    fundacion: "2022",
-  }
+  // Buscar slice founder - fallback graceful si no existe
+  const founderSlice = aboutDocument?.data.slices.find(s => s.slice_type === 'founder')
+  
+  // Mapear datos desde Prismic (si el slice existe)
+  const artistaFundadora = founderSlice && 'primary' in founderSlice ? {
+    nombre: founderSlice.primary.name || '',
+    especialidad: founderSlice.primary.role || '',
+    imagen: founderSlice.primary.picture.url || '',
+    experiencia: founderSlice.primary.experience || '',
+    descripcion: founderSlice.primary.bio || '',
+    instagram: founderSlice.primary.instagram || '',
+    fundacion: String(founderSlice.primary.founded_year || ''),
+  } : null
 
   return (
     <div className="min-h-screen">
@@ -143,44 +145,46 @@ export default async function AcercaDe({ params }: PageProps<'/[lang]/acerca-de'
       </section>
 
       {/* Artista Fundadora */}
-      <section className="px-4 py-20 bg-black text-white">
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center text-white">{dict.about.founder.title}</h2>
-          <div className="bg-zinc-800 rounded-sm overflow-hidden">
-            <div className="grid md:grid-cols-5 gap-8">
-              <div className="md:col-span-2 relative aspect-square md:aspect-auto">
-                <Image
-                  src={artistaFundadora.imagen || "/placeholder.svg"}
-                  alt={artistaFundadora.nombre}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
-                <h3 className="text-3xl md:text-4xl font-bold mb-2">{artistaFundadora.nombre}</h3>
-                <p className="text-white font-semibold mb-2">{artistaFundadora.especialidad}</p>
-                <p className="text-sm text-gray-400 mb-6">{artistaFundadora.experiencia} {dict.about.team.experience_label}</p>
-                <p className="text-lg leading-relaxed mb-6 text-gray-300">{artistaFundadora.descripcion}</p>
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <div className="bg-white/10 px-4 py-2 rounded-sm">
-                    <p className="text-sm font-medium">
-                      {dict.about.founder.founded_label} <span className="font-bold">{artistaFundadora.fundacion}</span>
-                    </p>
+      {artistaFundadora && (
+        <section className="px-4 py-20 bg-black text-white">
+          <div className="container mx-auto max-w-5xl">
+            <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center text-white">{dict.about.founder.title}</h2>
+            <div className="bg-zinc-800 rounded-sm overflow-hidden">
+              <div className="grid md:grid-cols-5 gap-8">
+                <div className="md:col-span-2 relative aspect-square md:aspect-auto">
+                  <Image
+                    src={artistaFundadora.imagen || "/placeholder.svg"}
+                    alt={artistaFundadora.nombre}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
+                  <h3 className="text-3xl md:text-4xl font-bold mb-2">{artistaFundadora.nombre}</h3>
+                  <p className="text-white font-semibold mb-2">{artistaFundadora.especialidad}</p>
+                  <p className="text-sm text-gray-400 mb-6">{artistaFundadora.experiencia} {dict.about.team.experience_label}</p>
+                  <p className="text-lg leading-relaxed mb-6 text-gray-300">{artistaFundadora.descripcion}</p>
+                  <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <div className="bg-white/10 px-4 py-2 rounded-sm">
+                      <p className="text-sm font-medium">
+                        {dict.about.founder.founded_label} <span className="font-bold">{artistaFundadora.fundacion}</span>
+                      </p>
+                    </div>
+                    <a
+                      href={`https://instagram.com/${artistaFundadora.instagram.replace("@", "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:underline font-medium"
+                    >
+                      {artistaFundadora.instagram}
+                    </a>
                   </div>
-                  <a
-                    href={`https://instagram.com/${artistaFundadora.instagram.replace("@", "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:underline font-medium"
-                  >
-                    {artistaFundadora.instagram}
-                  </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Artistas Fijos */}
       <section className="px-4 py-20">
