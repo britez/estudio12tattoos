@@ -1,3 +1,5 @@
+import type { ContactInfo } from '@/lib/prismic-helpers'
+
 interface BuyerConfirmationProps {
   buyerName: string
   buyerEmail: string
@@ -7,6 +9,7 @@ interface BuyerConfirmationProps {
   seminarInstructor: string
   amount: number
   paymentId: string
+  contactInfo: ContactInfo
 }
 
 export function BuyerConfirmationEmail({
@@ -17,6 +20,7 @@ export function BuyerConfirmationEmail({
   seminarInstructor,
   amount,
   paymentId,
+  contactInfo,
 }: BuyerConfirmationProps) {
   const formattedAmount = new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -82,7 +86,7 @@ export function BuyerConfirmationEmail({
         <p style={{ color: "#6b7280", fontSize: "14px", lineHeight: "1.6" }}>
           Recibirás más información sobre la ubicación y materiales necesarios en los próximos días.
           Si tenés alguna pregunta, podés escribirnos a{" "}
-          <a href="https://wa.me/5491171601995" style={{ color: "#1a1a1a", fontWeight: "600" }}>
+          <a href={`https://wa.me/${contactInfo.whatsapp.replace(/[\s\+\-]/g, '')}`} style={{ color: "#1a1a1a", fontWeight: "600" }}>
             WhatsApp
           </a>{" "}
           o responder este mail.
@@ -94,9 +98,9 @@ export function BuyerConfirmationEmail({
           © 2026 Estudio 12 Tattoos · Buenos Aires, Argentina
         </p>
         <p style={{ color: "#4b5563", fontSize: "12px", margin: "4px 0 0" }}>
-          <a href="https://www.instagram.com/estudio.12_/" style={{ color: "#6b7280" }}>Instagram</a>
+          <a href={contactInfo.instagramUrl} style={{ color: "#6b7280" }}>Instagram</a>
           {" · "}
-          <a href="https://wa.me/5491171601995" style={{ color: "#6b7280" }}>WhatsApp</a>
+          <a href={`https://wa.me/${contactInfo.whatsapp.replace(/[\s\+\-]/g, '')}`} style={{ color: "#6b7280" }}>WhatsApp</a>
         </p>
       </div>
     </div>

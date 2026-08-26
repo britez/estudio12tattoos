@@ -1,0 +1,76 @@
+{
+  "id": "contact_info",
+  "type": "SharedSlice",
+  "name": "ContactInfo",
+  "description": "Información de contacto del estudio (WhatsApp, Instagram, email, dirección)",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "whatsapp_number": {
+          "type": "Text",
+          "config": {
+            "label": "WhatsApp Number",
+            "placeholder": "+5491171601995"
+          }
+        },
+        "instagram_handle": {
+          "type": "Text",
+          "config": {
+            "label": "Instagram Handle",
+            "placeholder": "@estudio.12_"
+          }
+        },
+        "instagram_url": {
+          "type": "Link",
+          "config": {
+            "label": "Instagram URL",
+            "placeholder": "https://www.instagram.com/estudio.12_/",
+            "select": null
+          }
+        },
+        "email": {
+          "type": "Text",
+          "config": {
+            "label": "Email",
+            "placeholder": "estudio12.tattoos@gmail.com"
+          }
+        },
+        "address_line1": {
+          "type": "Text",
+          "config": {
+            "label": "Address Line 1",
+            "placeholder": "Humberto 1° 985, piso 12"
+          }
+        },
+        "address_line2": {
+          "type": "Text",
+          "config": {
+            "label": "Address Line 2",
+            "placeholder": "(opcional)"
+          }
+        },
+        "city": {
+          "type": "Text",
+          "config": {
+            "label": "City",
+            "placeholder": "Buenos Aires"
+          }
+        },
+        "country": {
+          "type": "Text",
+          "config": {
+            "label": "Country",
+            "placeholder": "Argentina"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

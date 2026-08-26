@@ -8,6 +8,7 @@ import StyleSelection from './components/StyleSelection'
 import ProjectDetails from './components/ProjectDetails'
 import ContactInfo from './components/ContactInfo'
 import SuccessStep from './components/SuccessStep'
+import type { ContactInfo as ContactInfoType } from '@/lib/prismic-helpers'
 
 interface BookingData {
   artist?: {
@@ -36,6 +37,7 @@ interface BookingWizardProps {
     image: string
     instagram?: string
   }>
+  contactInfo: ContactInfoType
 }
 
 const steps = [
@@ -45,7 +47,7 @@ const steps = [
   { id: 'contact', icon: Phone }
 ]
 
-export default function BookingWizard({ dict, lang, artists }: BookingWizardProps) {
+export default function BookingWizard({ dict, lang, artists, contactInfo }: BookingWizardProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [bookingData, setBookingData] = useState<BookingData>({})
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -127,7 +129,7 @@ export default function BookingWizard({ dict, lang, artists }: BookingWizardProp
   }
 
   if (isSubmitted) {
-    return <SuccessStep dict={dict} lang={lang} />
+    return <SuccessStep dict={dict} lang={lang} contactInfo={contactInfo} />
   }
 
   const renderStep = () => {

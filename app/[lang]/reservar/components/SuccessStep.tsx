@@ -3,13 +3,15 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { CheckCircle, MessageCircle, Home } from 'lucide-react'
+import type { ContactInfo } from '@/lib/prismic-helpers'
 
 interface SuccessStepProps {
   dict: any
   lang: string
+  contactInfo: ContactInfo
 }
 
-export default function SuccessStep({ dict, lang }: SuccessStepProps) {
+export default function SuccessStep({ dict, lang, contactInfo }: SuccessStepProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -50,7 +52,7 @@ export default function SuccessStep({ dict, lang }: SuccessStepProps) {
             {dict.success.whatsapp_message}
           </p>
           <a
-            href="https://wa.me/5491171601995"
+            href={`https://wa.me/${contactInfo.whatsapp.replace(/[\s\+\-]/g, '')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-sm hover:bg-green-700 transition-colors font-[family-name:var(--font-asap)]"

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import type { ContactInfo } from '@/lib/prismic-helpers'
 
 interface FooterProps {
   dict: {
@@ -12,9 +13,10 @@ interface FooterProps {
       }
     }
   }
+  contactInfo: ContactInfo
 }
 
-export function Footer({ dict }: FooterProps) {
+export function Footer({ dict, contactInfo }: FooterProps) {
   return (
     <footer className="border-t border-border py-12 px-4">
       <div className="container mx-auto max-w-4xl">
@@ -27,7 +29,7 @@ export function Footer({ dict }: FooterProps) {
           </div>
           <div className="flex gap-4 items-center">
             <a
-              href="https://www.instagram.com/estudio.12_/?hl=es"
+              href={contactInfo.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"
@@ -35,14 +37,14 @@ export function Footer({ dict }: FooterProps) {
               <Image src="/social-icons/instagram.png" alt={dict.footer.social.instagram_alt} width={32} height={32} className="w-8 h-8" />
             </a>
             <a
-              href="https://wa.me/5491171601995"
+              href={`https://wa.me/${contactInfo.whatsapp.replace(/[\s\+\-]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"
             >
               <Image src="/social-icons/whatsapp.png" alt={dict.footer.social.whatsapp_alt} width={32} height={32} className="w-8 h-8" />
             </a>
-            <a href="mailto:estudio12.tattoos@gmail.com" className="hover:opacity-70 transition-opacity">
+            <a href={`mailto:${contactInfo.email}`} className="hover:opacity-70 transition-opacity">
               <Image src="/social-icons/email.png" alt={dict.footer.social.email_alt} width={32} height={32} className="w-8 h-8" />
             </a>
           </div>

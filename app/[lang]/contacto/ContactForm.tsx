@@ -1,12 +1,14 @@
 "use client"
 
 import { FormEvent } from "react"
+import type { ContactInfo } from '@/lib/prismic-helpers'
 
 interface ContactFormProps {
   dict: any
+  contactInfo: ContactInfo
 }
 
-export default function ContactForm({ dict }: ContactFormProps) {
+export default function ContactForm({ dict, contactInfo }: ContactFormProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
@@ -26,7 +28,7 @@ ${phone ? `*${dict.contact.form.phone_label}:* ${phone}\n` : ''}
 ${message}`
     
     // Número de WhatsApp (sin espacios ni guiones)
-    const whatsappNumber = '5491171601995'
+    const whatsappNumber = contactInfo.whatsapp.replace(/[\s\+\-]/g, '')
     
     // Crear URL de WhatsApp con el mensaje
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`

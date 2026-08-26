@@ -6,6 +6,7 @@ import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
 import ContactForm from './ContactForm'
 import { GenericCarousel, type CarouselImage } from '@/components/guest-artists-carousel'
+import { getContactInfo } from '@/lib/prismic-helpers'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/contacto'>): Promise<Metadata> {
   const { lang } = await params
@@ -44,6 +45,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
   
   const dict = await getDictionary(lang)
   const client = createClient()
+  const contactInfo = await getContactInfo(lang)
   
   // Mapear idiomas de Next.js a los códigos de Prismic
   const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
@@ -117,7 +119,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <ContactForm dict={dict} />
+            <ContactForm dict={dict} contactInfo={contactInfo} />
 
             {/* Información de contacto */}
             <div className="space-y-8">
@@ -129,7 +131,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                     <div>
                       <p className="font-medium">{dict.contact.info.address_label}</p>
                       <p className="text-muted-foreground whitespace-pre-line">
-                        {dict.contact.info.address}
+                        {contactInfo.address}
                       </p>
                     </div>
                   </div>
@@ -138,7 +140,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                     <Phone className="w-5 h-5 mt-1 text-muted-foreground shrink-0" />
                     <div>
                       <p className="font-medium">{dict.contact.info.phone_label}</p>
-                      <p className="text-muted-foreground">+549 11 71601995</p>
+                      <p className="text-muted-foreground">{contactInfo.whatsapp}</p>
                     </div>
                   </div>
 
@@ -146,7 +148,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                     <Mail className="w-5 h-5 mt-1 text-muted-foreground shrink-0" />
                     <div>
                       <p className="font-medium">{dict.contact.info.email_label}</p>
-                      <p className="text-muted-foreground">estudio12.tattoos@gmail.com</p>
+                      <p className="text-muted-foreground">{contactInfo.email}</p>
                     </div>
                   </div>
                 </div>
@@ -157,7 +159,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                 <h3 className="text-xl font-bold mb-6 text-white">{dict.contact.social.title}</h3>
                 <div className="space-y-4">
                   <a
-                    href="https://www.instagram.com/estudio.12_/?hl=es"
+                    href={contactInfo.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 p-4 bg-zinc-900 border border-zinc-800 rounded-sm hover:bg-zinc-800 transition-colors group"
@@ -167,12 +169,12 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                     </div>
                     <div>
                       <p className="font-medium text-white">Instagram</p>
-                      <p className="text-sm text-zinc-400">@estudio.12_</p>
+                      <p className="text-sm text-zinc-400">{contactInfo.instagram}</p>
                     </div>
                   </a>
 
                   <a
-                    href="https://wa.me/5491171601995"
+                    href={`https://wa.me/${contactInfo.whatsapp.replace(/[\s\+\-]/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 p-4 bg-zinc-900 border border-zinc-800 rounded-sm hover:bg-zinc-800 transition-colors group"
@@ -182,7 +184,7 @@ export default async function ContactoPage({ params }: PageProps<'/[lang]/contac
                     </div>
                     <div>
                       <p className="font-medium text-white">WhatsApp</p>
-                      <p className="text-sm text-zinc-400">+549 11 71601995</p>
+                      <p className="text-sm text-zinc-400">{contactInfo.whatsapp}</p>
                     </div>
                   </a>
                 </div>

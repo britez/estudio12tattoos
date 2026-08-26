@@ -1,0 +1,21 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "contact_info",
+    "items": [],
+    "primary": {
+      "whatsapp_number": "+5491171601995",
+      "instagram_handle": "@estudio.12_",
+      "instagram_url": {
+        "link_type": "Web",
+        "url": "https://www.instagram.com/estudio.12_/"
+      },
+      "email": "estudio12.tattoos@gmail.com",
+      "address_line1": "Humberto 1° 985, piso 12",
+      "address_line2": "",
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  }
+]

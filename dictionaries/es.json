@@ -186,7 +186,6 @@
     "info": {
       "title": "Información de contacto",
       "address_label": "Dirección",
-      "address": "Humberto 1° 985, piso 12\nBuenos Aires, Argentina",
       "phone_label": "Teléfono",
       "email_label": "Email"
     },
@@ -264,7 +263,6 @@
       "step_counter": "Paso {{current}} de {{total}}"
     },
     "whatsapp": {
-      "phone_number": "+5491171601995",
       "message_template": "*🎨 Nueva Reserva de Tatuaje - Estudio 12*\n\n*Artista seleccionado:* {artist}\n*Instagram:* {instagram}\n\n*Estilo de tatuaje:* {style}\n\n*Descripción del proyecto:*\n{description}\n\n*Información de contacto:*\n• Nombre: {name}\n• Email: {email}\n• Teléfono: {phone}\n• Fecha preferida: {date}\n\nGracias por elegir Estudio 12 para tu próximo tatuaje. Te contactaremos pronto para coordinar los detalles. 🖤"
     },
     "success": {

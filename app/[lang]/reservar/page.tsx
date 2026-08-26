@@ -4,6 +4,7 @@ import type { AboutusDocument } from "@/prismicio-types"
 import { getDictionary, hasLocale } from '../dictionaries'
 import type { PageProps } from '../types'
 import BookingWizard from './BookingWizard'
+import { getContactInfo } from '@/lib/prismic-helpers'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/reservar'>): Promise<Metadata> {
   const { lang } = await params
@@ -42,6 +43,7 @@ export default async function BookPage({ params }: PageProps<'/[lang]/reservar'>
   
   const dict = await getDictionary(lang)
   const client = createClient()
+  const contactInfo = await getContactInfo(lang)
   
   // Mapear idiomas de Next.js a los códigos de Prismic
   const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
@@ -100,7 +102,7 @@ export default async function BookPage({ params }: PageProps<'/[lang]/reservar'>
             </p>
           </div>
           
-          <BookingWizard dict={dict.book} lang={lang} artists={allArtists} />
+          <BookingWizard dict={dict.book} lang={lang} artists={allArtists} contactInfo={contactInfo} />
         </div>
       </section>
     </div>

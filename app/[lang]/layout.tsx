@@ -7,6 +7,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { getDictionary, hasLocale } from './dictionaries'
 import type { LayoutProps } from './types'
+import { getContactInfo } from '@/lib/prismic-helpers'
 import "../globals.css"
 
 const ballet = Ballet({
@@ -114,6 +115,7 @@ export default async function RootLayout({
   }
   
   const dict = await getDictionary(lang)
+  const contactInfo = await getContactInfo(lang)
   
   return (
     <html lang={lang} className={ballet.variable}>
@@ -135,7 +137,7 @@ export default async function RootLayout({
         
         <Header lang={lang} dict={dict} />
         {children}
-        <Footer dict={dict} />
+        <Footer dict={dict} contactInfo={contactInfo} />
         <Analytics />
       </body>
     </html>

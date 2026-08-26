@@ -5,6 +5,7 @@ import { createClient } from "@/prismicio"
 import type * as prismic from "@prismicio/client"
 import { BuyerConfirmationEmail } from "@/lib/emails/seminar-confirmation-buyer"
 import { StudioNotificationEmail } from "@/lib/emails/seminar-notification-studio"
+import { getContactInfo } from "@/lib/prismic-helpers"
 import { createElement } from "react"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -168,6 +169,9 @@ export async function POST(request: NextRequest) {
   // Send emails (fire and forget failures — we already received the payment)
   const studioEmail = process.env.STUDIO_EMAIL ?? ""
   const fromAddress = process.env.EMAIL_FROM ?? "noreply@estudio12tattoos.com"
+  
+  // Obtener información de contacto desde Prismic
+  const contactInfo = await getContactInfo((lang ?? "es") as 'es' | 'en')
 
   try {
     const emailPromises: Promise<unknown>[] = [
@@ -184,6 +188,7 @@ export async function POST(request: NextRequest) {
           seminarInstructor,
           amount,
           paymentId: paymentIdStr,
+          contactInfo,
         }),
       }),
     ]

@@ -187,7 +187,6 @@
     "info": {
       "title": "Contact Information",
       "address_label": "Address",
-      "address": "Humberto 1° 985, floor 12\nBuenos Aires, Argentina",
       "phone_label": "Phone",
       "email_label": "Email"
     },
@@ -264,7 +263,6 @@
       "step_counter": "Step {{current}} of {{total}}"
     },
     "whatsapp": {
-      "phone_number": "+5491171601995",
       "message_template": "*🎨 New Tattoo Reservation - Studio 12*\n\n*Selected artist:* {artist}\n*Instagram:* {instagram}\n\n*Tattoo style:* {style}\n\n*Project description:*\n{description}\n\n*Contact information:*\n• Name: {name}\n• Email: {email}\n• Phone: {phone}\n• Preferred date: {date}\n\nThank you for choosing Studio 12 for your next tattoo. We'll contact you soon to coordinate the details. 🖤"
     },
     "success": {
