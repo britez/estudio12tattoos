@@ -94,7 +94,7 @@ export default function BookingWizard({ dict, lang, artists, contactInfo }: Book
       .replace('{date}', bookingData.preferredDate || 'No especificada')
     
     // Crear URL de WhatsApp con detección de dispositivo
-    const phoneNumber = dict.whatsapp.phone_number.replace(/[^0-9]/g, '')
+    const phoneNumber = contactInfo.whatsapp.replace(/[^0-9]/g, '')
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     
     let whatsappUrl
