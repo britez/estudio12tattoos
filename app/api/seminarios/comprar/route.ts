@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
   const backendUrl =
     process.env.SEMINAR_API_URL ||
-    "https://ddsm6deawd.us-east-1.awsapprunner.com/seminarios/comprar"
+    "https://api.estudio12tattoos.com/seminarios/comprar"
 
   try {
     const res = await fetch(backendUrl, {
