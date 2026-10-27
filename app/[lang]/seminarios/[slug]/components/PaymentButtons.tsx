@@ -13,7 +13,8 @@ interface PaymentButtonsProps {
   emailLabel: string
   emailPlaceholder: string
   errorLabel: string
-  lang: string
+  /** Define a qué ruta vuelve el comprador desde PayPal. El backend valida es|en. */
+  lang: "es" | "en"
 }
 
 export function PaymentButtons({
@@ -41,7 +42,9 @@ export function PaymentButtons({
       const res = await fetch("/api/seminarios/comprar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, slug, provider }),
+        // `lang` viaja para que el return_url de PayPal apunte a la misma ruta
+        // desde la que se compró: sin esto, quien compra en /en vuelve a /es.
+        body: JSON.stringify({ email, slug, provider, lang }),
       })
 
       if (!res.ok) {

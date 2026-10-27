@@ -318,6 +318,11 @@
       "payment_success": "Payment successful! We'll see you at the seminar.",
       "payment_pending": "Payment pending. We'll notify you once it's confirmed.",
       "payment_failure": "The payment could not be processed. Please try again.",
+      "payment_capturing": "We're confirming your payment. Please don't close this page.",
+      "payment_cancelled": "You cancelled the payment. You were not charged.",
+      "payment_declined": "Your payment method was declined. Please try another card.",
+      "payment_unconfirmed": "You approved the payment but we couldn't confirm it. Contact us before paying again.",
+      "payment_awaiting": "We're still confirming your payment. If you approved it, you'll get an email shortly. Please don't pay again.",
       "not_found": "Seminar not found."
     },
     "metadata": {

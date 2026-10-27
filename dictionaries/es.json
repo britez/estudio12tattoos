@@ -317,6 +317,11 @@
       "payment_success": "¡Pago exitoso! Te esperamos en el seminario.",
       "payment_pending": "Pago pendiente. Te notificaremos cuando se confirme.",
       "payment_failure": "El pago no se pudo procesar. Intentá de nuevo.",
+      "payment_capturing": "Estamos confirmando tu pago. No cierres esta página.",
+      "payment_cancelled": "Cancelaste el pago. No se te cobró nada.",
+      "payment_declined": "Tu medio de pago fue rechazado. Probá con otra tarjeta.",
+      "payment_unconfirmed": "Aprobaste el pago pero no pudimos confirmarlo. Escribinos antes de volver a pagar.",
+      "payment_awaiting": "Estamos terminando de confirmar tu pago. Si lo aprobaste, te llega el mail en unos minutos. No vuelvas a pagar.",
       "not_found": "Seminario no encontrado."
     },    "metadata": {
       "title": "Seminarios",

@@ -19,13 +19,55 @@ import { createClient } from "@/prismicio"
 import { getDictionary, hasLocale } from "../../dictionaries"
 import type { Seminar } from "../components/SeminarCard"
 import { PaymentButtons } from "./components/PaymentButtons"
+import { PayPalCapture } from "./components/PayPalCapture"
 
 // Revalidar cada 60 segundos para que cambios en Prismic se reflejen rápido
 export const revalidate = 60
 
 interface SlugPageProps {
   params: Promise<{ lang: string; slug: string }>
-  searchParams: Promise<{ payment?: string }>
+  searchParams: Promise<{
+    /** Mercado Pago: `approved` | `pending` | `rejected`. */
+    status?: string
+    collection_status?: string
+    /** PayPal: `success` | `cancel`, armado por el backend en el `return_url`. */
+    paypal?: string
+    /** PayPal: el orderId que hay que capturar. */
+    token?: string
+    /** Convención anterior que ningún provider manda. Se acepta por links viejos. */
+    payment?: string
+  }>
+}
+
+/**
+ * Traduce el retorno de Mercado Pago a los tres estados que muestra la página.
+ *
+ * MP agrega `?status=...&collection_status=...&payment_id=...` a la back_url.
+ * La página leía `payment`, que no lo manda nadie: por eso el banner nunca
+ * aparecía después de pagar.
+ */
+function estadoMercadoPago(params: {
+  status?: string
+  collection_status?: string
+  payment?: string
+}): "success" | "pending" | "failure" | null {
+  const crudo = params.status ?? params.collection_status ?? params.payment
+
+  switch (crudo) {
+    case "approved":
+    case "success":
+      return "success"
+    case "pending":
+    case "in_process":
+    case "in_mediation":
+      return "pending"
+    case "rejected":
+    case "failure":
+    case "cancelled":
+      return "failure"
+    default:
+      return null
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -141,7 +183,8 @@ export default async function SeminarDetailPage({
   searchParams,
 }: SlugPageProps) {
   const { lang, slug } = await params
-  const { payment } = await searchParams
+  const query = await searchParams
+  const estadoMp = estadoMercadoPago(query)
 
   if (!hasLocale(lang)) throw new Error(`Invalid locale: ${lang}`)
 
@@ -172,28 +215,44 @@ export default async function SeminarDetailPage({
         </div>
       </div>
 
-      {/* Payment status banner */}
-      {payment && (
+      {/* Estado del pago al volver del provider */}
+      {(estadoMp || query.paypal) && (
         <div className="px-4 pb-4">
           <div className="container mx-auto max-w-5xl">
-            {payment === "success" && (
+            {estadoMp === "success" && (
               <div className="flex items-center gap-3 bg-emerald-900/30 border border-emerald-700 text-emerald-300 rounded-sm px-4 py-3">
                 <CheckCircle className="w-5 h-5 shrink-0" />
                 <span>{detailDict.payment_success}</span>
               </div>
             )}
-            {payment === "failure" && (
+            {estadoMp === "failure" && (
               <div className="flex items-center gap-3 bg-red-900/30 border border-red-700 text-red-300 rounded-sm px-4 py-3">
                 <XCircle className="w-5 h-5 shrink-0" />
                 <span>{detailDict.payment_failure}</span>
               </div>
             )}
-            {payment === "pending" && (
+            {estadoMp === "pending" && (
               <div className="flex items-center gap-3 bg-amber-900/30 border border-amber-700 text-amber-300 rounded-sm px-4 py-3">
                 <AlertCircle className="w-5 h-5 shrink-0" />
                 <span>{detailDict.payment_pending}</span>
               </div>
             )}
+
+            {/* PayPal no termina en el redirect: hay que llamar a la captura.
+                Ese estado es dinámico, así que vive en un Client Component. */}
+            <PayPalCapture
+              resultado={query.paypal}
+              orderId={query.token}
+              textos={{
+                capturando: detailDict.payment_capturing,
+                exito: detailDict.payment_success,
+                cancelado: detailDict.payment_cancelled,
+                rechazado: detailDict.payment_declined,
+                sinConfirmar: detailDict.payment_unconfirmed,
+                esperando: detailDict.payment_awaiting,
+                generico: detailDict.payment_failure,
+              }}
+            />
           </div>
         </div>
       )}
