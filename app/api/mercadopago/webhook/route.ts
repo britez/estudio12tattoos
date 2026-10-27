@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createHmac } from "crypto"
 import { MercadoPagoConfig, Payment } from "mercadopago"
 import { Resend } from "resend"
 import { createClient } from "@/prismicio"
@@ -8,7 +9,20 @@ import { StudioNotificationEmail } from "@/lib/emails/seminar-notification-studi
 import { getContactInfo } from "@/lib/prismic-helpers"
 import { createElement } from "react"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+/**
+ * Se construye por request, no a nivel de módulo: el constructor de Resend tira
+ * `Missing API key` si la variable no está, y durante `next build` Next ejecuta
+ * los módulos de las rutas para recolectar metadata. Instanciarlo arriba hacía
+ * fallar el build entero en cualquier entorno sin `RESEND_API_KEY` — una ruta
+ * que ni siquiera se estaba invocando.
+ */
+function getResend(): Resend {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY no está configurada")
+  }
+  return new Resend(apiKey)
+}
 
 function verifySignature(request: NextRequest): boolean {
   const secret = process.env.MP_WEBHOOK_SECRET
@@ -35,9 +49,8 @@ function verifySignature(request: NextRequest): boolean {
   const dataId = request.nextUrl.searchParams.get("data.id") ?? ""
 
   // Template with trailing semicolon: id:{data.id};request-id:{x-request-id};ts:{ts};
-  const crypto = require("crypto")
   const message = `id:${dataId};request-id:${xRequestId};ts:${ts};`
-  const expected = crypto.createHmac("sha256", secret).update(message).digest("hex")
+  const expected = createHmac("sha256", secret).update(message).digest("hex")
   return expected === v1
 }
 
@@ -174,6 +187,7 @@ export async function POST(request: NextRequest) {
   const contactInfo = await getContactInfo((lang ?? "es") as 'es' | 'en')
 
   try {
+    const resend = getResend()
     const emailPromises: Promise<unknown>[] = [
       resend.emails.send({
         from: fromAddress,

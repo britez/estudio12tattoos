@@ -15,7 +15,11 @@ export async function getContactInfo(lang: 'es' | 'en'): Promise<ContactInfo> {
   const prismicLang = lang === 'es' ? 'es-ar' : 'en-us'
   
   try {
-    // @ts-ignore - TODO: Regenerar tipos de Prismic después de pushear custom type Settings
+    // El custom type `settings` todavia no esta en prismicio-types.d.ts, asi que
+    // `getSingle` solo acepta "aboutus" | "home" | "work". Se suprime con
+    // `@ts-expect-error` (no `@ts-ignore`) a proposito: el dia que se regeneren
+    // los tipos, TypeScript marca este supresor como innecesario y avisa.
+    // @ts-expect-error - falta regenerar los tipos de Prismic con el type Settings
     const settingsDoc = await client.getSingle("settings", { lang: prismicLang })
     const contactSlice = settingsDoc.data.slices.find((s: any) => s.slice_type === 'contact_info')
     

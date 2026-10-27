@@ -74,11 +74,14 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
     "@slicemachine/adapter-next": "^0.3.93",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.10",
     "postcss": "^8.5",
     "slice-machine-ui": "^2.20.5",
     "tailwindcss": "^4.1.9",
